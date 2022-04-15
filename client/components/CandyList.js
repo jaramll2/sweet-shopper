@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { getCandy } from "../store/candy";
 
 class CandyList extends React.Component {
@@ -15,7 +16,7 @@ class CandyList extends React.Component {
       <div>
         <ul>
           {candies.map((candy) => {
-            return <li key={candy.id}>{candy.name}</li>
+            return <Link to={`/candy/${candy.id}`} key={candy.id}><li >{candy.name}</li></Link>
           })}
         </ul>
       </div>
