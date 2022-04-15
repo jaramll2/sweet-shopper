@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const {db, models: {User, Candy} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -18,11 +18,20 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
+
+  const candy = [];
+
+  for(let i = 0; i < 10; i++){
+    candy.push(await Candy.generateRandom());
+  }
+
+
   return {
     users: {
       cody: users[0],
       murphy: users[1]
-    }
+    },
+    candy
   }
 }
 
