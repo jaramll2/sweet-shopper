@@ -34,7 +34,7 @@ class Routes extends Component {
           )
         } 
         <Route path='/candy/:id' component={Candy}/>
-        <Route path='/' component={CandyList}/>
+        <Route path='/candy' component={CandyList}/>
       </div>
     )
   }
