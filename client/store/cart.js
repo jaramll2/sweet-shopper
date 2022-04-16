@@ -5,7 +5,8 @@ const LOAD_CART = 'LOAD_CART';
 export const loadCart = () => {
   return async(dispatch) => {
     try{
-      const cart = (await axios.get('/api/cart', {
+
+      let cart = (await axios.get('/api/cart', {
         headers: {
           authorization: window.localStorage.token
         }
@@ -16,11 +17,23 @@ export const loadCart = () => {
       })
     }
     catch(err){
-      //if we get an error, it means user isn't logged in, so we set the cart to empty.
-      //will need to be changed when we add cart for non-logged in user.
+      let cart = window.localStorage.cart;
+      
+      //401 error means invalid user token was supplied, so user isn't logged in.
+      //we create a cart if there's not one already, fetch the cart if there is.
+      if((err.response.status === 401) && (!cart)){
+        cart = (await axios.post('/api/cart')).data;
+        window.localStorage.cart = cart.id;
+      }
+      else if((err.response.status === 401) && (cart)){
+        cart = (await axios.post('/api/cart', {cartId: window.localStorage.cart})).data
+      }
+      else{
+        throw err;
+      }
       dispatch({
         type: LOAD_CART,
-        cart: {}
+        cart
       })
     }
     

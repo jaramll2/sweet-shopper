@@ -17,6 +17,27 @@ router.get('/', async (req, res, next) => {
     res.send(cart);
   }
   catch(err){
+    if (err.status === 401){
+      res.sendStatus(401);
+    }
+    else
+      next(err);
+  }
+})
+
+
+router.post('/', async (req, res, next) => {
+  try{
+    let cart
+    if(req.body.cartId){
+      cart = await Cart.findByPk(req.body.cartId)
+    }
+    else{
+      cart = await Cart.create();
+    }
+    res.send(cart);
+  }
+  catch(err){
     next(err);
   }
 })
