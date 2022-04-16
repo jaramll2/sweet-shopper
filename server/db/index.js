@@ -21,6 +21,7 @@ module.exports = {
   models: {
     User,
     Candy,
-    LineItem
+    LineItem,
+    Cart
   },
 }
