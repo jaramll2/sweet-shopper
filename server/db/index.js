@@ -5,7 +5,13 @@ const db = require('./db')
 const User = require('./models/User');
 const Candy = require('./models/Candy')
 const LineItem = require('./models/LineItem');
+const Cart = require('./models/Cart');
 
+
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.hasMany(LineItem);
+LineItem.belongsTo(Cart);
 
 Candy.hasMany(LineItem);
 LineItem.belongsTo(Candy);
