@@ -1,6 +1,7 @@
 'use strict'
 
 const {db, models: {User, Candy, LineItem} } = require('../server/db')
+const Cart = require('../server/db/models/Cart')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -12,23 +13,35 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
+    
     User.create({ username: 'cody', password: '123' }),
     User.create({ username: 'murphy', password: '123' }),
   ])
 
+  const carts = [];
+  users.forEach(async (user) => {
+    carts.push(await Cart.create({userId: user.id}));
+  })
+
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 
+  //seed candy
   const candy = [];
-
   for(let i = 0; i < 10; i++){
     candy.push(await Candy.generateRandom());
   }
 
-  await LineItem.create({
-    candyId: 2,
-    qty: 3
-  })
+  //seed lineitems
+  for(let i = 0; i < 10; i++){
+    await LineItem.create({
+      candyId: candy[Math.floor(Math.random() * candy.length)].id,
+      qty: Math.floor(Math.random() * 10),
+      cartId: carts[Math.floor(Math.random() * carts.length)].id
+    })
+  }
+  
 
   return {
     users: {
