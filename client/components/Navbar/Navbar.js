@@ -11,15 +11,31 @@ import "./Navbar.scss";
 class Navbar extends Component {
   state = {
     searchFocused: false,
+    searchText: "",
   };
 
   toggleSearch = () => {
-    this.setState((prev) => ({ searchFocused: !prev.searchFocused }));
+    this.setState(
+      (prev) => ({ searchFocused: !prev.searchFocused }),
+      () => {
+        if (this.state.searchFocused) {
+          this.searchInput.focus();
+        }
+      }
+    );
+  };
+
+  handleFocusOut = () => {
+    this.setState({ searchFocused: false, searchText: "" });
+  };
+
+  handleSearchChange = (event) => {
+    this.setState({ searchText: event.target.value });
   };
 
   render() {
-    const { searchFocused } = this.state;
-    const searchWidth = searchFocused ? '160px' : '30px';
+    const { searchFocused, searchText } = this.state;
+    const searchWidth = searchFocused ? "160px" : "30px";
     return (
       <div className="navbar">
         <span className="navbar-left">
@@ -29,13 +45,20 @@ class Navbar extends Component {
         </span>
         <span className="navbar-right">
           <TextField
+            inputRef={(input) => {
+              this.searchInput = input;
+            }}
+            disabled={!searchFocused}
+            value={searchText}
+            onChange={this.handleSearchChange}
+            onBlur={this.handleFocusOut}
             className="navbar-search"
             InputProps={{
               disableUnderline: !searchFocused,
               startAdornment: (
                 <InputAdornment
                   sx={{
-                    color: '#000',
+                    color: "#000",
                   }}
                   position="start"
                   onClick={this.toggleSearch}
@@ -47,8 +70,8 @@ class Navbar extends Component {
             variant="standard"
             style={{
               width: searchWidth,
-              borderBottom: 'none',
-              transition: '0.2s ease'
+              borderBottom: "none",
+              transition: "0.2s ease",
             }}
           />
           <Link to="/login">Log In</Link>
