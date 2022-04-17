@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
+
+import { logout } from "../../store/auth";
 
 import "./Navbar.scss";
 
@@ -35,12 +38,14 @@ class Navbar extends Component {
 
   render() {
     const { searchFocused, searchText } = this.state;
+    const { auth, handleLogout } = this.props;
+    const isLoggedIn = Boolean(auth?.id);
     const searchWidth = searchFocused ? "160px" : "30px";
     return (
       <div className="navbar">
         <span className="navbar-left">
           <Link to="/">Home</Link>
-          <Link to="/shop">Shop</Link>
+          <Link to="/candy">Shop</Link>
           <Link to="/about">About</Link>
         </span>
         <span className="navbar-right">
@@ -74,13 +79,31 @@ class Navbar extends Component {
               transition: "0.2s ease",
             }}
           />
-          <Link to="/login">Log In</Link>
-          <Link to="/signup">Sign Up</Link>
-          <ShoppingCartIcon className="navbar-icon" />
+          {isLoggedIn ? (
+            <span className="navbar-logout" onClick={() => handleLogout()}>
+              Log Out
+            </span>
+          ) : (
+            <>
+              <Link to="/login">Log In</Link>
+              <Link to="/signup">Sign Up</Link>
+            </>
+          )}
+          <Link to="/cart">
+            <ShoppingCartIcon className="navbar-icon" />
+          </Link>
         </span>
       </div>
     );
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleLogout: () => dispatch(logout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
