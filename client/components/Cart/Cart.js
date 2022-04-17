@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { loadCart } from "../store/cart"
+import { loadCart } from "../../store/cart"
 
 class Cart extends Component{
 
