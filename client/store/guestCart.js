@@ -10,6 +10,7 @@ export const guestCart = () => {
       //if we have a cart id saved in local storage, we fetch the cart.
       //if not, we create a cart and save it in local storage.
       let cartId = window.localStorage.cart;
+      
       if(!cartId){
         guestCart = (await axios.post('/api/cart')).data;
         window.localStorage.cart = guestCart.id;
