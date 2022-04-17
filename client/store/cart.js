@@ -4,8 +4,11 @@ import axios from 'axios';
 const ADD_TO_CART = 'ADD_TO_CART';
 
 
-export const addToCart = (candy,cart)=>{
+export const addToCart = (candy,auth)=>{
   return async(dispatch)=>{
+   
+    const cart = auth.cart;
+
     //TODO
     if(!window.localStorage.token){
       //not logged in
@@ -27,9 +30,14 @@ export const addToCart = (candy,cart)=>{
         await axios.put(`/api/lineItem/${line.id}`, {...line, ...{qty: line.qty + 1}});
       }
 
+      //need to update cart in auth
+      const updatedcart = (await axios.get('/api/cart/',{headers: {authorization: window.localStorage.token}})).data;
+
+      auth.cart = updatedcart;
+
       dispatch({
         type: ADD_TO_CART,
-        cart
+        auth
       })
     }
   }
@@ -37,8 +45,7 @@ export const addToCart = (candy,cart)=>{
 
 export default (state = {}, action) => {
   if(action.type === ADD_TO_CART){
-    return action.cart;
+    return action.auth; 
   }
-
   return state;
 }

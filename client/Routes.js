@@ -21,8 +21,6 @@ class Routes extends Component {
     }
   }
 
-
-
   render() {
     const {isLoggedIn} = this.props
 
@@ -69,7 +67,6 @@ const mapDispatch = dispatch => {
       dispatch(guestCart())
     }
   }
-  
 }
 
 // The `withRouter` wrapper makes sure that updates are not blocked
