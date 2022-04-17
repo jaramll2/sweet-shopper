@@ -8,13 +8,12 @@ import { authenticate } from "../../store";
 const AuthForm = (props) => {
   const { name, displayName, error, history, handleAuthenticate } = props;
 
-  const handleSubmit = () => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    handleAuthenticate(username, password, formName);
-
+    await handleAuthenticate(username, password, formName);
     history.push("/");
   };
 
