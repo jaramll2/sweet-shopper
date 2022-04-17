@@ -32,9 +32,10 @@ router.post('/', async (req, res, next) => {
       cart = await Cart.findByPk(req.body.cartId)
     }
     else{
-      cart = await Cart.create();
+      cart = await Cart.create({},{
+        include: [LineItem]
+      });
     }
-
     res.send(cart);
   }
   catch(err){

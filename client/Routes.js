@@ -7,7 +7,7 @@ import CandyList from './components/CandyList';
 import Candy from './components/Candy';
 import {me} from './store';
 import Cart from './components/Cart';
-import { loadCart } from './store/cart';
+import { guestCart } from './store/guestCart';
 
 /**
  * COMPONENT
@@ -15,15 +15,12 @@ import { loadCart } from './store/cart';
 class Routes extends Component {
   async componentDidMount() {
     this.props.loadInitialData()
-    // await this.props.loadCart();
+    if(!this.props.isLoggedIn){
+      this.props.loadGuestCart();
+    }
   }
 
-  // async componentDidUpdate(prevProps, prevState){
-  //   console.log(this.props.cartId, prevProps.cartId);
-  //   if(this.props.cartId !== prevProps.cartId){
-  //     await this.props.loadCart();
-  //   }
-  // }
+
 
   render() {
     const {isLoggedIn} = this.props
@@ -58,8 +55,7 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id,
-    cartId: state.cart.id
+    isLoggedIn: !!state.auth.id
   }
 }
 
@@ -68,9 +64,9 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    // loadCart: function(){
-    //   dispatch(loadCart());
-    // }
+    loadGuestCart() {
+      dispatch(guestCart())
+    }
   }
   
 }

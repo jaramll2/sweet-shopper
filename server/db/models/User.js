@@ -59,7 +59,6 @@ User.findByToken = async function(token) {
           include: [Candy]}]
       }]
     })
-    console.log(user);
     if (!user) {
       throw 'nooo'
     }
