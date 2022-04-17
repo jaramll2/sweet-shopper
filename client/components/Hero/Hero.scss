@@ -1,0 +1,24 @@
+@import "../../variables.scss";
+
+.hero {
+  margin: 0 30px;
+  height: 500px;
+  background: $soft-green;
+  display: flex;
+  align-items: center;
+
+  .hero-img {
+    margin-left: 30px;
+    max-width: 40%;
+  }
+
+  .hero-title {
+    flex: auto;
+    justify-content: center;
+    text-align: center;
+    color: $navy;
+    font-weight: 500;
+    font-size: 42px;
+    margin-right: 25px;
+  }
+}
