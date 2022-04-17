@@ -7,8 +7,6 @@ router.put('/:id', async(req,res,next)=>{
     try{
         const line = await LineItem.findByPk(req.params.id);
 
-        console.log(req.params);
-        console.log(req.body);
         res.send(await line.update(req.body));
     }
     catch(err){
