@@ -49,17 +49,19 @@ export const addToCart = (candy,cart)=>{
 
 
     //if cart exists get all line items with that cart number then search for line item with our candy #
-    const lines = cart.lineitems;
-    const line = lines.find(_line => {
+    const line = cart.lineitems.find(_line => {
       return _line.candyId === candy.id;
     })
-    
-    //TODO
-    //if no line item exist create one to add to cart
-    //else update line item in cart 
-    const quanity = line.qty + 1;
-    const updatedLineItem = (await axios.put(`/api/lineItem/${line.id}`, {...line, ...{qty: quanity}})).data;
 
+    //if no line item exist create one to add to cart
+    if(!line){
+     await axios.post('/api/lineItem',{cartId:cart.id, qty: 1, candyId: candy.id}); 
+    }
+    else{
+      //else update line item in cart 
+      await axios.put(`/api/lineItem/${line.id}`, {...line, ...{qty: line.qty + 1}});
+    }
+    
     dispatch({
       type: ADD_TO_CART,
       cart
