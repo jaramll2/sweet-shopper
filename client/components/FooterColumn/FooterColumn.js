@@ -9,9 +9,9 @@ export default ({ data }) => {
     <div className="footer-column">
       <div className="column-title">{title}</div>
       <div className="column-items">
-        {items.map((item) => (
-          <Link className="column-item" to={item.url}>
-            {item.title}
+        {items.map(({ title, url }) => (
+          <Link key={title} className="column-item" to={url}>
+            {title}
           </Link>
         ))}
       </div>
