@@ -1,0 +1,10 @@
+@import '../../variables.scss';
+
+.featured {
+  display: flex;
+  background: $gray;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+}
