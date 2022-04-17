@@ -5,14 +5,12 @@ import { loadCart } from "../store/cart"
 
 class Cart extends Component{
 
-  async componentDidMount(){
-    await this.props.loadCart();
-  }
 
   render(){
-    const { lineitems } = this.props.cart;
-    if(!lineitems)
+    if(!this.props.auth.cart)
       return null;
+    const lineitems = this.props.auth.cart.lineitems;
+    
 
     return(
       <div>
@@ -29,12 +27,5 @@ class Cart extends Component{
   }
 }
 
-const mapDispatchToProps = (dispatch)  => {
-  return{
-    loadCart: function(){
-      dispatch(loadCart());
-    }
-  }
-}
 
-export default connect(state=>state, mapDispatchToProps)(Cart);
+export default connect(state=>state)(Cart);

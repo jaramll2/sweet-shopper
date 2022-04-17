@@ -7,14 +7,23 @@ import CandyList from './components/CandyList';
 import Candy from './components/Candy';
 import {me} from './store';
 import Cart from './components/Cart';
+import { loadCart } from './store/cart';
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.loadInitialData()
+    // await this.props.loadCart();
   }
+
+  // async componentDidUpdate(prevProps, prevState){
+  //   console.log(this.props.cartId, prevProps.cartId);
+  //   if(this.props.cartId !== prevProps.cartId){
+  //     await this.props.loadCart();
+  //   }
+  // }
 
   render() {
     const {isLoggedIn} = this.props
@@ -49,7 +58,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    cartId: state.cart.id
   }
 }
 
@@ -57,8 +67,12 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
-    }
+    },
+    // loadCart: function(){
+    //   dispatch(loadCart());
+    // }
   }
+  
 }
 
 // The `withRouter` wrapper makes sure that updates are not blocked
