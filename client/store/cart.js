@@ -32,6 +32,7 @@ export const loadCart = () => {
       else{
         throw err;
       }
+
       dispatch({
         type: LOAD_CART,
         cart
@@ -43,29 +44,31 @@ export const loadCart = () => {
 export const addToCart = (candy,cart)=>{
   return async(dispatch)=>{
     //TODO
-    //if cart is empty, create
-    //after creating, create lineItem and add to cart
-    //want to return cart to set as the new cart state
+    if(!window.localStorage.token){
+      //not logged in
+      //get cart from windows local storage
 
-
-    //if cart exists get all line items with that cart number then search for line item with our candy #
-    const line = cart.lineitems.find(_line => {
-      return _line.candyId === candy.id;
-    })
-
-    //if no line item exist create one to add to cart
-    if(!line){
-     await axios.post('/api/lineItem',{cartId:cart.id, qty: 1, candyId: candy.id}); 
     }
     else{
-      //else update line item in cart 
-      await axios.put(`/api/lineItem/${line.id}`, {...line, ...{qty: line.qty + 1}});
+      //if cart exists get all line items with that cart number then search for line item with our candy #
+      const line = cart.lineitems.find(_line => {
+        return _line.candyId === candy.id;
+      })
+
+      //if no line item exist create one to add to cart
+      if(!line){
+      await axios.post('/api/lineItem',{cartId:cart.id, qty: 1, candyId: candy.id}); 
+      }
+      else{
+        //else update line item in cart 
+        await axios.put(`/api/lineItem/${line.id}`, {...line, ...{qty: line.qty + 1}});
+      }
+
+      dispatch({
+        type: ADD_TO_CART,
+        cart
+      })
     }
-    
-    dispatch({
-      type: ADD_TO_CART,
-      cart
-    })
   }
 };
 
