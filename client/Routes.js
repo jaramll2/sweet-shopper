@@ -15,6 +15,7 @@ import { guestCart } from './store/guestCart';
 class Routes extends Component {
   async componentDidMount() {
     this.props.loadInitialData()
+    
     if(!this.props.isLoggedIn){
       this.props.loadGuestCart();
     }

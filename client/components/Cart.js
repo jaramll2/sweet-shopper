@@ -7,9 +7,19 @@ class Cart extends Component{
 
 
   render(){
-    if(!this.props.auth.cart)
+    //returns null for initial render
+    if(!this.props.auth)
       return null;
-    const lineitems = this.props.auth.cart.lineitems;
+
+    //renders guest cart if no user is logged in.
+    let lineitems
+    if(!this.props.auth.id){
+      lineitems = this.props.guestCart.lineitems;
+    }
+    else{
+      lineitems = this.props.auth.cart.lineitems;
+    }
+      
     
 
     return(
