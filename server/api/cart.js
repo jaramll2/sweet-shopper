@@ -28,12 +28,28 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try{
     let cart;
+    //if we send this route a cart id, it finds cart and 
+    //returns it. if we don't, then it creates a cart and
+    //returns it.
     if(req.body.cartId){
-      cart = await Cart.findByPk(req.body.cartId)
+      cart = await Cart.findOne({
+        where: {
+          id: req.body.cartId
+        },
+        include: [{
+          model: LineItem, include: [{
+            model: Candy
+          }]
+        }]
+      });
     }
     else{
       cart = await Cart.create({},{
-        include: [LineItem]
+        include: [{
+          model: LineItem, include: [{
+            model: Candy
+          }]
+        }]
       });
     }
     res.send(cart);
