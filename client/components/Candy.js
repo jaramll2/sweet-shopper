@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
+import { addToCart } from "../store/cart";
 
 class Candy extends Component{
 
@@ -17,11 +18,18 @@ class Candy extends Component{
         <h3>{candy.name}</h3>
         <div>Weight: {candy.weight}</div>
         <div>Price: ${candy.price}</div>
-        <button>Add To Cart</button>
+        <button onClick={this.props.addToCart(candy, this.props.cart)}>Add To Cart</button>
       </div>
     )
   }
-
 }
 
-export default connect(state => state)(Candy);
+const mapDispatchToProps = (dispatch)  => {
+  return{
+    addToCart: (candy, cart)=>{
+      dispatch(addToCart(candy,cart));
+    }
+  }
+};
+
+export default connect(state=>state,mapDispatchToProps)(Candy);
