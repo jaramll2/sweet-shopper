@@ -13,8 +13,10 @@ const AuthForm = (props) => {
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    await handleAuthenticate(username, password, formName);
-    history.push("/");
+    const response = await handleAuthenticate(username, password, formName);
+    if (response?.auth?.id) {
+      history.push("/");
+    }
   };
 
   return (
