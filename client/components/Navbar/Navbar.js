@@ -1,51 +1,63 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../../store'
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Sweet Shopper</h1>
-    <nav>
-      {isLoggedIn ? (
-        <span>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SearchIcon from "@mui/icons-material/Search";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+import "./Navbar.scss";
+
+class Navbar extends Component {
+  state = {
+    searchFocused: false,
+  };
+
+  toggleSearch = () => {
+    this.setState((prev) => ({ searchFocused: !prev.searchFocused }));
+  };
+
+  render() {
+    const { searchFocused } = this.state;
+    const searchWidth = searchFocused ? '160px' : '30px';
+    return (
+      <div className="navbar">
+        <span className="navbar-left">
+          <Link to="/">Home</Link>
+          <Link to="/shop">Shop</Link>
+          <Link to="/about">About</Link>
         </span>
-      ) : (
-        <span>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
+        <span className="navbar-right">
+          <TextField
+            className="navbar-search"
+            InputProps={{
+              disableUnderline: !searchFocused,
+              startAdornment: (
+                <InputAdornment
+                  sx={{
+                    color: '#000',
+                  }}
+                  position="start"
+                  onClick={this.toggleSearch}
+                >
+                  <SearchIcon className="navbar-icon" />
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+            style={{
+              width: searchWidth,
+              borderBottom: 'none',
+              transition: '0.2s ease'
+            }}
+          />
+          <Link to="/login">Log In</Link>
           <Link to="/signup">Sign Up</Link>
+          <ShoppingCartIcon className="navbar-icon" />
         </span>
-      )}
-
-      <Link to="/candy">Candy</Link>
-      <Link to="/cart">Cart</Link>
-    </nav>
-    <hr />
-  </div>
-)
-
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    isLoggedIn: !!state.auth.id
+      </div>
+    );
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    handleClick() {
-      dispatch(logout())
-    }
-  }
-}
-
-export default connect(mapState, mapDispatch)(Navbar)
+export default Navbar;
