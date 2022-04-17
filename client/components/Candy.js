@@ -17,7 +17,7 @@ class Candy extends Component{
         <h3>{candy.name}</h3>
         <div>Weight: {candy.weight}</div>
         <div>Price: ${candy.price}</div>
-
+        <button>Add To Cart</button>
       </div>
     )
   }
