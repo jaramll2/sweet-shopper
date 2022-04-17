@@ -25,16 +25,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-
 router.post('/', async (req, res, next) => {
   try{
-    let cart
+    let cart;
     if(req.body.cartId){
       cart = await Cart.findByPk(req.body.cartId)
     }
     else{
       cart = await Cart.create();
     }
+
     res.send(cart);
   }
   catch(err){
