@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { addToCart } from "../store/cart";
+import { addToCart } from "../../store/cart";
 
 class Candy extends Component{
 
