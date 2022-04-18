@@ -40,6 +40,12 @@ export const authenticate = (username, password, method) => async dispatch => {
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN)
+  //TODO
+  //revisit situation in which cart id would need to be removed from local storage
+  //when a user is a guest shopping and then logs in the guest cart is now that user cart
+  //after the user logs out the once guest cart should no longer exist in local storage
+  //would then need to figure out how to reload a guest cart
+  window.localStorage.removeItem('cart')
   history.push('/login')
   return {
     type: SET_AUTH,
