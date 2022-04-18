@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -16,10 +16,18 @@ class Navbar extends Component {
     searchFocused: false,
     searchText: "",
     navbarScrolled: false,
+    isHomePage: true,
   };
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+    this.props.history.listen((location) => {
+      this.setState({ isHomePage: location.pathname === "/" });
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   toggleSearch = () => {
@@ -51,12 +59,12 @@ class Navbar extends Component {
   };
 
   render() {
-    const { searchFocused, searchText, navbarScrolled } = this.state;
+    const { searchFocused, searchText, navbarScrolled, isHomePage } = this.state;
     const { auth, handleLogout } = this.props;
     const isLoggedIn = Boolean(auth?.id);
     const searchWidth = searchFocused ? "160px" : "30px";
-    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""}`;
-    
+    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""}`;
+
     return (
       <div className={navbarClass}>
         <span className="navbar-left">
@@ -122,4 +130,4 @@ const mapDispatchToProps = (dispatch) => ({
   handleLogout: () => dispatch(logout()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

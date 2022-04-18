@@ -9,7 +9,7 @@
 
   .hero-img {
     margin-left: 30px;
-    max-width: 40%;
+    max-width: 50%;
   }
 
   .hero-title {
@@ -19,6 +19,8 @@
     color: $navy;
     font-weight: 500;
     font-size: 42px;
-    margin-right: 25px;
+    margin-right: 30px;
+    letter-spacing: 1rem;
+    font-weight: bold;
   }
 }
