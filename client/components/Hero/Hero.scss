@@ -1,19 +1,26 @@
 @import "../../variables.scss";
 
 .hero {
-  // padding-top: 80px;
   height: 500px;
   background: $soft-green;
   display: flex;
   align-items: center;
+  overflow: hidden;
 
-  .hero-img {
-    margin-left: 30px;
-    max-width: 50%;
+  .hero-img-container {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .hero-img {
+      max-height: 100%;
+      width: 80%;
+    }
   }
 
   .hero-title {
-    flex: auto;
+    flex: 3;
     justify-content: center;
     text-align: center;
     color: $navy;
@@ -22,5 +29,17 @@
     margin-right: 30px;
     letter-spacing: 1rem;
     font-weight: bold;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .hero .hero-img-container .hero-img {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .hero .hero-img-container .hero-img {
+    width: 70%;
   }
 }

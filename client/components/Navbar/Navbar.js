@@ -4,8 +4,11 @@ import { connect } from "react-redux";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
 import { logout } from "../../store/auth";
 
@@ -17,6 +20,7 @@ class Navbar extends Component {
     searchText: "",
     navbarScrolled: false,
     isHomePage: true,
+    mobileNavOpen: false,
   };
 
   componentDidMount() {
@@ -58,15 +62,42 @@ class Navbar extends Component {
     }
   };
 
+  toggleMobileNav = () => {
+    this.setState((prev) => ({ mobileNavOpen: !prev.mobileNavOpen }));
+  };
+
   render() {
-    const { searchFocused, searchText, navbarScrolled, isHomePage } = this.state;
+    const { searchFocused, searchText, navbarScrolled, isHomePage, mobileNavOpen } = this.state;
     const { auth, handleLogout } = this.props;
     const isLoggedIn = Boolean(auth?.id);
     const searchWidth = searchFocused ? "160px" : "30px";
-    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""}`;
+    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${
+      isHomePage ? "homepage" : ""
+    }`;
 
     return (
       <div className={navbarClass}>
+        <span className="navbar-mobile">
+          <MenuIcon onClick={this.toggleMobileNav} />
+          <Modal
+            open={mobileNavOpen}
+            onClose={this.toggleMobileNav}
+            aria-labelledby="navigation"
+            aria-describedby="navigation"
+          >
+            <Box className="navbar-mobile-box" onClick={this.toggleMobileNav}>
+              <Link className="mobile-nav-link" to="/">
+                Home
+              </Link>
+              <Link className="mobile-nav-link" to="/candy">
+                Shop
+              </Link>
+              <Link className="mobile-nav-link" to="/about">
+                About
+              </Link>
+            </Box>
+          </Modal>
+        </span>
         <span className="navbar-left">
           <Link to="/">Home</Link>
           <Link to="/candy">Shop</Link>
