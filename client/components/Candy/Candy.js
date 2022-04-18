@@ -18,7 +18,7 @@ class Candy extends Component{
         <h3>{candy.name}</h3>
         <div>Weight: {candy.weight}</div>
         <div>Price: ${candy.price}</div>
-        <button onClick={()=> this.props.addToCart(candy, this.props.auth)}>Add To Cart</button>
+        <button onClick={()=> this.props.addToCart(candy, this.props.auth, this.props.guestCart)}>Add To Cart</button>
       </div>
     )
   }
@@ -26,8 +26,8 @@ class Candy extends Component{
 
 const mapDispatchToProps = (dispatch)  => {
   return{
-    addToCart: (candy, cart)=>{
-      dispatch(addToCart(candy,cart));
+    addToCart: (candy, auth, guestCart)=>{
+      dispatch(addToCart(candy,auth, guestCart));
     }
   }
 };

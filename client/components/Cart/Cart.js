@@ -12,7 +12,15 @@ class Cart extends Component{
       return null;
 
     //renders guest cart if no user is logged in.
-    let lineitems
+    let cart = !this.props.auth.id ? this.props.guestCart: this.props.auth.cart;
+
+    //guest cart but it is empty
+    if(!cart.lineitems){
+      return;
+    }
+
+    let lineitems;
+
     if(!this.props.auth.id){
       lineitems = this.props.guestCart.lineitems;
     }
@@ -20,8 +28,6 @@ class Cart extends Component{
       lineitems = this.props.auth.cart.lineitems;
     }
       
-    
-
     return(
       <div>
         <ul>
