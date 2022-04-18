@@ -12,6 +12,7 @@ class CandyList extends React.Component {
   
   render(){
     const { candies } = this.props;
+    
     return(
       <div>
         <ul>

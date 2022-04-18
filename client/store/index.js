@@ -7,7 +7,7 @@ import candies from './candy';
 import cart from './cart';
 import guestCart from './guestCart';
 
-const reducer = combineReducers({ auth, candies, cart, guestCart });
+const reducer = combineReducers({ auth, candies, guestCart, cart });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
