@@ -15,7 +15,12 @@ class Navbar extends Component {
   state = {
     searchFocused: false,
     searchText: "",
+    navbarScrolled: false,
   };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
 
   toggleSearch = () => {
     this.setState(
@@ -36,13 +41,24 @@ class Navbar extends Component {
     this.setState({ searchText: event.target.value });
   };
 
+  handleScroll = () => {
+    const verticalPosition = window.scrollY;
+    if (verticalPosition > 80) {
+      this.setState({ navbarScrolled: true });
+    } else {
+      this.setState({ navbarScrolled: false });
+    }
+  };
+
   render() {
-    const { searchFocused, searchText } = this.state;
+    const { searchFocused, searchText, navbarScrolled } = this.state;
     const { auth, handleLogout } = this.props;
     const isLoggedIn = Boolean(auth?.id);
     const searchWidth = searchFocused ? "160px" : "30px";
+    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""}`;
+    
     return (
-      <div className="navbar">
+      <div className={navbarClass}>
         <span className="navbar-left">
           <Link to="/">Home</Link>
           <Link to="/candy">Shop</Link>
@@ -89,7 +105,7 @@ class Navbar extends Component {
               <Link to="/signup">Sign Up</Link>
             </>
           )}
-          <Link to="/cart">
+          <Link className="icon-link" to="/cart">
             <ShoppingCartIcon className="navbar-icon" />
           </Link>
         </span>

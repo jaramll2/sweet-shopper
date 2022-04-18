@@ -1,12 +1,23 @@
 @import "../../variables.scss";
 
 .navbar {
-  height: 80px;
   display: flex;
   align-items: center;
+  height: 80px;
+  width: 100%;
+  background: $soft-green;
   padding: 0 30px;
   font-weight: 500;
   font-size: 18px;
+  position: sticky;
+  top: 0;
+  transition: 0.2s ease;
+
+  &.scrolled {
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
 
   a {
     color: $black;
@@ -18,6 +29,11 @@
     }
   }
 
+  .navbar-left,
+  .navbar-right {
+    padding: 0 30px;
+  }
+
   .navbar-right {
     display: flex;
     align-items: center;
@@ -25,6 +41,11 @@
 
     .navbar-search {
       margin-right: 30px;
+    }
+
+    .icon-link {
+      display: flex;
+      align-items: center;
     }
 
     .navbar-logout {
