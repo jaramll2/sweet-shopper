@@ -3,8 +3,10 @@ import axios from 'axios';
 const ADD_TO_CART = 'ADD_TO_CART';
 const ADD_TO_CART_GUEST = 'ADD_TO_CART_GUEST';
 
-export const addToCart = (candy,auth, guestCart)=>{
+export const addToCart = (candy, qty, auth, guestCart)=>{
   return async(dispatch)=>{
+    qty = parseInt(qty);
+
     const cart = (!window.localStorage.token && guestCart) ? guestCart : auth.cart;
 
     let line = (!cart.lineitems) ? null : cart.lineitems.find(_line => {
@@ -13,11 +15,11 @@ export const addToCart = (candy,auth, guestCart)=>{
 
     //if no line item exist create one to add to cart
     if(!line){
-      (await axios.post('/api/lineItem',{cartId:cart.id, qty: 1, candyId: candy.id})).data; 
+      (await axios.post('/api/lineItem',{cartId:cart.id, qty: qty, candyId: candy.id})).data; 
     }
     else{
       //else update line item in cart 
-      (await axios.put(`/api/lineItem/${line.id}`, {...line, ...{qty: line.qty + 1}}));
+      (await axios.put(`/api/lineItem/${line.id}`, {...line, ...{qty: line.qty + qty}}));
     }
 
     if(!window.localStorage.token && guestCart){

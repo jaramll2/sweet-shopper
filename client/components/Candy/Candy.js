@@ -4,8 +4,30 @@ import { connect } from "react-redux";
 import { addToCart } from "../../store/cart";
 
 class Candy extends Component{
+  constructor(){
+    super();
+    this.state = {
+      qty: ''
+    }
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onSubmit(ev){
+    ev.preventDefault();
+    this.setState({qty: ''});
+  }
+
+  onChange(ev){
+    const change = {};
+    change[ev.target.name] = ev.target.value;
+    this.setState(change);
+  }
 
   render(){
+    const { qty } = this.state;
+    const { onChange, onSubmit } = this;
+
     //filter through candies until we find the one that matches the id in the url
     const candy = this.props.candies.find((candy) => candy.id === this.props.match.params.id * 1)
     
@@ -18,7 +40,12 @@ class Candy extends Component{
         <h3>{candy.name}</h3>
         <div>Weight: {candy.weight}</div>
         <div>Price: ${candy.price}</div>
-        <button onClick={()=> this.props.addToCart(candy, this.props.auth, this.props.guestCart)}>Add To Cart</button>
+        <form onSubmit={onSubmit}>
+          <label>Quantity: </label>
+          <input type='number' min='1' name='qty' onChange={ onChange }></input><br/>
+          <button disabled = {!qty} onClick={()=> this.props.addToCart(candy, qty, this.props.auth, this.props.guestCart)}>Add To Cart</button>
+        </form>
+        
       </div>
     )
   }
@@ -26,8 +53,8 @@ class Candy extends Component{
 
 const mapDispatchToProps = (dispatch)  => {
   return{
-    addToCart: (candy, auth, guestCart)=>{
-      dispatch(addToCart(candy,auth, guestCart));
+    addToCart: (candy, qty, auth, guestCart)=>{
+      dispatch(addToCart(candy, qty, auth, guestCart));
     }
   }
 };
