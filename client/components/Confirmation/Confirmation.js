@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 class Confirmation extends Component{
 
     render(){
+        console.log(this.props);
         return(
             <div>
-                <h1>Thank you for your purchase, 'name'!</h1>
+                <h1>Thank you for your purchase{ !window.localStorage.token ? '!' : `, ${this.props.auth.username}!`}</h1>
             </div>
         )
     }
