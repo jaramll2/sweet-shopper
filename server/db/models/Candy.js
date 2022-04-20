@@ -5,7 +5,8 @@ const Candy = db.define('candy', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
+    //add this back in after we have a better way to seed.
+    // unique: true,
     validate: {
       notEmpty: true
     }
