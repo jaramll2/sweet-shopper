@@ -8,6 +8,7 @@ import Candy from "./components/Candy";
 import { me } from "./store";
 import Cart from "./components/Cart";
 import { guestCart } from "./store/guestCart";
+import Confirmation from "./components/Confirmation/Confirmation";
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ class Routes extends Component {
         <Route path="/candy/:id" component={Candy} />
         <Route path="/candy" component={CandyList} />
         <Route path="/cart" component={Cart} />
+        <Route exact path="/confirmation" component={Confirmation} />
         <Redirect to="/" />
       </div>
     );
