@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -21,6 +22,8 @@ class Navbar extends Component {
     navbarScrolled: false,
     isHomePage: true,
     mobileNavOpen: false,
+    userMenuOpen: false,
+    loginModalOpen: false,
   };
 
   componentDidMount() {
@@ -66,14 +69,40 @@ class Navbar extends Component {
     this.setState((prev) => ({ mobileNavOpen: !prev.mobileNavOpen }));
   };
 
+  toggleUserMenu = () => {
+    this.setState((prev) => ({ userMenuOpen: !prev.userMenuOpen }));
+  };
+
+  toggleLoginModal = () => {
+    this.setState((prev) => ({ loginModalOpen: !prev.loginModalOpen }));
+  };
+
+  handleUserIconClick = () => {
+    const isLoggedIn = Boolean(this.props.auth?.id);
+    if (isLoggedIn) {
+      this.toggleUserMenu();
+    } else {
+      this.toggleLoginModal();
+    }
+  };
+
   render() {
-    const { searchFocused, searchText, navbarScrolled, isHomePage, mobileNavOpen } = this.state;
+    const {
+      searchFocused,
+      searchText,
+      navbarScrolled,
+      isHomePage,
+      mobileNavOpen,
+      userMenuOpen,
+      loginModalOpen,
+    } = this.state;
     const { auth, handleLogout } = this.props;
     const isLoggedIn = Boolean(auth?.id);
     const searchWidth = searchFocused ? "160px" : "30px";
     const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${
       isHomePage ? "homepage" : ""
     }`;
+    const userMenuClass = `user-menu ${userMenuOpen ? "open" : ""}`;
 
     return (
       <div className={navbarClass}>
@@ -99,6 +128,7 @@ class Navbar extends Component {
           </Modal>
         </span>
         <span className="navbar-left">
+          <Link to="/">SS</Link>
           <Link to="/">Home</Link>
           <Link to="/candy">Shop</Link>
           <Link to="/about">About</Link>
@@ -134,6 +164,18 @@ class Navbar extends Component {
               transition: "0.2s ease",
             }}
           />
+          <div className="user-menu-container">
+            <PersonIcon className="navbar-icon" onClick={this.handleUserIconClick} />
+            <div className={userMenuClass}>
+              <span>mnozawa@gmail.com</span>
+              <span>Account</span>
+              <span>Settings</span>
+              <span>Log Out</span>
+            </div>
+            <Modal open={loginModalOpen} onClose={this.toggleLoginModal}>
+              <div className="login-modal-style">asdfasdfasdfasdfasdf</div>
+            </Modal>
+          </div>
           {isLoggedIn ? (
             <span className="navbar-logout" onClick={() => handleLogout()}>
               Log Out
