@@ -3,10 +3,20 @@ const db = require('../db');
 
 const Candy = db.define('candy', {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    //add this back in after we have a better way to seed.
+    // unique: true,
+    validate: {
+      notEmpty: true
+    }
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2)
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   weight: {
     type: Sequelize.STRING
