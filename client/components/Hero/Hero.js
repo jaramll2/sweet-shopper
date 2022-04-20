@@ -8,7 +8,10 @@ export default () => {
       <div className="hero-img-container">
         <img className="hero-img" src="./hero-img.png" />
       </div>
-      <span className="hero-title">SWEET SHOPPER</span>
+      <div className="hero-title-container">
+        <div className="hero-title">EAT SWEETS</div>
+        <div className="hero-title">BE HAPPY</div>
+      </div>
     </div>
   );
 };

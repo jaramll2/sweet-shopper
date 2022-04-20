@@ -10,12 +10,16 @@
   .hero-img-container {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
   }
 
   .hero-img {
-    width: 80%;
+    max-width: 80%;
+  }
+
+  .hero-title-container {
+    flex: 1;
   }
 
   .hero-title {
@@ -36,8 +40,16 @@
   }
 }
 
-@media only screen and (min-width: 1600px) {
+@media only screen and (min-width: 1400px) {
   .hero .hero-img-container .hero-img {
-    width: 70%;
+    max-height: 80%;
+    width: 100%;
   }
 }
+
+// @media only screen and (min-width: 1600px) {
+//   .hero .hero-img-container .hero-img {
+//     width: 80%;
+//     // height: 100%;
+//   }
+// }
