@@ -34,7 +34,7 @@ export const addToCart = (candy, qty, auth, guestCart)=>{
     if(!window.localStorage.token && guestCart){
       const updatedcart = (await axios.get(`/api/cart/${cart.id}`, {
         headers:{
-          authorization: window.localStorage.token
+          authorization: 'guest'
         }
       })).data ;
       guestCart.lineitems = updatedcart.lineitems;
