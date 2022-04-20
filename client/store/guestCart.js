@@ -16,7 +16,11 @@ export const guestCart = () => {
         window.localStorage.cartId = guestCart.id;
       }
       else{
-        guestCart = (await axios.get(`/api/cart/${cartId}`)).data;
+        guestCart = (await axios.get(`/api/cart/${cartId}`, {
+          headers: {
+            authorization: 'guest'
+          }
+        })).data;
       }
 
       dispatch({
