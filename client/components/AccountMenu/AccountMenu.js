@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 
 import PersonIcon from "@mui/icons-material/Person";
@@ -14,6 +14,22 @@ class AccountMenu extends Component {
   state = {
     loginModalOpen: false,
     userMenuOpen: false,
+  };
+
+  wrapperRef = createRef();
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  handleClickOutside = (event) => {
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+      this.setState({ userMenuOpen: false });
+    }
   };
 
   toggleLoginModal = () => {
@@ -44,7 +60,7 @@ class AccountMenu extends Component {
     const userMenuClass = `user-menu ${userMenuOpen ? "open" : ""}`;
 
     return (
-      <div className="user-menu-container">
+      <div className="user-menu-container" ref={this.wrapperRef}>
         <PersonIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
         <div className={userMenuClass}>
           <span>Logged in as {user?.username}</span>
