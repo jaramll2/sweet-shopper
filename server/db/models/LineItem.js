@@ -13,9 +13,16 @@ const LineItem = db.define('lineitem', {
         }
       }
     }
+  },
+  totalPrice: {
+    type: VIRTUAL,
+    async get(){
+      const candy = await Candy.findByPk(this.id);
+      const totalPrice = (this.qty * candy.price)
+      return totalPrice
+    }
   }
-  //TODO: maybe add virtual feild to add total of line item price.
 })
 
-
+ 
 module.exports = LineItem;
