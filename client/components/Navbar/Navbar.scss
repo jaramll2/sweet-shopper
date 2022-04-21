@@ -59,6 +59,10 @@
       align-items: center;
     }
 
+    .navbar-search {
+      font-size: 20px;
+    }
+
     .navbar-logout {
       cursor: pointer;
       margin-left: 30px;
@@ -76,28 +80,6 @@
       &:hover {
         cursor: pointer;
         opacity: 0.7;
-      }
-    }
-
-    .user-menu-container {
-      position: relative;
-
-      .user-menu {
-        position: absolute;
-        top: 30px;
-        right: 0;
-        padding: 20px;
-        background: $white;
-        display: flex;
-        flex-direction: column;
-        opacity: 0;
-        pointer-events: none;
-        transition: 0.2s ease;
-
-        &.open {
-          opacity: 1;
-          pointer-events: all;
-        }
       }
     }
   }
@@ -121,34 +103,4 @@
       }
     }
   }
-}
-
-.navbar-mobile-box {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  a {
-    font-size: 32px;
-    color: $white;
-    margin: 20px 0;
-    transition: 0.2s ease;
-
-    &:hover {
-      opacity: 0.5;
-    }
-  }
-}
-
-.login-modal-style {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400;
-  background: $white;
-  box-shadow: 24;
-  outline: none;
 }
