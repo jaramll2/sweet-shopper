@@ -28,12 +28,6 @@ class Routes extends Component {
     return (
       <div>
         <Route exact path="/" component={Home} />
-        {!isLoggedIn && (
-          <>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </>
-        )}
         <Route path="/candy/:id" component={Candy} />
         <Route path="/candy" component={CandyList} />
         <Route path="/cart" component={Cart} />
