@@ -30,7 +30,7 @@ class Candy extends Component{
 
     //filter through candies until we find the one that matches the id in the url
     const candy = this.props.candies.find((candy) => candy.id === this.props.match.params.id * 1)
-    
+
     //return null if we don't find candy for the initial render.
     if(!candy)
       return null;
@@ -59,4 +59,4 @@ const mapDispatchToProps = (dispatch)  => {
   }
 };
 
-export default connect(state=>state,mapDispatchToProps)(Candy);
+export default connect(state=>state, mapDispatchToProps)(Candy);

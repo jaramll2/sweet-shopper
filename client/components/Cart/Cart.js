@@ -1,6 +1,8 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
+import { loadCart } from "../../store/cart"
+import { deleteFromCart } from "../../store/guestCart"
 import Confirmation from "../Confirmation/Confirmation";
 
 class Cart extends Component{
@@ -25,14 +27,14 @@ class Cart extends Component{
     else{
       lineitems = this.props.auth.cart.lineitems;
     }
-      
+
     return(
       <div>
         <ul>
           {lineitems.map((lineitem) => {
             return <li key={lineitem.id}>
               {lineitem.candy.name} - qty: {lineitem.qty}
-              <button>x</button>
+              <button onClick={() => this.props.deleteFromCart(lineitem.id, this.props.auth)}>Remove</button>
             </li>
           })}
         </ul>
@@ -49,5 +51,13 @@ class Cart extends Component{
   }
 }
 
+const mapDispatchToProps = (dispatch)  => {
+  return {
+    deleteFromCart: (id, auth) => {
+      dispatch(deleteFromCart(id, auth));
+    }
+  }
+};
 
-export default connect(state=>state)(Cart);
+
+export default connect(state=>state, mapDispatchToProps)(Cart);
