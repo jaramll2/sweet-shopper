@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { me } from './auth'
 
 const GUEST_CART = 'GUEST_CART';
 const DELETE_FROM_CART_GUEST = 'DELETE_FROM_CART_GUEST'
@@ -40,15 +41,13 @@ export const guestCart = () => {
   }
 }
 
-export const deleteFromCart = (id, auth) => {
+export const deleteFromCart = (id) => {
   return async (dispatch) => {
     const guestCart = (await axios.delete(`/api/lineItem/${id}`)).data
-    console.log('cart.data', guestCart)
+
     if (window.localStorage.token) {
-      return dispatch({
-        type: DELETE_FROM_CART,
-        auth
-      })
+      dispatch(me());
+      return;
     } else {
       return dispatch({
         type: DELETE_FROM_CART_GUEST,
