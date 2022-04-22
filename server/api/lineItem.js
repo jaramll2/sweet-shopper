@@ -1,12 +1,11 @@
 const router = require('express').Router();
 const { route } = require('express/lib/application');
-const { models: {LineItem}} = require('../db');
+const { models: {LineItem, Cart, Candy}} = require('../db');
 module.exports = router;
 
 router.put('/:id', async(req,res,next)=>{
     try{
         const line = await LineItem.findByPk(req.params.id);
-
         res.send(await line.update(req.body));
     }
     catch(err){
@@ -23,3 +22,25 @@ router.post('/', async(req,res,next)=>{
         next(err);
     }
 });
+
+router.delete('/:id', async (req, res, next ) => {
+    try {
+        const lineItem = await LineItem.findByPk(req.params.id);
+        await lineItem.destroy()
+        const cart = await Cart.findOne({
+            where: {
+              id: lineItem.candyId
+            },
+            include: [{
+              model: LineItem, include: [{
+                model: Candy
+              }]
+            }]
+          })
+        res.send(cart)
+        console.log('cart from axios', cart)
+    }
+    catch (err) {
+        console.log(err)
+    }
+})

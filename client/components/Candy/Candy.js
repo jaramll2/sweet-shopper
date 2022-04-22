@@ -8,7 +8,7 @@ class Candy extends Component{
   render(){
     //filter through candies until we find the one that matches the id in the url
     const candy = this.props.candies.find((candy) => candy.id === this.props.match.params.id * 1)
-    
+
     //return null if we don't find candy for the initial render.
     if(!candy)
       return null;
@@ -25,11 +25,11 @@ class Candy extends Component{
 }
 
 const mapDispatchToProps = (dispatch)  => {
-  return{
+  return {
     addToCart: (candy, auth, guestCart)=>{
       dispatch(addToCart(candy,auth, guestCart));
     }
   }
 };
 
-export default connect(state=>state,mapDispatchToProps)(Candy);
+export default connect(state=>state, mapDispatchToProps)(Candy);

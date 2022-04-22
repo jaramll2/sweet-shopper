@@ -3,7 +3,7 @@ import axios from 'axios';
 const ADD_TO_CART = 'ADD_TO_CART';
 const ADD_TO_CART_GUEST = 'ADD_TO_CART_GUEST';
 
-export const addToCart = (candy,auth, guestCart)=>{
+export const addToCart = (candy, auth, guestCart)=>{
   return async(dispatch)=>{
     const cart = (!window.localStorage.token && guestCart) ? guestCart : auth.cart;
 
@@ -13,10 +13,10 @@ export const addToCart = (candy,auth, guestCart)=>{
 
     //if no line item exist create one to add to cart
     if(!line){
-      (await axios.post('/api/lineItem',{cartId:cart.id, qty: 1, candyId: candy.id})).data; 
+      (await axios.post('/api/lineItem',{cartId:cart.id, qty: 1, candyId: candy.id})).data;
     }
     else{
-      //else update line item in cart 
+      //else update line item in cart
       (await axios.put(`/api/lineItem/${line.id}`, {...line, ...{qty: line.qty + 1}}));
     }
 
@@ -43,7 +43,7 @@ export const addToCart = (candy,auth, guestCart)=>{
 
 export default (state = {}, action) => {
   if(action.type === ADD_TO_CART){
-    return action.auth; 
+    return action.auth;
   }
   if(action.type === ADD_TO_CART_GUEST){
     return action.guestCart;
