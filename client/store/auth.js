@@ -46,7 +46,6 @@ export const logout = () => {
   //after the user logs out the once guest cart should no longer exist in local storage
   //would then need to figure out how to reload a guest cart
   window.localStorage.removeItem('cart')
-  history.push('/login')
   return {
     type: SET_AUTH,
     auth: {}

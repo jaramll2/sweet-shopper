@@ -3,9 +3,9 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { loadCart } from "../../store/cart"
 import { deleteFromCart } from "../../store/guestCart"
+import Confirmation from "../Confirmation/Confirmation";
 
 class Cart extends Component{
-
   render(){
     //returns null for initial render
     if(!this.props.auth)
@@ -38,6 +38,14 @@ class Cart extends Component{
             </li>
           })}
         </ul>
+
+        <div>
+          <button onClick = { ()=>{
+              const {history} = this.props;
+              history.push('/confirmation');
+              }}>
+          Complete Order</button>
+        </div>
       </div>
     )
   }

@@ -27,6 +27,10 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id',async(req,res,next)=>{
   try{
+    //validating user
+    if(req.headers.authorization !== 'guest')
+      await User.findByToken(req.headers.authorization);
+
     const cart = await Cart.findOne({
       where: {
         id: req.params.id
@@ -47,6 +51,11 @@ router.get('/:id',async(req,res,next)=>{
 
 router.post('/', async (req, res, next) => {
   try{
+    console.log(req.headers);
+    //validating user
+    if(req.headers.authorization !== 'guest')
+      await User.findByToken(req.headers.authorization);
+      
     const cart = await Cart.create({},{
       include: [{
         model: LineItem, include: [{

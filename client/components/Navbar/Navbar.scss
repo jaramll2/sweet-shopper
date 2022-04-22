@@ -5,13 +5,18 @@
   align-items: center;
   height: 80px;
   width: 100%;
-  background: $soft-green;
-  padding: 0 30px;
+  background: $white;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
   position: sticky;
+  padding: 0 20px;
   top: 0;
-  transition: 0.2s ease;
+  box-sizing: border-box;
+
+  &.homepage {
+    transition: 0.2s ease;
+    background: $soft-green;
+  }
 
   &.scrolled {
     box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.3);
@@ -21,7 +26,6 @@
 
   a {
     color: $black;
-    margin-right: 30px;
     transition: 0.2s ease;
 
     &:hover {
@@ -29,18 +33,25 @@
     }
   }
 
-  .navbar-left,
-  .navbar-right {
-    padding: 0 30px;
+  .navbar-mobile {
+    display: none;
+  }
+
+  .navbar-left {
+    margin-left: 30px;
+
+    a {
+      margin-right: 30px;
+    }
   }
 
   .navbar-right {
     display: flex;
     align-items: center;
-    margin-left: auto;
+    margin: 0 30px 0 auto;
 
-    .navbar-search {
-      margin-right: 30px;
+    a {
+      margin-left: 30px;
     }
 
     .icon-link {
@@ -48,9 +59,13 @@
       align-items: center;
     }
 
+    .navbar-search {
+      font-size: 20px;
+    }
+
     .navbar-logout {
       cursor: pointer;
-      margin-right: 30px;
+      margin-left: 30px;
 
       &:hover {
         opacity: 0.7;
@@ -59,10 +74,32 @@
 
     .navbar-icon {
       transition: 0.2s ease;
+      display: flex;
+      justify-content: end;
 
       &:hover {
         cursor: pointer;
         opacity: 0.7;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar {
+    .navbar-mobile {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-left {
+      display: none;
+    }
+    .navbar-right {
+      margin-right: 0;
+
+      .navbar-search {
+        display: none;
       }
     }
   }
