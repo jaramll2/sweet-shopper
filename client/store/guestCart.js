@@ -55,10 +55,8 @@ export const deleteFromCart = (id, auth) => {
         guestCart
       })
     }
-    console.log('cart.data', cart)
   }
 
-  console.log('cart from store', guestCart)
 }
 
 export default(state = {}, action) => {

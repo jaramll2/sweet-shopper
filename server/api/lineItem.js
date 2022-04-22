@@ -27,9 +27,10 @@ router.delete('/:id', async (req, res, next ) => {
     try {
         const lineItem = await LineItem.findByPk(req.params.id);
         await lineItem.destroy()
+        console.log(lineItem.candyId)
         const cart = await Cart.findOne({
             where: {
-              id: lineItem.candyId
+              id: lineItem.cartId
             },
             include: [{
               model: LineItem, include: [{
@@ -37,8 +38,9 @@ router.delete('/:id', async (req, res, next ) => {
               }]
             }]
           })
+          console.log('cart from axios', cart)
         res.send(cart)
-        console.log('cart from axios', cart)
+        
     }
     catch (err) {
         console.log(err)

@@ -8,8 +8,6 @@ describe('Line Item model', () => {
     const candy = await Candy.create({name: 'testCandy', price: 1, weight: '3'});
     const li = await LineItem.create({qty: 5, candyId: candy.id});
 
-    
-
     expect(await li.totalPrice).to.equal(candy.price * li.qty);
   })
 })
