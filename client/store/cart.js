@@ -40,7 +40,7 @@ export const addToCart = (candy, qty, auth, guestCart)=>{
       guestCart.lineitems = updatedcart.lineitems;
 
       return dispatch({
-        type: ADD_TO_CART_GUEST,
+        type: "GUEST_CART",
         guestCart
       })
     }
@@ -49,7 +49,7 @@ export const addToCart = (candy, qty, auth, guestCart)=>{
       auth.cart = updatedcart;
 
       return dispatch({
-        type: ADD_TO_CART,
+        type: "SET_AUTH",
         auth
       })
     }
@@ -76,12 +76,10 @@ export const updateItem = (item) => async (dispatch, getState) => {
   }
 };
 
-export default (state = {}, action) => {
-  if(action.type === ADD_TO_CART){
-    return action.auth; 
-  }
-  if(action.type === ADD_TO_CART_GUEST){
-    return action.guestCart;
-  }
-  return state;
-}
+// export default (state = {}, action) => {
+//   if(action.type === ADD_TO_CART){
+//     return action.auth; 
+//   }
+
+//   return state;
+// }
