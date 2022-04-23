@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 import { logout } from "../../store/auth";
 import NavbarSearch from "../NavbarSearch";
 import MobileNavbar from "../MobileNavbar";
 import AccountMenu from "../AccountMenu";
+import Cart from "../Cart";
 
 import "./Navbar.scss";
 
@@ -48,6 +47,8 @@ class Navbar extends Component {
         <MobileNavbar />
         <span className="navbar-left">
           <Link to="/">SS</Link>
+        </span>
+        <span className="navbar-center">
           <Link to="/">Home</Link>
           <Link to="/candy">Shop</Link>
           <Link to="/about">About</Link>
@@ -55,9 +56,7 @@ class Navbar extends Component {
         <span className="navbar-right">
           <NavbarSearch />
           <AccountMenu />
-          <Link className="icon-link" to="/cart">
-            <ShoppingCartIcon fontSize="large" className="navbar-icon" />
-          </Link>
+          <Cart />
         </span>
       </div>
     );
