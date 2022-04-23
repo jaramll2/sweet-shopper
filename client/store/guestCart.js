@@ -4,6 +4,7 @@ import { me } from './auth'
 const GUEST_CART = 'GUEST_CART';
 const DELETE_FROM_CART_GUEST = 'DELETE_FROM_CART_GUEST'
 const DELETE_FROM_CART = 'DELETE_FROM_CART'
+const EMPTY_CART = 'EMPTY_CART';
 
 export const guestCart = () => {
   return async(dispatch) => {
@@ -58,12 +59,21 @@ export const deleteFromCart = (id) => {
 
 }
 
+export const emptyCart = () => {
+  return{
+    type: EMPTY_CART
+  }
+}
+
 export default(state = {}, action) => {
   if(action.type === GUEST_CART){
     return action.guestCart
   }
   if(action.type === DELETE_FROM_CART_GUEST) {
     return action.guestCart
+  }
+  if(action.type === EMPTY_CART){
+    return {...state, lineitems: []}
   }
   return state
 }

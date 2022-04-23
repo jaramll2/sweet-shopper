@@ -1,5 +1,6 @@
-import axios from 'axios'
-import history from '../history'
+import axios from 'axios';
+import history from '../history';
+import { emptyCart } from './guestCart';
 
 const TOKEN = 'token'
 
@@ -30,8 +31,9 @@ export const me = () => async dispatch => {
 
 export const authenticate = (username, password, method) => async dispatch => {
   try {
-    const res = await axios.post(`/auth/${method}`, {username, password})
+    const res = await axios.post(`/auth/${method}`, {username, password, guestCart: window.localStorage.cartId})
     window.localStorage.setItem(TOKEN, res.data.token)
+    dispatch(emptyCart());
     return dispatch(me())
   } catch (authError) {
     return dispatch(setAuth({error: authError}))
