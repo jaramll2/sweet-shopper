@@ -32,7 +32,6 @@ class Routes extends Component {
         <Route path="/candy" component={CandyList} />
         <Route path="/cart" component={Cart} />
         <Route exact path="/confirmation" component={Confirmation} />
-
       </div>
     );
   }
