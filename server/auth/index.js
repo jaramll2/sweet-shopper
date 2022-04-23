@@ -39,8 +39,32 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
+    const { username, password, guestCart } = req.body;
+    const user = await User.create({username, password});
     await Cart.create({ userId: user.id });
+    
+    //This block of code finds the user's cart, and the guest cart they were using,
+    //then emptys the guest cart into the user's cart.
+    const userCart = await Cart.findOne({
+      where:{
+        userId: user.id
+      }
+    });
+    const guestCartToEmpty = await Cart.findOne({
+      where: {
+        id: guestCart
+      },
+      include: [LineItem]
+    });
+    guestCartToEmpty.dataValues.lineitems.forEach(async(lineItem) => {
+      
+      lineItem.update({
+        cartId: userCart.id
+      })
+      
+    })
+
+
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
