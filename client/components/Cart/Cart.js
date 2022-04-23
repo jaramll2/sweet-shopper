@@ -33,7 +33,7 @@ class Cart extends Component{
         <ul>
           {lineitems.map((lineitem) => {
             return <li key={lineitem.id}>
-              {lineitem.candy.name} - qty: {lineitem.qty}
+              {lineitem.candy.name} - qty: {lineitem.qty} - Total Price: ${lineitem.candy.price * lineitem.qty}
               <button onClick={() => this.props.deleteFromCart(lineitem.id, this.props.auth)}>Remove</button>
             </li>
           })}
