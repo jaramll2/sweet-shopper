@@ -20,6 +20,7 @@ class Cart extends Component{
     }
 
     let lineitems;
+    let totalCartPrice = 0;
 
     if(!this.props.auth.id){
       lineitems = this.props.guestCart.lineitems;
@@ -32,13 +33,17 @@ class Cart extends Component{
       <div>
         <ul>
           {lineitems.map((lineitem) => {
+            const lineValue = lineitem.candy.price * lineitem.qty
+            totalCartPrice += lineValue
             return <li key={lineitem.id}>
-              {lineitem.candy.name} - qty: {lineitem.qty} - Total Price: ${lineitem.candy.price * lineitem.qty}
+              {lineitem.candy.name} - qty: {lineitem.qty} - Total Price: ${lineValue}
               <button onClick={() => this.props.deleteFromCart(lineitem.id, this.props.auth)}>Remove</button>
             </li>
           })}
         </ul>
-
+        <div>
+          {`Total Price: $${totalCartPrice}`}
+        </div>
         <div>
           <button onClick = { ()=>{
               const {history} = this.props;
