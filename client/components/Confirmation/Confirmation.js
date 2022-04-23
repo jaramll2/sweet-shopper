@@ -46,10 +46,15 @@ class Confirmation extends Component{
                                 <br/>
                                 <br/>
                             </span>
-
                         </div>
                     )
                 })}
+
+                <span><b>Total: </b>$</span>
+                {lines.reduce((prev,curr)=>{
+                    let price = (curr.candy.price * curr.qty).toFixed(2) * 1;
+                    return prev + price;
+                },0)}
             </div>
         )
     }
