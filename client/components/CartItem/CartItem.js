@@ -43,7 +43,7 @@ class CartItem extends Component {
 
   handleDelete = () => {
     if (!this.props.auth.id) {
-      this.props.deleteItem(this.props.guestCart.id);
+      this.props.deleteItem(this.props.item.id);
     }
   };
 
