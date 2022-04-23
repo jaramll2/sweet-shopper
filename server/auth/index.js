@@ -1,12 +1,37 @@
 const router = require("express").Router();
 const {
-  models: { User, Cart },
+  models: { User, Cart, LineItem },
 } = require("../db");
 module.exports = router;
 
 router.post("/login", async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body) });
+    const { username, password, guestCart } = req.body;
+
+    //This block of code finds the user's cart, and the guest cart they were using,
+    //then emptys the guest cart into the user's cart.
+    const token = await User.authenticate({username, password});
+    const user = await User.findByToken(token);
+    const userCart = await Cart.findOne({
+      where:{
+        userId: user.id
+      }
+    })
+    const guestCartToEmpty = await Cart.findOne({
+      where: {
+        id: guestCart
+      },
+      include: [LineItem]
+    })
+    guestCartToEmpty.dataValues.lineitems.forEach(async(lineItem) => {
+      
+      lineItem.update({
+        cartId: userCart.id
+      })
+      
+    })
+    
+    res.send({ token });
   } catch (err) {
     next(err);
   }

@@ -4,7 +4,6 @@ import axios from 'axios';
 const ADD_TO_CART = 'ADD_TO_CART';
 const ADD_TO_CART_GUEST = 'ADD_TO_CART_GUEST';
 
-
 export const addToCart = (candy, qty, auth, guestCart)=>{
   return async(dispatch)=>{
     qty = parseInt(qty);
@@ -59,7 +58,7 @@ export const addToCart = (candy, qty, auth, guestCart)=>{
 
 export default (state = {}, action) => {
   if(action.type === ADD_TO_CART){
-    return action.auth;
+    return action.auth; 
   }
   if(action.type === ADD_TO_CART_GUEST){
     return action.guestCart;
