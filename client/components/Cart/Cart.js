@@ -9,18 +9,20 @@ import Drawer from "@mui/material/Drawer";
 import CartItem from "../CartItem";
 
 import "./Cart.scss";
+import { toggleCart } from "../../store/displayCart";
 
 class Cart extends Component {
-  state = {
-    cartOpen: false,
-  };
+  // state = {
+  //   cartOpen: false,
+  // };
 
   toggleCart = () => {
-    this.setState((prev) => ({ cartOpen: !prev.cartOpen }));
+    // this.setState((prev) => ({ cartOpen: !prev.cartOpen }));
+    this.props.toggleCart()
   };
 
   render() {
-    const { cartOpen } = this.state;
+    const cartOpen = this.props.displayCart;
     const items = this.props.auth.cart?.lineitems || this.props.guestCart.lineitems || [];
     const subtotalMessage = `Subtotal (${items.length} item${items.length > 1 ? "s" : ""})`;
     const totalPrice =
@@ -59,6 +61,15 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps)(Cart);
+
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => {
+  return{
+    toggleCart: function(){
+      dispatch(toggleCart())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

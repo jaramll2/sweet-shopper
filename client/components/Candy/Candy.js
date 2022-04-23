@@ -2,7 +2,7 @@ import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { addToCart } from "../../store/cart";
-
+import {toggleCart} from '../../store/displayCart'
 class Candy extends Component{
   constructor(){
     super();
@@ -40,10 +40,12 @@ class Candy extends Component{
         <h3>{candy.name}</h3>
         <div>Weight: {candy.weight}</div>
         <div>Price: ${candy.price}</div>
+
         <form id='addForm' onSubmit={onSubmit}>
           <label>Quantity: </label>
           <input type='number' min='1' name='qty' onChange={ onChange }></input><br/>
-          <button disabled = {!qty} onClick={()=> this.props.addToCart(candy, qty, this.props.auth, this.props.guestCart)}>Add To Cart</button>
+          <button disabled = {!qty} onClick={()=> {this.props.addToCart(candy, qty, this.props.auth, this.props.guestCart)}
+          }>Add To Cart</button>
         </form>
         
       </div>
@@ -55,6 +57,9 @@ const mapDispatchToProps = (dispatch)  => {
   return{
     addToCart: (candy, qty, auth, guestCart)=>{
       dispatch(addToCart(candy, qty, auth, guestCart));
+    },
+    toggleCartDisplay: () => {
+      dispatch(toggleCart());
     }
   }
 };
