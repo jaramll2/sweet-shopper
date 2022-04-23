@@ -5,6 +5,7 @@ const ADD_TO_CART = 'ADD_TO_CART';
 const ADD_TO_CART_GUEST = 'ADD_TO_CART_GUEST';
 
 export const addToCart = (candy, qty, auth, guestCart)=>{
+  console.log('test');
   return async(dispatch)=>{
     qty = parseInt(qty);
 
@@ -39,19 +40,26 @@ export const addToCart = (candy, qty, auth, guestCart)=>{
       })).data ;
       guestCart.lineitems = updatedcart.lineitems;
 
-      return dispatch({
+      dispatch({
         type: "GUEST_CART",
         guestCart
+      })
+      return dispatch({
+        type: "TOGGLE_CART"
       })
     }
     else{
       const updatedcart = (await axios.get('/api/cart/',{headers: {authorization: window.localStorage.token}})).data ;
       auth.cart = updatedcart;
 
-      return dispatch({
+      dispatch({
         type: "SET_AUTH",
         auth
       })
+      return dispatch({
+        type: "TOGGLE_CART"
+      })
+
     }
   }
 };
