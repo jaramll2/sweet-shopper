@@ -24,6 +24,43 @@ const Candy = db.define('candy', {
 })
 
 Candy.generateRandom = () => {
+
+  // This is the beginning of an idea to create random candy names. It works right now, but I need to add more 
+  // variety so that we don't get a bunch of repeats
+  // const prefixes = [
+  //   '',
+  //   'Coco',
+  //   'Super',
+  //   'Butter',
+  //   'Frutti',
+  //   'Crazy'
+  
+  // ]
+  
+  // const candy = [
+  // 'jellies',
+  // 'bubbles',
+  // 'pops',
+  // 'bursts'
+  // ]
+  
+  // const adjective = [
+  //   '',
+  //   'Tasty',
+  //   'Delicious',
+  //   'Fruity',
+  //   'Cookie'
+  // ]
+  // const candies = []
+  // for(let i = 0; i < 5; i++){
+  //   candies.push(
+  //     `
+  //       ${adjective[Math.floor(Math.random() * adjective.length)]} ${prefixes[Math.floor(Math.random() * prefixes.length)]}${candy[Math.floor(Math.random() * candy.length)]} 
+        
+  //     `
+  //   )
+  // }
+
   //List of possible random names. Could use an api later.
   const randomName = [
     'Plum Cocobites',
