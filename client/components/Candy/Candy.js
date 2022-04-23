@@ -40,7 +40,7 @@ class Candy extends Component{
         <h3>{candy.name}</h3>
         <div>Weight: {candy.weight}</div>
         <div>Price: ${candy.price}</div>
-        <form id="addForm" onSubmit={onSubmit}>
+        <form id='addForm' onSubmit={onSubmit}>
           <label>Quantity: </label>
           <input type='number' min='1' name='qty' onChange={ onChange }></input><br/>
           <button disabled = {!qty} onClick={()=> this.props.addToCart(candy, qty, this.props.auth, this.props.guestCart)}>Add To Cart</button>
