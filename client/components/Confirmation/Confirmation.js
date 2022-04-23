@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 class Confirmation extends Component{
 
     render(){
+        //TODO: 
         //make cart purchased
         //store cart in order history eventually
-        //TODO: go back and ensure that if there are no line items (empty cart)
+        //go back and ensure that if there are no line items (empty cart)
         //you cannot complete purcahse, thus cannot get to this page
         
         const cart = !window.localStorage.token ? this.props.guestCart : this.props.auth.cart;
@@ -22,9 +23,11 @@ class Confirmation extends Component{
             return;
         }
 
-        console.log(lines);
-        let total = 0;
-        let price = 0;
+        const total = lines.reduce((prev,curr)=>{
+            let price = curr.candy.price * curr.qty * 1;
+            return prev + price;
+        },0);
+
 
         return(
             <div>
@@ -50,11 +53,7 @@ class Confirmation extends Component{
                     )
                 })}
 
-                <span><b>Total: </b>$</span>
-                {lines.reduce((prev,curr)=>{
-                    let price = (curr.candy.price * curr.qty).toFixed(2) * 1;
-                    return prev + price;
-                },0)}
+                <span><b>Total: </b>${total.toFixed(2)}</span>
             </div>
         )
     }
