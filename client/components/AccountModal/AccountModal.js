@@ -27,6 +27,7 @@ class AccountModal extends Component {
 
     return (
       <div className="login-modal-body">
+        <h2>Welcome to Sweet Shopper</h2>
         <h4>{isLoginForm ? "Please log in to your account." : "Please enter your details."}</h4>
         <form className="login-modal-form" onSubmit={this.handleSubmit}>
           <input name="username" type="text" placeholder="Username" />
@@ -34,7 +35,7 @@ class AccountModal extends Component {
           <button type="submit">{isLoginForm ? "LOG IN" : "SIGN UP"}</button>
         </form>
         {isLoginForm && (
-          <div>
+          <div className="check-member">
             Not a member?{" "}
             <span className="signup-link" onClick={this.toggleFormType}>
               <b>Join us</b>

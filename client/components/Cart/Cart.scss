@@ -19,10 +19,12 @@
 
   .cart-checkout-button {
     width: 100%;
-    border-radius: 14px;
-    background: #ccc;
+    border-radius: 10px;
+    background: $dark-gray;
     border: none;
     font-weight: 600;
+    font-size: medium;
+    color: $white;
     padding: 12px 0;
   }
 }

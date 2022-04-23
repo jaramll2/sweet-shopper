@@ -2,7 +2,12 @@
 
 .login-modal-body {
   text-align: center;
-  font-size: 20px;
+  font-size: 22px;
+  color: $thunder;
+
+  h4 {
+    font-weight: 400;
+  }
 
   .login-modal-form {
     display: block;
@@ -15,7 +20,7 @@
     button {
       display: block;
       width: 100%;
-      font-size: 24px;
+      font-size: 20px;
       margin-bottom: 20px;
       border-radius: 8px;
       padding: 14px;
@@ -27,6 +32,9 @@
       color: $white;
       background-color: $green;
     }
+  }
+  .check-member {
+    margin-bottom: 29.26px;
   }
 
   .signup-link {
