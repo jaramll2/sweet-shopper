@@ -46,7 +46,7 @@ class Navbar extends Component {
       <div className={navbarClass}>
         <MobileNavbar />
         <span className="navbar-left">
-          <Link to="/">SS</Link>
+          <Link to="/">SWEET SHOPPER</Link>
         </span>
         <span className="navbar-center">
           <Link to="/">Home</Link>
