@@ -1,68 +1,64 @@
-import React from "react";
-import { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadCart } from "../../store/cart"
-import { deleteFromCart } from "../../store/guestCart"
-import Confirmation from "../Confirmation/Confirmation";
+import { Link } from "react-router-dom";
 
-class Cart extends Component{
-  render(){
-    //returns null for initial render
-    if(!this.props.auth)
-      return null;
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
 
-    //renders guest cart if no user is logged in.
-    let cart = !this.props.auth.id ? this.props.guestCart: this.props.auth.cart;
+import CartItem from "../CartItem";
 
-    //guest cart but it is empty
-    if(!cart.lineitems){
-      return;
-    }
+import "./Cart.scss";
 
-    let lineitems;
-    let totalCartPrice = 0;
+class Cart extends Component {
+  state = {
+    cartOpen: false,
+  };
 
-    if(!this.props.auth.id){
-      lineitems = this.props.guestCart.lineitems;
-    }
-    else{
-      lineitems = this.props.auth.cart.lineitems;
-    }
+  toggleCart = () => {
+    this.setState((prev) => ({ cartOpen: !prev.cartOpen }));
+  };
 
-    return(
-      <div>
-        <ul>
-          {lineitems.map((lineitem) => {
-            const lineValue = lineitem.candy.price * lineitem.qty
-            totalCartPrice += lineValue
-            return <li key={lineitem.id}>
-              {lineitem.candy.name} - qty: {lineitem.qty} - Total Price: ${lineValue}
-              <button onClick={() => this.props.deleteFromCart(lineitem.id, this.props.auth)}>Remove</button>
-            </li>
-          })}
-        </ul>
-        <div>
-          {`Total Price: $${totalCartPrice}`}
-        </div>
-        <div>
-          <button onClick = { ()=>{
-              const {history} = this.props;
-              history.push('/confirmation');
-              }}>
-          Complete Order</button>
-        </div>
-      </div>
-    )
+  render() {
+    const { cartOpen } = this.state;
+    const items = this.props.auth.cart?.lineitems || this.props.guestCart.lineitems || [];
+    const subtotalMessage = `Subtotal (${items.length} item${items.length > 1 ? "s" : ""})`;
+    const totalPrice =
+      items.length > 0 ? items.reduce((total, item) => total + item.candy.price * item.qty, 0) : 0;
+
+    return (
+      <>
+        <ShoppingCartIcon
+          fontSize="large"
+          className="navbar-icon shopping-cart"
+          onClick={this.toggleCart}
+        />
+        <Drawer anchor="right" open={cartOpen} onClose={this.toggleCart} transitionDuration={400}>
+          <Box sx={{ width: 400, padding: "10px 20px" }} role="presentation">
+            <div className="cart-body">
+              <h3>Your Cart</h3>
+              <div className="cart-items">
+                {items.map((item) => (
+                  <CartItem key={item.id} item={item} />
+                ))}
+              </div>
+              <div className="cart-subtotal">
+                <span className="cart-subtotal-label">{subtotalMessage}</span>
+                <span className="cart-subtotal-value">${totalPrice.toFixed(2)}</span>
+              </div>
+              <Link to="/confirmation">
+                <button className="cart-checkout-button" onClick={this.toggleCart}>
+                  Continue to Checkout
+                </button>
+              </Link>
+            </div>
+          </Box>
+        </Drawer>
+      </>
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch)  => {
-  return {
-    deleteFromCart: (id, auth) => {
-      dispatch(deleteFromCart(id, auth));
-    }
-  }
-};
+const mapStateToProps = (state) => state;
 
-
-export default connect(state=>state, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps)(Cart);

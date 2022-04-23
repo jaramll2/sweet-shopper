@@ -37,8 +37,16 @@
     display: none;
   }
 
-  .navbar-left {
+  .navbar-left,
+  .navbar-center,
+  .navbar-right {
+    flex: 1;
+  }
+
+  .navbar-center {
+    display: flex;
     margin-left: 30px;
+    justify-content: center;
 
     a {
       margin-right: 30px;
@@ -47,16 +55,17 @@
 
   .navbar-right {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     margin: 0 30px 0 auto;
 
     a {
-      margin-left: 30px;
+      margin-left: 20px;
     }
 
-    .icon-link {
-      display: flex;
-      align-items: center;
+    .shopping-cart {
+      margin-left: 20px;
+      width: 30px;
     }
 
     .navbar-search {
@@ -92,9 +101,10 @@
       align-items: center;
     }
 
-    .navbar-left {
+    .navbar-center {
       display: none;
     }
+
     .navbar-right {
       margin-right: 0;
 

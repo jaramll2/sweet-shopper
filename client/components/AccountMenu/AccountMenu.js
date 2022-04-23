@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import PersonIcon from "@mui/icons-material/Person";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import { logout } from "../../store/auth";
 import AccountModal from "../AccountModal";
@@ -63,10 +66,22 @@ class AccountMenu extends Component {
       <div className="user-menu-container" ref={this.wrapperRef}>
         <PersonIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
         <div className={userMenuClass}>
-          <span>Logged in as {user?.username}</span>
-          <span>Account</span>
-          <span>Settings</span>
-          <span onClick={this.handleLogout}>Log Out</span>
+          <div className="user-menu-item">
+            <span className="user-menu-username">{user.username?.[0]}</span>
+            {user.username}
+          </div>
+          <div className="user-menu-item">
+            <AccountCircleIcon className="user-menu-icon" />
+            Profile
+          </div>
+          <div className="user-menu-item">
+            <SettingsIcon className="user-menu-icon" />
+            Settings
+          </div>
+          <div className="user-menu-item" onClick={this.handleLogout}>
+            <LogoutIcon className="user-menu-icon" />
+            Log Out
+          </div>
         </div>
         <Modal open={loginModalOpen} onClose={this.toggleLoginModal}>
           <Box sx={loginModalStyle}>

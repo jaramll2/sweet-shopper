@@ -56,6 +56,26 @@ export const addToCart = (candy, qty, auth, guestCart)=>{
   }
 };
 
+export const updateItem = (item) => async (dispatch, getState) => {
+  const store = getState();
+  const { auth, guestCart } = store;
+  await axios.put(`/api/lineItem/${item.id}`, item , {
+    headers: {
+      authorization: window.localStorage.token
+    }
+  });
+  const cart = auth.cart || guestCart;
+  const updatedCart = {
+    ...cart,
+    lineitems: cart.lineitems.map(prev => prev.id === item.id ? item : prev)
+  };
+  if (auth.cart) {
+    dispatch({ type: "SET_AUTH", auth: { ...auth, cart: updatedCart }});
+  } else {
+    dispatch({ type: "GUEST_CART", guestCart: updatedCart });
+  }
+};
+
 export default (state = {}, action) => {
   if(action.type === ADD_TO_CART){
     return action.auth; 
