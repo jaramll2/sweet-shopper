@@ -6,6 +6,7 @@ module.exports = router;
 
 router.post("/login", async (req, res, next) => {
   try {
+    
     const { username, password, guestCart } = req.body;
 
     //This block of code finds the user's cart, and the guest cart they were using,
@@ -39,8 +40,9 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const { username, password, guestCart } = req.body;
-    const user = await User.create({username, password});
+    console.log(req.body);
+    const { username, password, guestCart, firstName, lastName, email } = req.body;
+    const user = await User.create({username, password, firstName, lastName, email});
     await Cart.create({ userId: user.id });
     
     //This block of code finds the user's cart, and the guest cart they were using,

@@ -6,6 +6,7 @@ const axios = require('axios');
 const Cart = require('./Cart');
 const LineItem = require('./LineItem');
 const Candy = require('./Candy');
+const { STRING } = require('sequelize');
 const SALT_ROUNDS = 5;
 
 const User = db.define('user', {
@@ -27,6 +28,15 @@ const User = db.define('user', {
   admin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  firstName: {
+    type: STRING
+  },
+  lastName: {
+    type: STRING
+  },
+  email:{
+    type: STRING
   }
 })
 
