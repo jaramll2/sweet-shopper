@@ -16,6 +16,7 @@ async function seed() {
     
     User.create({ username: 'cody', password: '123' }),
     User.create({ username: 'murphy', password: '123' }),
+    User.create({username: 'mr admin', password: 'admin', admin:true})
   ])
 
   const carts = [];

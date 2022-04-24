@@ -6,6 +6,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { AdminPanelSettings } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 import { logout } from "../../store/auth";
@@ -61,7 +62,7 @@ class AccountMenu extends Component {
     const { userMenuOpen, loginModalOpen } = this.state;
     const { user } = this.props;
     const userMenuClass = `user-menu ${userMenuOpen ? "open" : ""}`;
-
+    
     return (
       <div className="user-menu-container" ref={this.wrapperRef}>
         <PersonIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
@@ -78,6 +79,14 @@ class AccountMenu extends Component {
             <SettingsIcon className="user-menu-icon" />
             Settings
           </div>
+          {this.props.user.admin ?
+            <div className="user-menu-item" onClick={this.handleLogout}>
+              <AdminPanelSettings className="user-menu-icon"/>
+              Admin Panel
+            </div> :
+            null
+          }
+          
           <div className="user-menu-item" onClick={this.handleLogout}>
             <LogoutIcon className="user-menu-icon" />
             Log Out
