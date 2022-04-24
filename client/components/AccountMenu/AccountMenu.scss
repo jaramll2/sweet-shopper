@@ -4,6 +4,10 @@
   position: relative;
   margin-left: 20px;
 
+  .navbar-icon {
+    color: $black;
+  }
+
   .user-menu {
     position: absolute;
     min-width: 210px;
