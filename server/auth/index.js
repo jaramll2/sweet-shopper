@@ -24,7 +24,7 @@ router.post("/login", async (req, res, next) => {
       },
       include: [LineItem]
     })
-    guestCartToEmpty.dataValues.lineitems.forEach(async(lineItem) => {
+    guestCartToEmpty?.dataValues.lineitems.forEach(async(lineItem) => {
       
       lineItem.update({
         cartId: userCart.id
@@ -58,7 +58,7 @@ router.post("/signup", async (req, res, next) => {
       },
       include: [LineItem]
     });
-    guestCartToEmpty.dataValues.lineitems.forEach(async(lineItem) => {
+    guestCartToEmpty?.dataValues.lineitems.forEach(async(lineItem) => {
       
       lineItem.update({
         cartId: userCart.id

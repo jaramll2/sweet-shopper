@@ -26,34 +26,6 @@
     display: inline-block;
     justify-content: space-around;
     text-align: center;
-
-    .item {
-      display: inline-block;
-      margin: 0 30px 50px 30px;
-    }
-
-    .image {
-      height: 200px;
-      width: 200px;
-      border: solid black 0.5px;
-      border-radius: 10px;
-    }
-  
-    .details {
-      display: flex;
-      justify-content: space-between;
-      text-align: center;
-      padding: 10px 0
-    }
-
-    .quick-add {
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 10px;
-      background-color: #FFF2D6;
-    }
   }
 
   .page {
