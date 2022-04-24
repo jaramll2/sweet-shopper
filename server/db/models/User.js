@@ -23,6 +23,10 @@ const User = db.define('user', {
     validate:{
       notEmpty: true
     }
+  },
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 

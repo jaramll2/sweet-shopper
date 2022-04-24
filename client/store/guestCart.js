@@ -72,6 +72,7 @@ export default(state = {}, action) => {
   if(action.type === DELETE_FROM_CART_GUEST) {
     return action.guestCart
   }
+  
   if(action.type === EMPTY_CART){
     return {...state, lineitems: []}
   }
