@@ -8,12 +8,14 @@ import Box from "@mui/material/Box";
 import "./AccountModal.scss";
 
 class AccountModal extends Component {
+
   state = {
     isLoginForm: true,
     error: false,
     username: "",
     password: "",
   };
+
 
   toggleFormType = () => {
     this.setState((prev) => ({ isLoginForm: !prev.isLoginForm }));
@@ -25,7 +27,7 @@ class AccountModal extends Component {
 
     const { handleAuthenticate, toggleLoginModal, openNotification } = this.props;
     const { username, password, firstName, lastName, email } = event.target;
-    await handleAuthenticate(username.value, password.value, isLoginForm ? "login" : "signup", firstName?.value, lastName?.value, email?.value);
+    const response = await handleAuthenticate(username.value, password.value, isLoginForm ? "login" : "signup", firstName?.value, lastName?.value, email?.value);
     if (!response.auth.error) {
       toggleLoginModal();
       openNotification("You have logged in.");
@@ -33,6 +35,7 @@ class AccountModal extends Component {
     } else {
       this.setState({ error: true });
     }
+    this.toggleFormType();
   };
 
   handleInputChange = (event) => {
