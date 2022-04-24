@@ -42,6 +42,11 @@ class AccountModal extends Component {
     this.setState({ [event.target.name]: event.target.value, error: false });
   };
 
+  handleFormClose = () =>{
+    this.props.toggleLoginModal();
+    this.toggleFormType();
+  }
+
   render() {
     const { isLoginForm, error, username, password, notificationOpen } = this.state;
     const { toggleLoginModal, modalOpen } = this.props;
@@ -49,7 +54,7 @@ class AccountModal extends Component {
 
     return (
 
-      <Modal open={modalOpen} onClose={toggleLoginModal}>
+      <Modal open={modalOpen} onClose={this.handleFormClose}>
         <Box sx={modalStyle}>
           <div className="login-modal-body">
             <h3>Welcome back to Sweet Shopper</h3>
