@@ -44,7 +44,9 @@ class AccountModal extends Component {
 
   handleFormClose = () =>{
     this.props.toggleLoginModal();
-    this.toggleFormType();
+    this.setState({
+      isLoginForm: true
+    })
   }
 
   render() {
