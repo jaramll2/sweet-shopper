@@ -1,5 +1,6 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import PersonIcon from "@mui/icons-material/Person";
 import Modal from "@mui/material/Modal";
@@ -62,7 +63,7 @@ class AccountMenu extends Component {
     const { userMenuOpen, loginModalOpen } = this.state;
     const { user } = this.props;
     const userMenuClass = `user-menu ${userMenuOpen ? "open" : ""}`;
-    
+
     return (
       <div className="user-menu-container" ref={this.wrapperRef}>
         <PersonIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
@@ -80,11 +81,11 @@ class AccountMenu extends Component {
             Settings
           </div>
           {this.props.user.admin ?
-            <div className="user-menu-item" onClick={this.handleLogout}>
-              <AdminPanelSettings className="user-menu-icon"/>
-              Admin Panel
-            </div> :
-            null
+          <Link to='/admin-panel' className="user-menu-item" style={{margin: 0}}>
+                <AdminPanelSettings className="user-menu-icon"/>
+                Admin Panel
+          </Link> :
+          null
           }
           
           <div className="user-menu-item" onClick={this.handleLogout}>
@@ -117,7 +118,7 @@ const loginModalStyle = {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.auth,
+  user: state.auth
 });
 
 const mapDispatchToProps = (dispatch) => ({
