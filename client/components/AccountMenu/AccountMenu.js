@@ -1,11 +1,13 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import PersonIcon from "@mui/icons-material/Person";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { AdminPanelSettings } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 import { logout } from "../../store/auth";
@@ -78,6 +80,14 @@ class AccountMenu extends Component {
             <SettingsIcon className="user-menu-icon" />
             Settings
           </div>
+          {this.props.user.admin ?
+          <Link to='/admin-panel' className="user-menu-item" style={{margin: 0}}>
+                <AdminPanelSettings className="user-menu-icon"/>
+                Admin Panel
+          </Link> :
+          null
+          }
+          
           <div className="user-menu-item" onClick={this.handleLogout}>
             <LogoutIcon className="user-menu-icon" />
             Log Out
@@ -108,7 +118,7 @@ const loginModalStyle = {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.auth,
+  user: state.auth
 });
 
 const mapDispatchToProps = (dispatch) => ({
