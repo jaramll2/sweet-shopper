@@ -83,5 +83,3 @@ export const updateItem = (item) => async (dispatch, getState) => {
     dispatch({ type: "GUEST_CART", guestCart: updatedCart });
   }
 };
-
-

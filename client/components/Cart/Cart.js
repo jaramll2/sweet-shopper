@@ -12,24 +12,21 @@ import "./Cart.scss";
 import { toggleCart } from "../../store/displayCart";
 
 class Cart extends Component {
-  // state = {
-  //   cartOpen: false,
-  // };
-
   toggleCart = () => {
-    // this.setState((prev) => ({ cartOpen: !prev.cartOpen }));
-    this.props.toggleCart()
+    this.props.toggleCart();
   };
 
   render() {
     const cartOpen = this.props.displayCart;
     const items = this.props.auth.cart?.lineitems || this.props.guestCart.lineitems || [];
-    const subtotalMessage = `Subtotal (${items.length} item${items.length > 1 ? "s" : ""})`;
     const totalPrice =
       items.length > 0 ? items.reduce((total, item) => total + item.candy.price * item.qty, 0) : 0;
+    const totalCount = items.length > 0 ? items.reduce((total, item) => total + item.qty, 0) : 0;
+    const subtotalMessage = `Subtotal (${totalCount} item${totalCount > 1 ? "s" : ""})`;
 
     return (
-      <>
+      <div className="navbar-cart">
+        {totalCount > 0 && <span className="cart-count-icon">{totalCount}</span>}
         <ShoppingCartIcon
           fontSize="large"
           className="navbar-icon shopping-cart"
@@ -56,20 +53,18 @@ class Cart extends Component {
             </div>
           </Box>
         </Drawer>
-      </>
+      </div>
     );
   }
 }
 
-
-
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => {
-  return{
-    toggleCart: function(){
-      dispatch(toggleCart())
-    }
-  }
-}
+  return {
+    toggleCart: function () {
+      dispatch(toggleCart());
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
