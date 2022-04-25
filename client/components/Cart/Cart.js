@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 
@@ -27,7 +27,7 @@ class Cart extends Component {
     return (
       <div className="navbar-cart">
         {totalCount > 0 && <span className="cart-count-icon">{totalCount}</span>}
-        <ShoppingCartIcon
+        <ShoppingCartOutlinedIcon
           fontSize="large"
           className="navbar-icon shopping-cart"
           onClick={this.toggleCart}

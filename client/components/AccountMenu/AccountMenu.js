@@ -2,7 +2,7 @@ import React, { Component, createRef, forwardRef } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import PersonIcon from "@mui/icons-material/Person";
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { AdminPanelSettings } from "@mui/icons-material";
@@ -84,14 +84,14 @@ class AccountMenu extends Component {
 
     return (
       <div className="user-menu-container" ref={this.wrapperRef}>
-        <PersonIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
+        <PersonOutlineIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
         <div className={userMenuClass}>
           <div className="user-menu-item">
             <span className="user-menu-username">{user.username?.[0]}</span>
             {user.username}
           </div>
           <div className="user-menu-item">
-            <AccountCircleIcon className="user-menu-icon" />
+            <AccountCircleIcon className="user-menu-icon"/>
             Profile
           </div>
           <div className="user-menu-item">

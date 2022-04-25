@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { getCandy } from "../../store/candy";
 
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 import Footer from "../Footer";
 import CandyItem from "../CandyItem";
@@ -13,12 +13,40 @@ import CandyItem from "../CandyItem";
 import "./CandyList.scss";
 
 class CandyList extends React.Component {
+  state = {
+    sortBy: "",
+  };
+
   async componentDidMount() {
     await this.props.getCandy();
   }
 
-  render() {
+  handleSort = (event) => {
+    this.setState({ sortBy: event.target.value });
+  };
+
+  getSortedCandies = () => {
+    const { sortBy } = this.state;
     const { candies } = this.props;
+
+    const sortOption = {
+      "nameAsc": (a, b) => a.name.localeCompare(b.name),
+      "nameDesc": (a, b) => b.name.localeCompare(a.name),
+      "priceAsc": (a, b) => a.price - b.price,
+      "priceDesc": (a, b) => b.price - a.price,
+    }
+
+    if (sortBy in sortOption) {
+      return [...candies].sort(sortOption[sortBy]);
+    }
+
+    return candies;
+  };
+
+  render() {
+    const { sortBy } = this.state;
+    const { candies } = this.props;
+    const containerCountMsg = `${candies.length} product${candies.length > 1 ? "s" : ""}`;
 
     return (
       <div className="shop">
@@ -33,9 +61,31 @@ class CandyList extends React.Component {
             <div>Gummy</div>
           </div>
           <div className="item-container">
-            {candies.map((candy) => (
-              <CandyItem key={candy.id} candy={candy} />
-            ))}
+            <div className="container-header">
+              <span className="product-count">{containerCountMsg}</span>
+              <span className="sort-container">
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                  <InputLabel id="container-sort">Sort By</InputLabel>
+                  <Select
+                    labelId="container-sort"
+                    id="container-sort"
+                    value={sortBy}
+                    label="Sort By"
+                    onChange={this.handleSort}
+                  >
+                    <MenuItem value="nameAsc">Name - Ascending</MenuItem>
+                    <MenuItem value="nameDesc">Name - Descending</MenuItem>
+                    <MenuItem value="priceAsc">Price - Ascending</MenuItem>
+                    <MenuItem value="priceDesc">Price - Descending</MenuItem>
+                  </Select>
+                </FormControl>
+              </span>
+            </div>
+            <div className="container-contents">
+              {this.getSortedCandies().map((candy) => (
+                <CandyItem key={candy.id} candy={candy} />
+              ))}
+            </div>
           </div>
         </div>
         <div className="page"> 1 2 3 </div>
