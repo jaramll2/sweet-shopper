@@ -1,13 +1,11 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { addToOrderHistory } from "../../store/orderHistory"
+import { completePurchase } from "../../store/cart"
 
 class Confirmation extends Component{
 
     render(){
-        console.log(this.props);
-        this.props.addToOrderHistory(this.props.auth);
         //TODO: 
         //make cart purchased
         //store cart in order history eventually
@@ -30,6 +28,9 @@ class Confirmation extends Component{
             let price = curr.candy.price * curr.qty * 1;
             return prev + price;
         },0);
+
+
+        this.props.completePurchase(this.props.auth);
 
         return(
             <div>
@@ -63,8 +64,8 @@ class Confirmation extends Component{
 
 const mapDispatchToProps = (dispatch)  => {
     return{
-        addToOrderHistory: (auth)=>{
-        dispatch(addToOrderHistory(auth));
+        completePurchase: (auth)=>{
+        dispatch(completePurchase(auth));
       }
     }
   };

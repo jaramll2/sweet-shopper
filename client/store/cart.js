@@ -73,4 +73,20 @@ export const updateItem = (item) => async (dispatch, getState) => {
   }
 };
 
+export const completePurchase = (auth)=>{
+  return async(dispatch)=>{
+      if(!auth.cart){
+          return;
+      }
 
+      //use put command to update the user's cart to isPurchased === true
+      await axios.put(`/api/cart/${auth.cart.id}`, {...auth.cart, ...{isPurchased: true}});
+
+      console.log(auth.cart);
+      
+      return dispatch({
+          type: "SET_AUTH",
+          auth
+        })
+  }
+}

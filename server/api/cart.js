@@ -70,3 +70,13 @@ router.post('/', async (req, res, next) => {
     next(err);
   }
 })
+
+router.put('/:id', async(req,res,next)=>{
+  try{
+      const cart = await Cart.findByPk(req.params.id);
+      res.send(await cart.update(req.body));
+  }
+  catch(err){
+      next(err);
+  }
+});
