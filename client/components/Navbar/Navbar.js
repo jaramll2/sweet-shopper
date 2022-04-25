@@ -11,10 +11,14 @@ import Cart from "../Cart";
 import "./Navbar.scss";
 
 class Navbar extends Component {
-  state = {
-    navbarScrolled: false,
-    isHomePage: true,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      navbarScrolled: false,
+      isHomePage: props.history.location.pathname === "/",
+    };
+  }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);

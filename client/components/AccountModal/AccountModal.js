@@ -51,7 +51,7 @@ class AccountModal extends Component {
       <Modal open={modalOpen} onClose={toggleLoginModal}>
         <Box sx={modalStyle}>
           <div className="login-modal-body">
-            <h3>Welcome back to Sweet Shopper</h3>
+            <h3>Welcome to Sweet Shopper</h3>
             <h4>{isLoginForm ? "Please log in to your account." : "Please enter your details."}</h4>
             {error && (
               <span className="login-error-msg">
