@@ -14,16 +14,22 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
 
+    const { pathname } = props.history.location;
+
     this.state = {
       navbarScrolled: false,
-      isHomePage: props.history.location.pathname === "/",
+      isHomePage: pathname === "/",
+      isCandyPage: pathname.includes("/candy/"),
     };
   }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
-    this.props.history.listen((location) => {
-      this.setState({ isHomePage: location.pathname === "/" });
+    this.props.history.listen(({ pathname }) => {
+      this.setState({
+        isHomePage: pathname === "/",
+        isCandyPage: pathname.includes("/candy/"),
+      });
     });
   }
 
@@ -41,10 +47,10 @@ class Navbar extends Component {
   };
 
   render() {
-    const { navbarScrolled, isHomePage } = this.state;
-    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${
-      isHomePage ? "homepage" : ""
-    }`;
+    const { navbarScrolled, isHomePage, isCandyPage } = this.state;
+    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""}
+      ${isHomePage ? "homepage" : ""}
+      ${isCandyPage ? "candy-page" : ""}`;
 
     return (
       <div className={navbarClass}>

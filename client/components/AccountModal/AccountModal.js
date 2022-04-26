@@ -42,13 +42,22 @@ class AccountModal extends Component {
     this.setState({ [event.target.name]: event.target.value, error: false });
   };
 
+  handleClose = () => {
+    this.props.toggleLoginModal();
+    this.setState({
+      error: false,
+      username: "",
+      password: "",
+    });
+  };
+
   render() {
-    const { isLoginForm, error, username, password, notificationOpen } = this.state;
-    const { toggleLoginModal, modalOpen } = this.props;
+    const { isLoginForm, error, username, password } = this.state;
+    const { modalOpen } = this.props;
     const formClass = `login-modal-form ${error ? "error" : ""}`;
 
     return (
-      <Modal open={modalOpen} onClose={toggleLoginModal}>
+      <Modal open={modalOpen} onClose={this.handleClose}>
         <Box sx={modalStyle}>
           <div className="login-modal-body">
             <h3>Welcome to Sweet Shopper</h3>

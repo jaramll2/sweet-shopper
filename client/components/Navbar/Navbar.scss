@@ -19,6 +19,12 @@
     background: $soft-green;
   }
 
+  &.candy-page {
+    position: absolute;
+    top: 0;
+    background: none;
+  }
+
   &.scrolled {
     box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.3);
     background: rgba(255, 255, 255, 0.8);
