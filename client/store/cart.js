@@ -73,20 +73,50 @@ export const updateItem = (item) => async (dispatch, getState) => {
   }
 };
 
-export const completePurchase = (auth)=>{
+export const completePurchase = (auth,guestCart)=>{
   return async(dispatch)=>{
-      if(!auth.cart){
-          return;
+  
+      // if(!auth.cart || guestCart){
+      //     return;
+      // }
+
+      //route for logged in user
+      if(auth.cart){
+        //use put command to update the user's cart to isPurchased === true
+        await axios.put(`/api/cart/${auth.cart.id}`, {...auth.cart, ...{isPurchased: true}});
+        
+        //create a new cart for the logged in user
+        const newCart = (await axios.post('/api/cart/', null, {headers: {authorization: window.localStorage.token}})).data;
+
+        auth.cart = newCart;
+
+        return dispatch({
+            type: "SET_AUTH",
+            auth
+          })
       }
+      // else{ //logged out user
+      //   //mark guest cart as purchased
+      //   await axios.put(`/api/cart/${guestCart.id}`, {...guestCart, ...{isPurchased: true}});
 
-      //use put command to update the user's cart to isPurchased === true
-      await axios.put(`/api/cart/${auth.cart.id}`, {...auth.cart, ...{isPurchased: true}});
+      //   //remove cartID from local storage so a new cart can get created
+      //   //  window.localStorage.removeItem('cartId');
 
-      console.log(auth.cart);
-      
-      return dispatch({
-          type: "SET_AUTH",
-          auth
-        })
+      //   //post for new guestCart
+      //   const newCart = (await axios.post('/api/cart', null,  {
+      //     headers:{
+      //       authorization: 'guest'
+      //     }
+      //   })).data;
+
+      //   guestCart = newCart;
+
+      //   window.localStorage.cartId = newCart.id;
+
+      //   return dispatch({
+      //     type: "GUEST_CART",
+      //     guestCart
+      //   })
+      // }
   }
 }

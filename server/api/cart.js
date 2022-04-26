@@ -11,7 +11,8 @@ router.get('/', async (req, res, next) => {
         {model: LineItem, include: [Candy]}
       ],
       where: {
-        userId: user.id
+        userId: user.id,
+        isPurchased: false
       }
     })
     res.send(cart);
@@ -33,7 +34,8 @@ router.get('/:id',async(req,res,next)=>{
 
     const cart = await Cart.findOne({
       where: {
-        id: req.params.id
+        id: req.params.id,
+        isPurchased: false
       },
       include: [{
         model: LineItem, include: [{
@@ -51,12 +53,15 @@ router.get('/:id',async(req,res,next)=>{
 
 router.post('/', async (req, res, next) => {
   try{
-    console.log(req.headers);
     //validating user
-    if(req.headers.authorization !== 'guest')
-      await User.findByToken(req.headers.authorization);
-      
-    const cart = await Cart.create({},{
+    let user;
+    if(req.headers.authorization !== 'guest'){
+      user = (await User.findByToken(req.headers.authorization));
+    }
+    
+    const id = user ? user.id : null;
+
+    const cart = await Cart.create({userId: id},{
       include: [{
         model: LineItem, include: [{
           model: Candy

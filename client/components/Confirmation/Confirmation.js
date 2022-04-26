@@ -7,7 +7,6 @@ class Confirmation extends Component{
 
     render(){
         //TODO: 
-        //make cart purchased
         //store cart in order history eventually
         //go back and ensure that if there are no line items (empty cart)
         //you cannot complete purcahse, thus cannot get to this page
@@ -29,8 +28,8 @@ class Confirmation extends Component{
             return prev + price;
         },0);
 
-
-        this.props.completePurchase(this.props.auth);
+        this.props.completePurchase(this.props.auth,cart);
+        console.log(lines);
 
         return(
             <div>
@@ -64,8 +63,8 @@ class Confirmation extends Component{
 
 const mapDispatchToProps = (dispatch)  => {
     return{
-        completePurchase: (auth)=>{
-        dispatch(completePurchase(auth));
+        completePurchase: (auth,cart)=>{
+        dispatch(completePurchase(auth,cart));
       }
     }
   };
