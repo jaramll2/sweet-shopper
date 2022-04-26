@@ -9,6 +9,8 @@ import { me } from "./store";
 import Cart from "./components/Cart";
 import { guestCart } from "./store/guestCart";
 import Confirmation from "./components/Confirmation/Confirmation";
+import AdminPanel from "./components/AdminPanel/AdminPanel";
+import AccountPage from "./components/AccountPage/AccountPage";
 
 /**
  * COMPONENT
@@ -32,6 +34,8 @@ class Routes extends Component {
         <Route path="/candy" component={CandyList} />
         <Route path="/cart" component={Cart} />
         <Route exact path="/confirmation" component={Confirmation} />
+        <Route exact path='/admin-panel' component={AdminPanel} />
+        <Route exact path='/account' component={AccountPage} />
       </div>
     );
   }

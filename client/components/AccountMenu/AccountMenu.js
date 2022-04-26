@@ -1,22 +1,29 @@
-import React, { Component, createRef } from "react";
+import React, { Component, createRef, forwardRef } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import PersonIcon from "@mui/icons-material/Person";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { AdminPanelSettings } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 import { logout } from "../../store/auth";
 import AccountModal from "../AccountModal";
 
 import "./AccountMenu.scss";
 
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="outlined" {...props} />;
+});
+
 class AccountMenu extends Component {
   state = {
     loginModalOpen: false,
     userMenuOpen: false,
+    notification: "",
   };
 
   wrapperRef = createRef();
@@ -54,58 +61,76 @@ class AccountMenu extends Component {
 
   handleLogout = async () => {
     await this.props.handleLogout();
+    this.openNotification("You have logged out.");
     this.toggleUserMenu();
   };
 
+  openNotification = (msg) => {
+    this.setState({ notification: msg });
+  };
+
+  closeNotification = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({ notification: "" });
+  };
+
   render() {
-    const { userMenuOpen, loginModalOpen } = this.state;
+    const { userMenuOpen, loginModalOpen, notification } = this.state;
     const { user } = this.props;
     const userMenuClass = `user-menu ${userMenuOpen ? "open" : ""}`;
 
     return (
       <div className="user-menu-container" ref={this.wrapperRef}>
-        <PersonIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
+        <PersonOutlineIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
         <div className={userMenuClass}>
-          <div className="user-menu-item">
+          <Link to="/account" className="user-menu-item" style={{ margin: 0 }}> 
             <span className="user-menu-username">{user.username?.[0]}</span>
             {user.username}
-          </div>
+          </Link>
           <div className="user-menu-item">
-            <AccountCircleIcon className="user-menu-icon" />
+            <AccountCircleIcon className="user-menu-icon"/>
             Profile
           </div>
           <div className="user-menu-item">
             <SettingsIcon className="user-menu-icon" />
             Settings
           </div>
+          {this.props.user.admin ? (
+            <Link to="/admin-panel" className="user-menu-item" style={{ margin: 0 }}>
+              <AdminPanelSettings className="user-menu-icon" />
+              Admin Panel
+            </Link>
+          ) : null}
+
           <div className="user-menu-item" onClick={this.handleLogout}>
             <LogoutIcon className="user-menu-icon" />
             Log Out
           </div>
         </div>
-        <Modal open={loginModalOpen} onClose={this.toggleLoginModal}>
-          <Box sx={loginModalStyle}>
-            <AccountModal toggleLoginModal={this.toggleLoginModal} />
-          </Box>
-        </Modal>
+        <AccountModal
+          toggleLoginModal={this.toggleLoginModal}
+          openNotification={this.openNotification}
+          modalOpen={loginModalOpen}
+        />
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          open={Boolean(notification)}
+          autoHideDuration={6000}
+          onClose={this.closeNotification}
+        >
+          <Alert onClose={this.closeNotification} severity="success" sx={notificationStyle}>
+            {notification}
+          </Alert>
+        </Snackbar>
       </div>
     );
   }
 }
 
-const loginModalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  background: "#ffffff",
-  transform: "translate(-50%, -50%)",
-  minWidth: "40%",
-  maxWidth: "80%",
-  border: "none",
-  outline: "none",
-  boxShadow: 24,
-  p: 4,
-};
+const notificationStyle = { width: "300px", position: "absolute", top: "60px" };
 
 const mapStateToProps = (state) => ({
   user: state.auth,

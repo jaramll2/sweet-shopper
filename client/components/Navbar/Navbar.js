@@ -11,10 +11,14 @@ import Cart from "../Cart";
 import "./Navbar.scss";
 
 class Navbar extends Component {
-  state = {
-    navbarScrolled: false,
-    isHomePage: true,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      navbarScrolled: false,
+      isHomePage: props.history.location.pathname === "/",
+    };
+  }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -46,7 +50,7 @@ class Navbar extends Component {
       <div className={navbarClass}>
         <MobileNavbar />
         <span className="navbar-left">
-          <Link to="/">SS</Link>
+          <Link to="/">SWEET SHOPPER</Link>
         </span>
         <span className="navbar-center">
           <Link to="/">Home</Link>

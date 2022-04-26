@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { route } = require('express/lib/application');
-const { models: {LineItem, Cart, Candy}} = require('../db');
+const { models: {LineItem, Cart, Candy, User}} = require('../db');
 module.exports = router;
 
 router.put('/:id', async(req,res,next)=>{
@@ -25,9 +25,11 @@ router.post('/', async(req,res,next)=>{
 
 router.delete('/:id', async (req, res, next ) => {
     try {
+        if(req.headers.authorization !== 'guest'){
+            await User.findByToken(req.headers.authorization);
+        }
         const lineItem = await LineItem.findByPk(req.params.id);
         await lineItem.destroy()
-        console.log(lineItem.candyId)
         const cart = await Cart.findOne({
             where: {
               id: lineItem.cartId
@@ -38,7 +40,6 @@ router.delete('/:id', async (req, res, next ) => {
               }]
             }]
           })
-          console.log('cart from axios', cart)
         res.send(cart)
         
     }

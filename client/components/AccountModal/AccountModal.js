@@ -2,12 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../../store";
 
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+
 import "./AccountModal.scss";
 
 class AccountModal extends Component {
+
   state = {
     isLoginForm: true,
+    error: false,
+    username: "",
+    password: "",
   };
+
 
   toggleFormType = () => {
     this.setState((prev) => ({ isLoginForm: !prev.isLoginForm }));
@@ -16,39 +24,101 @@ class AccountModal extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { isLoginForm } = this.state;
-    const { handleAuthenticate, toggleLoginModal } = this.props;
-    const { username, password } = event.target;
-    await handleAuthenticate(username.value, password.value, isLoginForm ? "login" : "signup");
-    toggleLoginModal();
+
+    const { handleAuthenticate, toggleLoginModal, openNotification } = this.props;
+    const { username, password, firstName, lastName, email } = event.target;
+    const response = await handleAuthenticate(username.value, password.value, isLoginForm ? "login" : "signup", firstName?.value, lastName?.value, email?.value);
+    if (!response.auth.error) {
+      toggleLoginModal();
+      openNotification("You have logged in.");
+      this.setState({ username: "", password: "" });
+    } else {
+      this.setState({ error: true });
+    }
+    this.toggleFormType();
   };
 
+  handleInputChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value, error: false });
+  };
+
+  handleFormClose = () =>{
+    this.props.toggleLoginModal();
+    this.setState({
+      isLoginForm: true
+    })
+  }
+
   render() {
-    const { isLoginForm } = this.state;
+    const { isLoginForm, error, username, password, notificationOpen } = this.state;
+    const { toggleLoginModal, modalOpen } = this.props;
+    const formClass = `login-modal-form ${error ? "error" : ""}`;
 
     return (
-      <div className="login-modal-body">
-        <h4>{isLoginForm ? "Please log in to your account." : "Please enter your details."}</h4>
-        <form className="login-modal-form" onSubmit={this.handleSubmit}>
-          <input name="username" type="text" placeholder="Username" />
-          <input name="password" type="password" placeholder="Password" />
-          <button type="submit">{isLoginForm ? "LOG IN" : "SIGN UP"}</button>
-        </form>
-        {isLoginForm && (
-          <div>
-            Not a member?{" "}
-            <span className="signup-link" onClick={this.toggleFormType}>
-              <b>Join us</b>
-            </span>
+
+      <Modal open={modalOpen} onClose={this.handleFormClose}>
+        <Box sx={modalStyle}>
+          <div className="login-modal-body">
+            <h3>Welcome to Sweet Shopper</h3>
+            <h4>{isLoginForm ? "Please log in to your account." : "Please enter your details."}</h4>
+            {error && (
+              <span className="login-error-msg">
+                Authentication failed. Please check your username and password.
+              </span>
+            )}
+            <form className={formClass} onSubmit={this.handleSubmit}>
+              <input
+                name="username"
+                value={username}
+                type="text"
+                placeholder="Username"
+                onChange={this.handleInputChange}
+              />
+              <input
+                name="password"
+                value={password}
+                type="password"
+                placeholder="Password"
+                onChange={this.handleInputChange}
+              />
+              {!isLoginForm ? <input name="firstName" type="text" placeholder="First Name"/> : null}
+              {!isLoginForm ? <input name="lastName" type="text" placeholder="Last Name"/> : null}
+              {!isLoginForm ? <input name="email" type="text" placeholder="Email"/> : null}
+              <button type="submit">{isLoginForm ? "LOG IN" : "SIGN UP"}</button>
+            </form>
+            {isLoginForm && (
+              <div className="check-member">
+                Not a member?{" "}
+                <span className="signup-link" onClick={this.toggleFormType}>
+                  <b>Join us</b>
+                </span>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </Box>
+      </Modal>
     );
   }
 }
 
+const modalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  background: "#ffffff",
+  transform: "translate(-50%, -50%)",
+  minWidth: "40%",
+  maxWidth: "80%",
+  border: "none",
+  outline: "none",
+  boxShadow: 24,
+  p: 4,
+};
+
+const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
-  handleAuthenticate: (username, password, formName) =>
-    dispatch(authenticate(username, password, formName)),
+  handleAuthenticate: (username, password, formName, firstName, lastName, email) =>
+    dispatch(authenticate(username, password, formName, firstName, lastName, email)),
 });
 
-export default connect(() => ({}), mapDispatchToProps)(AccountModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountModal);

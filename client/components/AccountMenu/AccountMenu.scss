@@ -4,6 +4,10 @@
   position: relative;
   margin-left: 20px;
 
+  .navbar-icon {
+    color: $black;
+  }
+
   .user-menu {
     position: absolute;
     min-width: 210px;
@@ -43,7 +47,7 @@
         color: $white;
         display: flex;
         border-radius: 50%;
-        background-color: $soft-green;
+        background-color: $green;
         justify-content: center;
         align-items: center;
       }

@@ -1,0 +1,39 @@
+.candy-item {
+  display: inline-block;
+
+  .image {
+    height: 200px;
+    width: 200px;
+    border: solid black 0.5px;
+    border-radius: 10px;
+  }
+
+  .details {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 10px 0
+  }
+
+  .quick-add {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #FFF2D6;
+  }
+}
+
+.candy-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+  min-width: 40%;
+  max-width: 80%;
+  border: none;
+  outline: none;
+  box-shadow: 24;
+};

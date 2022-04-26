@@ -44,12 +44,22 @@ export const guestCart = () => {
 
 export const deleteFromCart = (id) => {
   return async (dispatch) => {
-    const guestCart = (await axios.delete(`/api/lineItem/${id}`)).data
+
 
     if (window.localStorage.token) {
+      const guestCart = (await axios.delete(`/api/lineItem/${id}`, {
+        headers: {
+          authorization: window.localStorage.token
+        }
+      })).data
       dispatch(me());
       return;
     } else {
+      const guestCart = (await axios.delete(`/api/lineItem/${id}`, {
+        headers: {
+          authorization: 'guest'
+        }
+      })).data
       return dispatch({
         type: DELETE_FROM_CART_GUEST,
         guestCart
@@ -72,6 +82,7 @@ export default(state = {}, action) => {
   if(action.type === DELETE_FROM_CART_GUEST) {
     return action.guestCart
   }
+  
   if(action.type === EMPTY_CART){
     return {...state, lineitems: []}
   }
