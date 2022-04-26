@@ -1,12 +1,12 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
+import { completePurchase } from "../../store/cart"
 
 class Confirmation extends Component{
 
     render(){
         //TODO: 
-        //make cart purchased
         //store cart in order history eventually
         //go back and ensure that if there are no line items (empty cart)
         //you cannot complete purcahse, thus cannot get to this page
@@ -28,6 +28,8 @@ class Confirmation extends Component{
             return prev + price;
         },0);
 
+        this.props.completePurchase(this.props.auth,cart);
+        console.log(lines);
 
         return(
             <div>
@@ -59,4 +61,12 @@ class Confirmation extends Component{
     }
 }
 
-export default connect(state=>state)(Confirmation);
+const mapDispatchToProps = (dispatch)  => {
+    return{
+        completePurchase: (auth,cart)=>{
+        dispatch(completePurchase(auth,cart));
+      }
+    }
+  };
+
+export default connect(state=>state, mapDispatchToProps)(Confirmation);

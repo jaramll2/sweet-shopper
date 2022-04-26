@@ -12,7 +12,7 @@ export const guestCart = () => {
       let guestCart;
 
       //if we have a cart id saved in local storage, we fetch the cart.
-      //if not, we create a cart and save it in local storage.
+      //if not, we create a cart.
       let cartId = window.localStorage.cartId;
 
       if(!cartId){

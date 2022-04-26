@@ -15,12 +15,14 @@ router.post("/login", async (req, res, next) => {
     const user = await User.findByToken(token);
     const userCart = await Cart.findOne({
       where:{
-        userId: user.id
+        userId: user.id,
+        isPurchased: false
       }
     })
     const guestCartToEmpty = await Cart.findOne({
       where: {
-        id: guestCart
+        id: guestCart,
+        isPurchased: false
       },
       include: [LineItem]
     })
