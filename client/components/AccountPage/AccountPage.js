@@ -6,7 +6,8 @@ class AccountPage extends Component{
   constructor(){
     super();
     this.state = {
-      updateView: false
+      updateView: false,
+      editModalOpen: false
     }
 
     this.doneUpdating = this.doneUpdating.bind(this);
@@ -20,10 +21,10 @@ class AccountPage extends Component{
 
   render(){
     const { username, firstName, lastName, email } = this.props.auth;
-    
+    const { updateView } = this.state
     return(
       <div>
-        {this.state.updateView ? <EditForm doneUpdating={this.doneUpdating}/> : 
+        {this.state.updateView ? <EditForm doneUpdating={this.doneUpdating} open={updateView}/> : 
           <div>
             <h3>Account Details</h3>
             <div>Username: {username}</div>
