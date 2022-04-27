@@ -6,6 +6,7 @@ module.exports = router;
 
 router.post("/login", async (req, res, next) => {
   try {
+    
     const { username, password, guestCart } = req.body;
 
     //This block of code finds the user's cart, and the guest cart they were using,
@@ -14,12 +15,14 @@ router.post("/login", async (req, res, next) => {
     const user = await User.findByToken(token);
     const userCart = await Cart.findOne({
       where:{
-        userId: user.id
+        userId: user.id,
+        isPurchased: false
       }
     })
     const guestCartToEmpty = await Cart.findOne({
       where: {
-        id: guestCart
+        id: guestCart,
+        isPurchased: false
       },
       include: [LineItem]
     })
@@ -39,8 +42,9 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const { username, password, guestCart } = req.body;
-    const user = await User.create({username, password});
+    console.log(req.body);
+    const { username, password, guestCart, firstName, lastName, email } = req.body;
+    const user = await User.create({username, password, firstName, lastName, email});
     await Cart.create({ userId: user.id });
     
     //This block of code finds the user's cart, and the guest cart they were using,

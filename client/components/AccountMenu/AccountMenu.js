@@ -90,10 +90,10 @@ class AccountMenu extends Component {
             <span className="user-menu-username">{user.username?.[0]}</span>
             {user.username}
           </div>
-          <div className="user-menu-item">
+          <Link to="/account" className="user-menu-item" style={{ margin: 0 }}> 
             <AccountCircleIcon className="user-menu-icon"/>
             Profile
-          </div>
+          </Link>
           <div className="user-menu-item">
             <SettingsIcon className="user-menu-icon" />
             Settings

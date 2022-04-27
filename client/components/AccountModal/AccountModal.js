@@ -16,18 +16,27 @@ class AccountModal extends Component {
   };
 
   toggleFormType = () => {
-    this.setState((prev) => ({ isLoginForm: !prev.isLoginForm }));
+    this.setState((prev) => ({
+      isLoginForm: !prev.isLoginForm,
+      error: false,
+      username: "",
+      password: "",
+    }));
   };
 
   handleSubmit = async (event) => {
     event.preventDefault();
     const { isLoginForm } = this.state;
+
     const { handleAuthenticate, toggleLoginModal, openNotification } = this.props;
-    const { username, password } = event.target;
+    const { username, password, firstName, lastName, email } = event.target;
     const response = await handleAuthenticate(
       username.value,
       password.value,
-      isLoginForm ? "login" : "signup"
+      isLoginForm ? "login" : "signup",
+      firstName?.value,
+      lastName?.value,
+      email?.value
     );
     if (!response.auth.error) {
       toggleLoginModal();
@@ -82,6 +91,11 @@ class AccountModal extends Component {
                 placeholder="Password"
                 onChange={this.handleInputChange}
               />
+              {!isLoginForm ? (
+                <input name="firstName" type="text" placeholder="First Name" />
+              ) : null}
+              {!isLoginForm ? <input name="lastName" type="text" placeholder="Last Name" /> : null}
+              {!isLoginForm ? <input name="email" type="text" placeholder="Email" /> : null}
               <button type="submit">{isLoginForm ? "LOG IN" : "SIGN UP"}</button>
             </form>
             {isLoginForm && (
@@ -115,8 +129,8 @@ const modalStyle = {
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
-  handleAuthenticate: (username, password, formName) =>
-    dispatch(authenticate(username, password, formName)),
+  handleAuthenticate: (username, password, formName, firstName, lastName, email) =>
+    dispatch(authenticate(username, password, formName, firstName, lastName, email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountModal);
