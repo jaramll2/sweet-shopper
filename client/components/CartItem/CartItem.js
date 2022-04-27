@@ -5,6 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { updateItem } from "../../store/cart";
 import { deleteFromCart } from "../../store/guestCart";
+import QtyController from "../QtyController";
 
 import "./CartItem.scss";
 
@@ -63,21 +64,12 @@ class CartItem extends Component {
             <span className="cart-item-price">${candy.price}</span>
             <span className="cart-item-quantity">
               <DeleteIcon className="cart-item-icon" onClick={this.handleDelete} />
-              <span className="qty-button-group">
-                <span className="qty-button" onClick={() => this.handleClick(-1)}>
-                  -
-                </span>
-                <input
-                  className="qty-input"
-                  type="text"
-                  value={qty}
-                  onChange={this.handleQtyInputChange}
-                  onBlur={this.handleQtyChange}
-                />
-                <span className="qty-button" onClick={() => this.handleClick(1)}>
-                  +
-                </span>
-              </span>
+              <QtyController
+                buttonHandler={this.handleClick}
+                inputHandler={this.handleQtyInputChange}
+                blurHandler={this.handleQtyChange}
+                value={qty}
+              />
             </span>
           </div>
         </div>

@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import "./AccountModal.scss";
 
 class AccountModal extends Component {
-
   state = {
     isLoginForm: true,
     error: false,
@@ -16,9 +15,13 @@ class AccountModal extends Component {
     password: "",
   };
 
-
   toggleFormType = () => {
-    this.setState((prev) => ({ isLoginForm: !prev.isLoginForm }));
+    this.setState((prev) => ({
+      isLoginForm: !prev.isLoginForm,
+      error: false,
+      username: "",
+      password: "",
+    }));
   };
 
   handleSubmit = async (event) => {
@@ -27,7 +30,14 @@ class AccountModal extends Component {
 
     const { handleAuthenticate, toggleLoginModal, openNotification } = this.props;
     const { username, password, firstName, lastName, email } = event.target;
-    const response = await handleAuthenticate(username.value, password.value, isLoginForm ? "login" : "signup", firstName?.value, lastName?.value, email?.value);
+    const response = await handleAuthenticate(
+      username.value,
+      password.value,
+      isLoginForm ? "login" : "signup",
+      firstName?.value,
+      lastName?.value,
+      email?.value
+    );
     if (!response.auth.error) {
       toggleLoginModal();
       openNotification("You have logged in.");
@@ -35,28 +45,28 @@ class AccountModal extends Component {
     } else {
       this.setState({ error: true });
     }
-    this.toggleFormType();
   };
 
   handleInputChange = (event) => {
     this.setState({ [event.target.name]: event.target.value, error: false });
   };
 
-  handleFormClose = () =>{
+  handleClose = () => {
     this.props.toggleLoginModal();
     this.setState({
-      isLoginForm: true
-    })
-  }
+      error: false,
+      username: "",
+      password: "",
+    });
+  };
 
   render() {
-    const { isLoginForm, error, username, password, notificationOpen } = this.state;
-    const { toggleLoginModal, modalOpen } = this.props;
+    const { isLoginForm, error, username, password } = this.state;
+    const { modalOpen } = this.props;
     const formClass = `login-modal-form ${error ? "error" : ""}`;
 
     return (
-
-      <Modal open={modalOpen} onClose={this.handleFormClose}>
+      <Modal open={modalOpen} onClose={this.handleClose}>
         <Box sx={modalStyle}>
           <div className="login-modal-body">
             <h3>Welcome to Sweet Shopper</h3>
@@ -81,9 +91,11 @@ class AccountModal extends Component {
                 placeholder="Password"
                 onChange={this.handleInputChange}
               />
-              {!isLoginForm ? <input name="firstName" type="text" placeholder="First Name"/> : null}
-              {!isLoginForm ? <input name="lastName" type="text" placeholder="Last Name"/> : null}
-              {!isLoginForm ? <input name="email" type="text" placeholder="Email"/> : null}
+              {!isLoginForm ? (
+                <input name="firstName" type="text" placeholder="First Name" />
+              ) : null}
+              {!isLoginForm ? <input name="lastName" type="text" placeholder="Last Name" /> : null}
+              {!isLoginForm ? <input name="email" type="text" placeholder="Email" /> : null}
               <button type="submit">{isLoginForm ? "LOG IN" : "SIGN UP"}</button>
             </form>
             {isLoginForm && (
