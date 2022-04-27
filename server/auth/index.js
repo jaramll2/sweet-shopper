@@ -13,6 +13,11 @@ router.post("/login", async (req, res, next) => {
     //then emptys the guest cart into the user's cart.
     const token = await User.authenticate({username, password});
     const user = await User.findByToken(token);
+    
+    console.log('IN LOGIN');
+    console.log(token);
+    console.log(user);
+
     const userCart = await Cart.findOne({
       where:{
         userId: user.id,

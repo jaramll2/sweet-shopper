@@ -15,6 +15,7 @@ class Candy extends Component{
 
   onSubmit(ev){
     ev.preventDefault();
+    this.setState({qty: ''});
     document.getElementById("addForm").reset();
   }
 
