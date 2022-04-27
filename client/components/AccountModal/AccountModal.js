@@ -53,10 +53,12 @@ class AccountModal extends Component {
 
   handleClose = () => {
     this.props.toggleLoginModal();
+
     this.setState({
       error: false,
       username: "",
       password: "",
+      isLoginForm: true
     });
   };
 
