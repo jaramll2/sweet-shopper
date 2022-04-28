@@ -24,6 +24,12 @@ class Cart extends Component {
     const totalCount = items.length > 0 ? items.reduce((total, item) => total + item.qty, 0) : 0;
     const subtotalMessage = `Subtotal (${totalCount} item${totalCount > 1 ? "s" : ""})`;
 
+    console.log(this.props);
+    const cart = !window.localStorage.token ? this.props.guestCart : this.props.auth.cart;
+    if(!cart){
+      return;
+    }
+
     return (
       <div className="navbar-cart">
         {totalCount > 0 && <span className="cart-count-icon">{totalCount}</span>}
@@ -46,7 +52,7 @@ class Cart extends Component {
                 <span className="cart-subtotal-value">${totalPrice.toFixed(2)}</span>
               </div>
               <Link to="/confirmation">
-                <button className="cart-checkout-button" onClick={this.toggleCart}>
+                <button disabled={!cart.lineitems || cart.lineitems <=0} className="cart-checkout-button" onClick={this.toggleCart}>
                   Continue to Checkout
                 </button>
               </Link>

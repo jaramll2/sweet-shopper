@@ -84,10 +84,6 @@ export const updateItem = (item) => async (dispatch, getState) => {
 export const completePurchase = (auth,guestCart)=>{
   return async(dispatch)=>{
   
-      // if(!auth.cart || guestCart){
-      //     return;
-      // }
-
       //route for logged in user
       if(auth.cart){
         //use put command to update the user's cart to isPurchased === true
@@ -103,28 +99,24 @@ export const completePurchase = (auth,guestCart)=>{
             auth
           })
       }
-      // else{ //logged out user
-      //   //mark guest cart as purchased
-      //   await axios.put(`/api/cart/${guestCart.id}`, {...guestCart, ...{isPurchased: true}});
+      else{ //logged out user
+        //mark guest cart as purchased
+        await axios.put(`/api/cart/${guestCart.id}`, {...guestCart, ...{isPurchased: true}});
 
-      //   //remove cartID from local storage so a new cart can get created
-      //   //  window.localStorage.removeItem('cartId');
+        //create new guestCart
+        const newCart = (await axios.post('/api/cart', null,  {
+          headers:{
+            authorization: 'guest'
+          }
+        })).data;
 
-      //   //post for new guestCart
-      //   const newCart = (await axios.post('/api/cart', null,  {
-      //     headers:{
-      //       authorization: 'guest'
-      //     }
-      //   })).data;
+        guestCart = newCart;
+        window.localStorage.cartId = newCart.id;
 
-      //   guestCart = newCart;
-
-      //   window.localStorage.cartId = newCart.id;
-
-      //   return dispatch({
-      //     type: "GUEST_CART",
-      //     guestCart
-      //   })
-      // }
+        return dispatch({
+          type: "GUEST_CART",
+          guestCart
+        })
+      }
   }
 }
