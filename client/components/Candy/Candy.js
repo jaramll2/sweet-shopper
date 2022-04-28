@@ -1,68 +1,87 @@
-import React from "react";
-import { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+
+import Button from "@mui/material/Button";
+
 import { addToCart } from "../../store/cart";
-import {toggleCart} from '../../store/displayCart'
-class Candy extends Component{
-  constructor(){
-    super();
-    this.state = {
-      qty: ''
+import { toggleCart } from "../../store/displayCart";
+import { getCandy } from "../../store/candy";
+import QtyController from "../QtyController";
+
+import "./Candy.scss";
+
+class Candy extends Component {
+  state = {
+    qty: 1,
+    candy: {},
+  };
+
+  async componentDidMount() {
+    const { match, getCandy } = this.props;
+
+    if (!this.props.candies.length) {
+      await getCandy();
     }
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+
+    this.setState({
+      candy: this.props.candies.find((candy) => candy.id === +match.params.id) || {},
+    });
   }
 
-  onSubmit(ev){
-    ev.preventDefault();
-    this.setState({qty: ''});
-    document.getElementById("addForm").reset();
-  }
+  handleInputChange = (event) => {
+    const { value } = event.target;
+    if (!isNaN(value) && value.length <= 4) {
+      this.setState({ qty: value });
+    }
+  };
 
-  onChange(ev){
-    const change = {};
-    change[ev.target.name] = ev.target.value;
-    this.setState(change);
-  }
+  handleClick = (amount) => {
+    const qty = this.state.qty + amount;
+    if (qty > 0) {
+      this.setState((prev) => ({ qty: prev.qty + amount }));
+    }
+  };
 
-  render(){
-    const { qty } = this.state;
-    const { onChange, onSubmit } = this;
+  addToCart = () => {
+    const { qty, candy } = this.state;
+    const { auth, guestCart, addToCart } = this.props;
+    addToCart(candy, qty, auth, guestCart);
+  };
 
-    //filter through candies until we find the one that matches the id in the url
-    const candy = this.props.candies.find((candy) => candy.id === this.props.match.params.id * 1)
+  render() {
+    const { qty, candy } = this.state;
 
-    //return null if we don't find candy for the initial render.
-    if(!candy)
-      return null;
-
-    return(
-      <div>
-        <h3>{candy.name}</h3>
-        <div>Weight: {candy.weight}</div>
-        <div>Price: ${candy.price}</div>
-
-        <form id='addForm' onSubmit={onSubmit}>
-          <label>Quantity: </label>
-          <input type='number' min='1' name='qty' onChange={ onChange }></input><br/>
-          <button disabled = {!qty} onClick={()=> {this.props.addToCart(candy, qty, this.props.auth, this.props.guestCart)}
-          }>Add To Cart</button>
-        </form>
-        
+    return (
+      <div className="candy-body">
+        <div className="candy-img">img</div>
+        <div className="candy-details">
+          <h3>
+            {candy.name} ({candy.weight})
+          </h3>
+          <div>${candy.price}</div>
+          <div className="add-to-cart">
+            <QtyController
+              buttonHandler={this.handleClick}
+              inputHandler={this.handleInputChange}
+              blurHandler={() => {}}
+              value={qty}
+            />
+            <Button variant="contained" onClick={this.addToCart}>
+              Add to Cart
+            </Button>
+          </div>
+        </div>
       </div>
-    )
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch)  => {
-  return{
-    addToCart: (candy, qty, auth, guestCart)=>{
-      dispatch(addToCart(candy, qty, auth, guestCart));
-    },
-    toggleCartDisplay: () => {
-      dispatch(toggleCart());
-    }
-  }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (candy, qty, auth, guestCart) => dispatch(addToCart(candy, qty, auth, guestCart)),
+    toggleCartDisplay: () => dispatch(toggleCart()),
+    getCandy: () => dispatch(getCandy()),
+  };
 };
 
-export default connect(state=>state, mapDispatchToProps)(Candy);
+export default connect((state) => state, mapDispatchToProps)(Candy);
