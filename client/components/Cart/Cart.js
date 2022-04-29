@@ -10,6 +10,7 @@ import CartItem from "../CartItem";
 
 import "./Cart.scss";
 import { toggleCart } from "../../store/displayCart";
+import { Paper } from "@mui/material";
 
 class Cart extends Component {
   toggleCart = () => {
@@ -40,23 +41,25 @@ class Cart extends Component {
         />
         <Drawer anchor="right" open={cartOpen} onClose={this.toggleCart} transitionDuration={400}>
           <Box sx={{ width: 400, padding: "10px 20px" }} role="presentation">
-            <div className="cart-body">
-              <h3>Your Cart</h3>
-              <div className="cart-items">
-                {items.map((item) => (
-                  <CartItem key={item.id} item={item} />
-                ))}
+            <Paper>
+              <div className="cart-body">
+                <h3>Your Cart</h3>
+                <div className="cart-items">
+                  {items.map((item) => (
+                    <CartItem key={item.id} item={item} />
+                  ))}
+                </div>
+                <div className="cart-subtotal">
+                  <span className="cart-subtotal-label">{subtotalMessage}</span>
+                  <span className="cart-subtotal-value">${totalPrice.toFixed(2)}</span>
+                </div>
+                <Link to="/confirmation">
+                  <button disabled={!cart.lineitems || cart.lineitems <=0} className="cart-checkout-button" onClick={this.toggleCart}>
+                    Continue to Checkout
+                  </button>
+                </Link>
               </div>
-              <div className="cart-subtotal">
-                <span className="cart-subtotal-label">{subtotalMessage}</span>
-                <span className="cart-subtotal-value">${totalPrice.toFixed(2)}</span>
-              </div>
-              <Link to="/confirmation">
-                <button disabled={!cart.lineitems || cart.lineitems <=0} className="cart-checkout-button" onClick={this.toggleCart}>
-                  Continue to Checkout
-                </button>
-              </Link>
-            </div>
+            </Paper>
           </Box>
         </Drawer>
       </div>

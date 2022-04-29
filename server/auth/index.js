@@ -43,7 +43,6 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    console.log(req.body);
     const { username, password, guestCart, firstName, lastName, email } = req.body;
     const user = await User.create({username, password, firstName, lastName, email});
     await Cart.create({ userId: user.id });
@@ -79,6 +78,21 @@ router.post("/signup", async (req, res, next) => {
     }
   }
 });
+
+router.put('/', async (req, res, next) => {
+  try{
+    let user = await User.findByToken(req.headers.authorization);
+    user.username = req.body.username;
+    user.email = req.body.email;
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    await user.save()
+    res.send(user);
+  }
+  catch(error){
+    next(error);
+  }
+})
 
 router.get("/me", async (req, res, next) => {
   try {

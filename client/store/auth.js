@@ -55,6 +55,22 @@ export const logout = () => {
   }
 }
 
+export const editUserInfo = (user) => {
+  return async (dispatch) => {
+    const auth = (await axios.put('/auth', user, {
+      headers: {
+        authorization: window.localStorage.token
+      }
+    })).data
+    dispatch({
+      type: SET_AUTH,
+      auth
+    })
+  }
+
+}
+
+
 /**
  * REDUCER
  */

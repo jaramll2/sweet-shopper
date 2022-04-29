@@ -1,9 +1,15 @@
 @import "../../variables.scss";
 
+
+
 .edit-modal-body {
   text-align: center;
   font-size: 22px;
   color: $thunder;
+
+  div{
+    display:block;
+  }
 
   h4 {
     font-weight: 400;
