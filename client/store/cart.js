@@ -1,8 +1,8 @@
-import { WindowSharp } from '@mui/icons-material';
+
 import axios from 'axios';
 
 export const addToCart = (candy, qty, auth, guestCart)=>{
-  console.log('test');
+
   return async(dispatch)=>{
     qty = parseInt(qty);
 
