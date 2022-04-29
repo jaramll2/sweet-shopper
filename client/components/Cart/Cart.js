@@ -24,7 +24,7 @@ class Cart extends Component {
     const totalCount = items.length > 0 ? items.reduce((total, item) => total + item.qty, 0) : 0;
     const subtotalMessage = `Subtotal (${totalCount} item${totalCount > 1 ? "s" : ""})`;
 
-    console.log(this.props);
+
     const cart = !window.localStorage.token ? this.props.guestCart : this.props.auth.cart;
     if(!cart){
       return;
