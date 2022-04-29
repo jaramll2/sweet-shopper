@@ -7,7 +7,7 @@ import CandyList from "./components/CandyList";
 import Candy from "./components/Candy";
 import { me } from "./store";
 import Cart from "./components/Cart";
-import { guestCart } from "./store/guestCart";
+import { getGuestCart } from "./store/guestCart";
 import Confirmation from "./components/Confirmation/Confirmation";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import AccountPage from "./components/AccountPage/AccountPage";
@@ -58,7 +58,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me());
     },
     loadGuestCart() {
-      dispatch(guestCart());
+      dispatch(getGuestCart());
     },
   };
 };
