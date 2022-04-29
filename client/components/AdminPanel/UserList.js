@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
+import './AdminPanel.scss'
+
 class UserList extends Component{
   constructor(){
     super();
@@ -20,11 +22,10 @@ class UserList extends Component{
   render(){
     const { users } = this.state
     return(
-      <div>
-        <h3>Users</h3>
-        <ul>
+      <div className="admin-items">
+        <ul className="unordered-list">
           {users.map(user => {
-            return <li key={user.id}>{user.username}</li>
+            return <li key={user.id} className="user">{user.username}</li>
           })}
         </ul>
       </div>

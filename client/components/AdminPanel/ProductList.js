@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import './AdminPanel.scss'
+
 class ProductList extends Component{
   constructor(){
     super();
@@ -19,11 +21,10 @@ class ProductList extends Component{
   render(){
     const { products } = this.state
     return(
-      <div>
-        <h3>Products</h3>
-        <ul>
+      <div className="admin-items">
+        <ul className="unordered-list">
           {products.map(product => {
-            return <li key={product.id}>{product.name}</li>
+            return <li key={product.id} className="product">{product.name}</li>
           })}
         </ul>
       </div>
