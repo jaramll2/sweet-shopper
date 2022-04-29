@@ -53,7 +53,9 @@ class Candy extends Component {
 
     return (
       <div className="candy-body">
-        <div className="candy-img">img</div>
+        <div className="candy-img">
+          <img />
+        </div>
         <div className="candy-details">
           <h3>
             {candy.name} ({candy.weight})
