@@ -32,9 +32,14 @@ class UserList extends Component{
     })
   }
 
-  closeUserInfo(){
+  async closeUserInfo(){
     this.setState({
       showUserDetails: false
+    })
+    const users = (await axios.get('/api/users')).data;
+
+    this.setState({
+      users
     })
   }
 
@@ -42,6 +47,9 @@ class UserList extends Component{
     const { users, showUserDetails, selectedUser } = this.state
     if(!users)
       return null;
+
+    //sorts alphabetically by username
+    users.sort((a, b) => a.username.localeCompare(b.username))
 
     return(
       <div className="admin-items">

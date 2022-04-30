@@ -103,8 +103,11 @@ router.put('/:id', async (req, res, next) => {
       res.sendStatus(401)
     }
     else{
-      const user = User.findById(req.body.id);
-      res.send(user);
+      const user = await User.findByPk(req.params.id);
+
+      user.admin = req.body.isAdmin
+      await user.save();
+      res.sendStatus(200);
     }
 
     
