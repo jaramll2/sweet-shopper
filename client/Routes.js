@@ -8,6 +8,7 @@ import Candy from "./components/Candy";
 import { me } from "./store";
 import Cart from "./components/Cart";
 import { guestCart } from "./store/guestCart";
+import { getCandy } from "./store/candy";
 import Confirmation from "./components/Confirmation/Confirmation";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import AccountPage from "./components/AccountPage/AccountPage";
@@ -18,6 +19,7 @@ import AccountPage from "./components/AccountPage/AccountPage";
 class Routes extends Component {
   async componentDidMount() {
     this.props.loadInitialData();
+    this.props.getCandy();
 
     if (!this.props.isLoggedIn) {
       this.props.loadGuestCart();
@@ -60,6 +62,9 @@ const mapDispatch = (dispatch) => {
     loadGuestCart() {
       dispatch(guestCart());
     },
+    getCandy() {
+      dispatch(getCandy())
+    }
   };
 };
 
