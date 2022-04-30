@@ -30,7 +30,7 @@ class QuickViewModal extends Component {
           <Box sx={modalStyle}>
             <div className="candy-modal-container">
               <div className="modal-left">
-                <img />
+                <img src="https://www.rebeccas.com/mm5/graphics/00000001/cn134.jpg" />
               </div>
               <div className="modal-right">
                 <div className="item-name">{name} ({weight})</div>
