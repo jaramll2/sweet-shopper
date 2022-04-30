@@ -22,14 +22,22 @@ class ProductList extends Component{
     })
   }
 
-  closeProductInfo(){
+  async closeProductInfo(){
     this.setState({
       displayDetails: false
+    })
+    const products = (await axios.get('/api/candy')).data;
+    this.setState({
+      products
     })
   }
 
   render(){
     const { products, displayDetails, selectedProduct } = this.state
+
+    //sorts alphabetically by username
+    products.sort((a, b) => a.name.localeCompare(b.name))
+    
     return(
       <div className="admin-items">
         {displayDetails ? <ProductDetails open={displayDetails} product={selectedProduct} done={this.closeProductInfo}/> : 
