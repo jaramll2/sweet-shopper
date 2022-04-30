@@ -9,12 +9,11 @@ const Cart = db.define('cart', {
   },
   date:{
     type: Sequelize.DATEONLY,
-    allowNull: true
+    defaultValue: new Date()
   },
   total:{
     type: Sequelize.DECIMAL(10, 2),
-    defaultValue: 0.00,
-    allowNull: true
+    defaultValue: 0.00
   }
 });
 

@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const GET_PURCHASED = 'GET_PURCHASED';
+const LOAD_PURCHASED = 'LOAD_PURCHASED';
 
 export const addToCart = (candy, qty, auth, guestCart)=>{
 
@@ -131,7 +131,7 @@ export const completePurchase = (auth,guestCart)=>{
   }
 }
 
-export const getPurchased = ()=>{
+export const loadPurchased = ()=>{
   return async(dispatch) => {
     const orderHistory = (await axios.get('/api/cart/complete', {
       headers: {
@@ -140,7 +140,7 @@ export const getPurchased = ()=>{
     })).data;
 
     dispatch({
-      type: GET_PURCHASED,
+      type: LOAD_PURCHASED,
       orderHistory
     })
   }
@@ -148,7 +148,7 @@ export const getPurchased = ()=>{
 
 //reducer
 export default(state = [], action) => {
-  if(action.type === GET_PURCHASED){
+  if(action.type === LOAD_PURCHASED){
     return action.orderHistory;
   }
 

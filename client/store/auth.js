@@ -42,7 +42,7 @@ export const authenticate = (username, password, method, firstName, lastName, em
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN)
-
+  window.location = '/'
   return {
     type: SET_AUTH,
     auth: {}

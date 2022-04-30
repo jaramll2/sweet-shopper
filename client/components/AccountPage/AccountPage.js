@@ -7,7 +7,10 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 import OrderHistory from "../OrderHistory/OrderHistory";
+
 import EditAccount from "../EditAccount";
+
+import { Link } from "react-router-dom";
 
 import './AccountPage.scss';
 
@@ -135,8 +138,9 @@ class AccountPage extends Component{
           </div>
         </div>
         <div className="order-history-container">
-          <OrderHistory/>
+          <h3><Link to='/orderHistory'>View Order History</Link></h3>
         </div>
+        
       </div>
     )
   }
