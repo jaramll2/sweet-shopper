@@ -16,7 +16,6 @@ class Featured extends React.Component {
     if (featured.length === 0) {
       return <div>...Loading</div>
     }
-    console.log('featured', featured)
     return (
       <div className="featured">
         Featured Sweets
