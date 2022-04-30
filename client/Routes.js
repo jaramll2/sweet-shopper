@@ -12,6 +12,7 @@ import Confirmation from "./components/Confirmation/Confirmation";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import AccountPage from "./components/AccountPage/AccountPage";
 import OrderSummary from "./components/OrderSummary/OrderSummary";
+import OrderHistory from "./components/OrderHistory/OrderHistory";
 
 /**
  * COMPONENT
@@ -38,6 +39,7 @@ class Routes extends Component {
         <Route exact path='/admin-panel' component={AdminPanel} />
         <Route exact path='/account' component={AccountPage} />
         <Route exact path='/orderDetails' component={OrderSummary}/>
+        <Route exact path='/orderHistory' component={OrderHistory}/>
       </div>
     );
   }

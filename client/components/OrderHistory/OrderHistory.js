@@ -11,7 +11,7 @@ class OrderHistory extends Component{
         this.state = {
             orders: [],
             loading: false,
-            currentPage: 1,
+            currentPage: JSON.parse(window.localStorage.getItem('pageNumber')) || 1,
             postsPerPage: 5 
         }
 
@@ -32,7 +32,9 @@ class OrderHistory extends Component{
 
     paginate (pageNum){
         this.setState({currentPage: pageNum});
+        window.localStorage.setItem('pageNumber', JSON.stringify(pageNum));
     }
+
     render(){
         const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
         const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;

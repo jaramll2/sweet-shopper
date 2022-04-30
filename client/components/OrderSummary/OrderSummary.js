@@ -26,7 +26,7 @@ function OrderSummary (props){
                 )
             })}
 
-            <span><b>Total: </b>${total}</span>
+            <span><b>Total: </b>${Number(total).toFixed(2)}</span>
         </div>
     )
     
