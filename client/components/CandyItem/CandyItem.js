@@ -11,7 +11,8 @@ class CandyItem extends Component {
     modalOpen: false,
   };
 
-  toggleModal = () => {
+  toggleModal = (event) => {
+    event.preventDefault();
     this.setState((prev) => ({ modalOpen: !prev.modalOpen }));
   };
 
@@ -21,24 +22,29 @@ class CandyItem extends Component {
 
     return (
       <div className="candy-item" key={id}>
-        <div className="image">
-          <Link to={`/candy/${id}`}>
-            <div>image</div>
-          </Link>
-        </div>
-        <div className="details">
-          <div>{name}</div>
-          <div>${price}</div>
-        </div>
-        <div className="quick-add">
-          <div variant="contained" onClick={this.toggleModal}>
-            Quick View
+        <Link to={`/candy/${id}`}>
+          <div
+            className="image"
+            style={{
+              backgroundImage: "url(https://www.rebeccas.com/mm5/graphics/00000001/cn134.jpg)",
+              backgroundSize: "cover"
+            }}
+          >
+            <div className="quick-add">
+              <div variant="contained" onClick={this.toggleModal}>
+                Quick View
+              </div>
+              <QuickViewModal
+                candy={this.props.candy}
+                modalOpen={modalOpen}
+                toggleModal={this.toggleModal}
+              />
+            </div>
           </div>
-          <QuickViewModal
-            candy={this.props.candy}
-            modalOpen={modalOpen}
-            toggleModal={this.toggleModal}
-          />
+        </Link>
+        <div className="details">
+          <span>{name}</span>
+          <span>${price}</span>
         </div>
       </div>
     );

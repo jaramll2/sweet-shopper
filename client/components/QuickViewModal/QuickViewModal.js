@@ -22,7 +22,7 @@ class QuickViewModal extends Component {
   
   render () {
     const { modalOpen, toggleModal } = this.props;
-    const { name, price } = this.props.candy;
+    const { name, weight, price } = this.props.candy;
 
     return (
       <>
@@ -33,7 +33,7 @@ class QuickViewModal extends Component {
                 <img />
               </div>
               <div className="modal-right">
-                <div className="item-name">{name}</div>
+                <div className="item-name">{name} ({weight})</div>
                 <div className="item-details">
                   <div>${price}</div>
                   <div>Ingredients:</div>

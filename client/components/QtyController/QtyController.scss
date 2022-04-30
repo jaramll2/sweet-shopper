@@ -1,14 +1,18 @@
 .qty-controller {
   display: flex;
-  width: 100px;
+  height: 35px;
+  width: 150px;
   border: 1px solid lightblue;
   border-radius: 6px;
   transition: 0.2s ease;
+  font-size: 18px;
 
   .qty-button {
     cursor: default;
     flex: 1;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     user-select: none;
 
     &:hover {
@@ -22,5 +26,6 @@
     outline: none;
     width: 30px;
     text-align: center;
+    font-size: 18px;
   }
 }

@@ -57,10 +57,11 @@ class Candy extends Component {
           <img />
         </div>
         <div className="candy-details">
-          <h3>
-            {candy.name} ({candy.weight})
-          </h3>
-          <div>${candy.price}</div>
+          <h2>
+            {candy.name}
+            <span className="candy-weight">({candy.weight})</span>
+          </h2>
+          <div className="candy-price">${candy.price}</div>
           <div className="add-to-cart">
             <QtyController
               buttonHandler={this.handleClick}
