@@ -3,7 +3,6 @@ import { me } from './auth'
 
 const GUEST_CART = 'GUEST_CART';
 const DELETE_FROM_CART_GUEST = 'DELETE_FROM_CART_GUEST'
-const DELETE_FROM_CART = 'DELETE_FROM_CART'
 const EMPTY_CART = 'EMPTY_CART';
 
 export const getGuestCart = () => {
