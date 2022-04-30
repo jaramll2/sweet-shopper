@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import EditForm from "./EditForm";
+import { Link } from "react-router-dom";
 
 class AccountPage extends Component{
   constructor(){
@@ -38,7 +39,8 @@ class AccountPage extends Component{
             }
         </div>
         
-        <OrderHistory/>
+        <h3><Link to='/orderHistory'>View Order History</Link></h3>
+        
       </div>
     )
   }
