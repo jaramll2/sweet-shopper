@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { editUserInfo } from '../../store/auth'
 
-class EditForm extends Component{
+import './EditAccount.scss';
+
+class EditAccount extends Component{
   constructor(props){
     super(props);
     const { username, firstName, lastName, email } = this.props.auth;
@@ -75,4 +77,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(state => state, mapDispatchToProps)(EditForm);
+export default connect(state => state, mapDispatchToProps)(EditAccount);

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SettingsIcon from "@mui/icons-material/Settings";
 import { AdminPanelSettings } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Snackbar from "@mui/material/Snackbar";
@@ -92,12 +91,8 @@ class AccountMenu extends Component {
           </div>
           <Link to="/account" className="user-menu-item" style={{ margin: 0 }}> 
             <AccountCircleIcon className="user-menu-icon"/>
-            Profile
+            Account
           </Link>
-          <div className="user-menu-item">
-            <SettingsIcon className="user-menu-icon" />
-            Settings
-          </div>
           {this.props.user.admin ? (
             <Link to="/admin-panel" className="user-menu-item" style={{ margin: 0 }}>
               <AdminPanelSettings className="user-menu-icon" />

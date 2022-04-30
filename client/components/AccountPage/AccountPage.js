@@ -7,7 +7,7 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 import OrderHistory from "../OrderHistory/OrderHistory";
-import EditForm from "./EditForm";
+import EditAccount from "../EditAccount";
 
 import './AccountPage.scss';
 
@@ -33,13 +33,16 @@ class AccountPage extends Component{
     const { updateView } = this.state
     return(
       <div className="body">
-        <h3>Account</h3>
+        
         <div className="account-container">
-          {updateView ? <EditForm doneUpdating={this.doneUpdating} open={updateView}/>  :
-             <Box
+          <h3>Account</h3>
+          <div>
+            {updateView ? <EditAccount doneUpdating={this.doneUpdating} open={updateView}/>  :
+              <Box
                 sx={{
                   display: 'flex',
                   flexWrap: 'wrap',
+                  justifyContent: 'space-between',
                   '& > :not(style)': {
                     m: 1,
                     width: 500,
@@ -129,6 +132,7 @@ class AccountPage extends Component{
                 </Paper>
               </Box>
             }
+          </div>
         </div>
         <div className="order-history-container">
           <OrderHistory/>
