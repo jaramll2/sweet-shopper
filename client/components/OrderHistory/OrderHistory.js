@@ -10,8 +10,6 @@ class OrderHistory extends Component{
 
     render(){
         const carts = this.props.orderHistory;
-        console.log('CARTS');
-        console.log(carts);
         
         if(carts.length <= 0){
             return (
@@ -40,7 +38,7 @@ class OrderHistory extends Component{
                                     <tr key = {cart.id}>
                                         <td width='25%'>{cart.date}</td>
                                         <td width='25%'>{cart.total}</td>
-                                        <td width='25%'><Link to='/orderDetails'>View Details</Link></td>
+                                        <td width='25%'><Link to={{ pathname: "/orderDetails", state: { cart } }}>View Details</Link></td>
                                     </tr>
                                 )
                             }) }

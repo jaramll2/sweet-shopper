@@ -5,11 +5,9 @@ function OrderSummary (props){
         return;
     }
 
-    const lines = props.cart.lineitems;
-    const total = props.total;
+    const lines = !props.cart ? props.location.state.cart.lineitems : props.cart.lineitems;
+    const total = !props.total ? props.location.state.cart.total : props.total;
 
-    console.log(lines);
-    console.log(total);
     return(
         <div>
             <h3>Order Summary</h3>
@@ -32,7 +30,7 @@ function OrderSummary (props){
                 )
             })}
 
-            <span><b>Total: </b>${total.toFixed(2)}</span>
+            <span><b>Total: </b>${total}</span>
         </div>
     )
     
