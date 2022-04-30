@@ -40,7 +40,7 @@ class Cart extends Component {
           onClick={this.toggleCart}
         />
         <Drawer anchor="right" open={cartOpen} onClose={this.toggleCart} transitionDuration={400}>
-          <Box sx={{ width: 400, padding: "10px 20px" }} role="presentation">
+          <Box sx={{ width: 500, padding: "10px 20px" }} role="presentation">
             <Paper>
               <div className="cart-body">
                 <h3>Your Cart</h3>

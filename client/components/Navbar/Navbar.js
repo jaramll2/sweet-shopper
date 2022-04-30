@@ -48,9 +48,7 @@ class Navbar extends Component {
 
   render() {
     const { navbarScrolled, isHomePage, isCandyPage } = this.state;
-    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""}
-      ${isHomePage ? "homepage" : ""}
-      ${isCandyPage ? "candy-page" : ""}`;
+    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""} ${isCandyPage ? "candy-page" : ""}`;
 
     return (
       <div className={navbarClass}>
