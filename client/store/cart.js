@@ -1,8 +1,10 @@
-import { WindowSharp } from '@mui/icons-material';
+
 import axios from 'axios';
 
+const GET_PURCHASED = 'GET_PURCHASED';
+
 export const addToCart = (candy, qty, auth, guestCart)=>{
-  console.log('test');
+
   return async(dispatch)=>{
     qty = parseInt(qty);
 
@@ -83,15 +85,19 @@ export const updateItem = (item) => async (dispatch, getState) => {
 
 export const completePurchase = (auth,guestCart)=>{
   return async(dispatch)=>{
-  
-      // if(!auth.cart || guestCart){
-      //     return;
-      // }
+      const cart = !window.localStorage.token ? guestCart : auth.cart;
 
+      const total = cart.lineitems.reduce((prev,curr)=>{
+        let price = curr.candy.price * curr.qty * 1;
+        return prev + price;
+      },0).toFixed(2);
+
+      const date = new Date();  
+      
       //route for logged in user
       if(auth.cart){
         //use put command to update the user's cart to isPurchased === true
-        await axios.put(`/api/cart/${auth.cart.id}`, {...auth.cart, ...{isPurchased: true}});
+        await axios.put(`/api/cart/${auth.cart.id}`, {...auth.cart, ...{isPurchased: true, date: date, total: total} } );
         
         //create a new cart for the logged in user
         const newCart = (await axios.post('/api/cart/', null, {headers: {authorization: window.localStorage.token}})).data;
@@ -103,28 +109,48 @@ export const completePurchase = (auth,guestCart)=>{
             auth
           })
       }
-      // else{ //logged out user
-      //   //mark guest cart as purchased
-      //   await axios.put(`/api/cart/${guestCart.id}`, {...guestCart, ...{isPurchased: true}});
+      else{ //logged out user
+        //mark guest cart as purchased
+        await axios.put(`/api/cart/${guestCart.id}`, {...guestCart, ...{isPurchased: true}});
 
-      //   //remove cartID from local storage so a new cart can get created
-      //   //  window.localStorage.removeItem('cartId');
+        //create new guestCart
+        const newCart = (await axios.post('/api/cart', null,  {
+          headers:{
+            authorization: 'guest'
+          }
+        })).data;
 
-      //   //post for new guestCart
-      //   const newCart = (await axios.post('/api/cart', null,  {
-      //     headers:{
-      //       authorization: 'guest'
-      //     }
-      //   })).data;
+        guestCart = newCart;
+        window.localStorage.cartId = newCart.id;
 
-      //   guestCart = newCart;
-
-      //   window.localStorage.cartId = newCart.id;
-
-      //   return dispatch({
-      //     type: "GUEST_CART",
-      //     guestCart
-      //   })
-      // }
+        return dispatch({
+          type: "GUEST_CART",
+          guestCart
+        })
+      }
   }
+}
+
+export const getPurchased = ()=>{
+  return async(dispatch) => {
+    const orderHistory = (await axios.get('/api/cart/complete', {
+      headers: {
+        authorization: window.localStorage.token
+      }
+    })).data;
+
+    dispatch({
+      type: GET_PURCHASED,
+      orderHistory
+    })
+  }
+}
+
+//reducer
+export default(state = [], action) => {
+  if(action.type === GET_PURCHASED){
+    return action.orderHistory;
+  }
+
+  return state;
 }

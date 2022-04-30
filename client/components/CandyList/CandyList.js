@@ -51,6 +51,7 @@ class CandyList extends React.Component {
     return (
       <div className="shop">
         <div className="shop-header">
+          <img src="./candy-image.jpeg" />
           <div className="shop-name">Category</div>
         </div>
         <div className="shop-body">
@@ -73,10 +74,10 @@ class CandyList extends React.Component {
                     label="Sort By"
                     onChange={this.handleSort}
                   >
-                    <MenuItem value="nameAsc">Name - Ascending</MenuItem>
-                    <MenuItem value="nameDesc">Name - Descending</MenuItem>
-                    <MenuItem value="priceAsc">Price - Ascending</MenuItem>
-                    <MenuItem value="priceDesc">Price - Descending</MenuItem>
+                    <MenuItem value="nameAsc">Name: A  -  Z</MenuItem>
+                    <MenuItem value="nameDesc">Name: Z  -  A</MenuItem>
+                    <MenuItem value="priceAsc">Price: Low to High</MenuItem>
+                    <MenuItem value="priceDesc">Price: High to Low</MenuItem>
                   </Select>
                 </FormControl>
               </span>

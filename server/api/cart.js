@@ -26,6 +26,29 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/complete', async (req, res, next) => {
+  try{
+    const user = await User.findByToken(req.headers.authorization);
+    const carts = await Cart.findAll({
+      include:[
+        {model: LineItem, include: [Candy]}
+      ],
+      where: {
+        userId: user.id,
+        isPurchased: true
+      }
+    })
+    res.send(carts);
+  }
+  catch(err){
+    if (err.status === 401){
+      res.sendStatus(401);
+    }
+    else
+      next(err);
+  }
+})
+
 router.get('/:id',async(req,res,next)=>{
   try{
     //validating user

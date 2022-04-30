@@ -86,14 +86,14 @@ class AccountMenu extends Component {
       <div className="user-menu-container" ref={this.wrapperRef}>
         <PersonOutlineIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
         <div className={userMenuClass}>
-          <Link to="/account" className="user-menu-item" style={{ margin: 0 }}> 
+          <div className="user-menu-item">
             <span className="user-menu-username">{user.username?.[0]}</span>
             {user.username}
-          </Link>
-          <div className="user-menu-item">
+          </div>
+          <Link to="/account" className="user-menu-item" style={{ margin: 0 }}> 
             <AccountCircleIcon className="user-menu-icon"/>
             Profile
-          </div>
+          </Link>
           <div className="user-menu-item">
             <SettingsIcon className="user-menu-icon" />
             Settings

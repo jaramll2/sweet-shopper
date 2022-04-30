@@ -13,6 +13,7 @@ router.post("/login", async (req, res, next) => {
     //then emptys the guest cart into the user's cart.
     const token = await User.authenticate({username, password});
     const user = await User.findByToken(token);
+
     const userCart = await Cart.findOne({
       where:{
         userId: user.id,
@@ -42,7 +43,6 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    console.log(req.body);
     const { username, password, guestCart, firstName, lastName, email } = req.body;
     const user = await User.create({username, password, firstName, lastName, email});
     await Cart.create({ userId: user.id });
@@ -78,6 +78,44 @@ router.post("/signup", async (req, res, next) => {
     }
   }
 });
+
+router.put('/', async (req, res, next) => {
+  try{
+    let user = await User.findByToken(req.headers.authorization);
+    user.username = req.body.username;
+    user.email = req.body.email;
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    await user.save()
+    res.send(user);
+  }
+  catch(error){
+    next(error);
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try{
+    const admin = await User.findByToken(req.headers.authorization);
+
+    //user must be an admin to use this route
+    if(!admin.admin){
+      res.sendStatus(401)
+    }
+    else{
+      const user = await User.findByPk(req.params.id);
+
+      user.admin = req.body.isAdmin
+      await user.save();
+      res.sendStatus(200);
+    }
+
+    
+  }
+  catch(error){
+    next(error);
+  }
+})
 
 router.get("/me", async (req, res, next) => {
   try {

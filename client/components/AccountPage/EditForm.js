@@ -1,6 +1,7 @@
 import { Box, Modal } from "@mui/material";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { editUserInfo } from '../../store/auth'
 
 class EditForm extends Component{
   constructor(props){
@@ -11,7 +12,6 @@ class EditForm extends Component{
       email,
       firstName,
       lastName,
-      password: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,6 +26,8 @@ class EditForm extends Component{
 
   handleSubmit(evt){
     evt.preventDefault();
+    this.props.editUserInfo(this.state);
+    this.props.doneUpdating();
   }
 
   render(){
@@ -38,11 +40,10 @@ class EditForm extends Component{
             <h1>Edit User Information</h1>
             <form onSubmit={this.handleSubmit} className='edit-modal-form'>
               <div>Username <input value={username} name='username' onChange={this.handleChange}/></div>
-              <div>Password <input value={password} name='password' onChange={this.handleChange} type='password' placeholder="Password"/></div>
               <div>Email <input value={email} name='email' onChange={this.handleChange}/></div>
               <div>First Name <input value={firstName} name='firstName' onChange={this.handleChange}/></div>
               <div>Last Name <input value={lastName} name='lastName' onChange={this.handleChange}/></div>
-              <div><button type='button' onClick={this.props.doneUpdating}>Back</button></div>
+              <div style={{display: 'block'}}><button type='button' onClick={this.props.doneUpdating}>Back</button></div>
               <div><button>Submit Changes</button></div>
               
             </form>
@@ -65,4 +66,13 @@ const modalStyle = {
   boxShadow: 24,
   p: 4,
 };
-export default connect(state => state)(EditForm);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editUserInfo: function(user) {
+      return dispatch(editUserInfo(user))
+    }
+  }
+}
+
+export default connect(state => state, mapDispatchToProps)(EditForm);

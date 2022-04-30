@@ -7,11 +7,12 @@ import CandyList from "./components/CandyList";
 import Candy from "./components/Candy";
 import { me } from "./store";
 import Cart from "./components/Cart";
-import { guestCart } from "./store/guestCart";
+import { getGuestCart } from "./store/guestCart";
 import { getCandy } from "./store/candy";
 import Confirmation from "./components/Confirmation/Confirmation";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import AccountPage from "./components/AccountPage/AccountPage";
+import OrderSummary from "./components/OrderSummary/OrderSummary";
 
 /**
  * COMPONENT
@@ -21,9 +22,8 @@ class Routes extends Component {
     this.props.loadInitialData();
     this.props.getCandy();
 
-    if (!this.props.isLoggedIn) {
-      this.props.loadGuestCart();
-    }
+    this.props.loadGuestCart();
+
   }
 
   render() {
@@ -33,11 +33,12 @@ class Routes extends Component {
       <div>
         <Route exact path="/" component={Home} />
         <Route path="/candy/:id" component={Candy} />
-        <Route path="/candy" component={CandyList} />
+        <Route exact path="/candy" component={CandyList} />
         <Route path="/cart" component={Cart} />
         <Route exact path="/confirmation" component={Confirmation} />
         <Route exact path='/admin-panel' component={AdminPanel} />
         <Route exact path='/account' component={AccountPage} />
+        <Route exact path='/orderDetails' component={OrderSummary}/>
       </div>
     );
   }
@@ -60,7 +61,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me());
     },
     loadGuestCart() {
-      dispatch(guestCart());
+      dispatch(getGuestCart());
     },
     getCandy() {
       dispatch(getCandy())
