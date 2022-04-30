@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { loadPurchased } from '../../store/cart'
 import { Link } from "react-router-dom";
 import Orders from "../Orders/Orders";
+import Pagination from "../Pagination/Pagination";
 
 class OrderHistory extends Component{
 
@@ -47,6 +48,7 @@ class OrderHistory extends Component{
                 <h3>Order History</h3>
 
                 <Orders orders={currentOrders} loading={this.state.loading}/>
+                <Pagination postsPerPage={this.state.postsPerPage} totalPosts = {this.state.orders.length}/>
             </div>
         )
     }
