@@ -94,6 +94,26 @@ router.put('/', async (req, res, next) => {
   }
 })
 
+router.put('/:id', async (req, res, next) => {
+  try{
+    const admin = await User.findByToken(req.headers.authorization);
+
+    //user must be an admin to use this route
+    if(!admin.admin){
+      res.sendStatus(401)
+    }
+    else{
+      const user = User.findById(req.body.id);
+      res.send(user);
+    }
+
+    
+  }
+  catch(error){
+    next(error);
+  }
+})
+
 router.get("/me", async (req, res, next) => {
   try {
     res.send(await User.findByToken(req.headers.authorization));

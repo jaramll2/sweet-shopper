@@ -45,12 +45,13 @@ class UserList extends Component{
 
     return(
       <div className="admin-items">
-        <UserDetails open={showUserDetails} done={this.closeUserInfo} user={selectedUser}/>
+        {showUserDetails ? <UserDetails open={showUserDetails} done={this.closeUserInfo} user={selectedUser}/> :
         <ul className="unordered-list">
             {users.map(user => {
               return <li key={user.id} className="user" onClick={() => this.displayUserInfo(user.id)}>{user.username}</li>
             })}
         </ul> 
+  }
       </div>
     )
   }

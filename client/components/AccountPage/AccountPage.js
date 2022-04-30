@@ -26,7 +26,7 @@ class AccountPage extends Component{
     return(
       <div>
         <div>
-          {this.state.updateView ? <EditForm doneUpdating={this.doneUpdating} open={updateView}/> : 
+          {updateView ? <EditForm doneUpdating={this.doneUpdating} open={updateView}/>  :
             <div>
               <h3>Account Details</h3>
               <div>Username: {username}</div>
@@ -35,7 +35,7 @@ class AccountPage extends Component{
               <div>Last Name: {lastName}</div>
               <button onClick={() => this.setState({updateView: true})}>Edit Info</button>
             </div>
-          }
+            }
         </div>
         
         <OrderHistory/>
