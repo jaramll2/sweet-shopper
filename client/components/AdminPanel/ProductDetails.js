@@ -1,4 +1,5 @@
 import { Box, Modal } from "@mui/material";
+import axios from "axios";
 import React, { Component } from "react";
 
 
@@ -14,6 +15,7 @@ class ProductDetails extends Component{
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(evt){
@@ -22,17 +24,28 @@ class ProductDetails extends Component{
     })
   }
 
+  async handleSubmit(evt){
+    evt.preventDefault();
+    await axios.put(`/api/candy/${this.props.product.id}`, this.state, {
+      headers: {
+        authorization: window.localStorage.token
+      }
+    })
+    this.props.done();
+  }
+
   render(){
-    const { open, done } = this.props;
+    const { open } = this.props;
     const { name, price, weight } = this.state
     return(
       <Modal open={open}>
         <Box sx={modalStyle}>
-          <input value={name} name="name" onChange={this.handleChange}></input>
-          <input value={price} name="price" onChange={this.handleChange}></input>
-          <input value={weight} name="weight" onChange={this.handleChange}></input>
-          <button onClick={done}>Submit</button>
-
+          <form onSubmit={this.handleSubmit}>
+            <input value={name} name="name" onChange={this.handleChange}></input>
+            <input value={price} name="price" onChange={this.handleChange}></input>
+            <input value={weight} name="weight" onChange={this.handleChange}></input>
+            <button>Submit</button>
+          </form>
 
         </Box>
       </Modal>
