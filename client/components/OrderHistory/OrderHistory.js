@@ -1,17 +1,39 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
-import { getPurchased } from '../../store/cart'
+import { loadPurchased } from '../../store/cart'
 import { Link } from "react-router-dom";
+import Orders from "../Orders/Orders";
 
 class OrderHistory extends Component{
+
+    constructor(){
+        super();
+        this.state = {
+            orders: [],
+            loading: false,
+            currentPage: 1,
+            postsPerPage: 5 
+        }
+    }
+
     componentDidMount(){
-        this.props.getPurchased();
+        this.props.loadPurchased();
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props !== prevProps){
+            this.setState({loading:true});
+            this.setState({orders: this.props.orderHistory});
+            this.setState({loading:false});
+        }
     }
 
     render(){
-        const carts = this.props.orderHistory;
+        const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
+        const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
+        const currentOrders= this.state.orders.slice(indexofFirstPost,indexOfLastPost);
 
-        if(carts.length <= 0){
+        if(this.state.orders.length <= 0){
             return (
                 <div>
                     <h3>Order History</h3>
@@ -24,28 +46,7 @@ class OrderHistory extends Component{
             <div>
                 <h3>Order History</h3>
 
-                <table width='60%'>
-                    <thead>
-                        <tr>
-                            <th align='left'>Order Placed</th>
-                            <th align='left'>Total</th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            {carts.map(cart=>{
-                                return (
-                                    <tr key = {cart.id}>
-                                        <td width='25%'>{cart.date}</td>
-                                        <td width='25%'>{cart.total}</td>
-                                        <td width='25%'><Link to={{ pathname: "/orderDetails", state: { cart } }}>View Details</Link></td>
-                                    </tr>
-                                )
-                            }) }
-                    </tbody>
-                </table>
-                
-                {/* FIGURE OUT PAGNATION INSTEAD OF LINKING TO ALL ORDERS */}
+                <Orders orders={currentOrders} loading={this.state.loading}/>
             </div>
         )
     }
@@ -53,8 +54,8 @@ class OrderHistory extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getPurchased: ()=> {
-        dispatch(getPurchased());
+        loadPurchased: ()=> {
+        dispatch(loadPurchased());
       },
     };
 };
