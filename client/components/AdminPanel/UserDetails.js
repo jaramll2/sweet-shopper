@@ -11,15 +11,11 @@ class UserDetails extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
-  async doneUpdating(){
-    axios.put(`/api/users/${this.props.user.id}`)
-    this.props.done()
-  }
+
 
   handleChange(evt){
     this.setState({
@@ -28,19 +24,31 @@ class UserDetails extends Component {
     
   }
 
+  async handleSubmit(evt){
+    evt.preventDefault();
+    await axios.put(`/auth/${this.props.user.id}`, {isAdmin: this.state.isAdmin}, {
+      headers: {
+        authorization: window.localStorage.token
+      }
+    })
+    this.props.done()
+  }
+
   render(){
     const { isAdmin } = this.state;
     const { open, done, user } = this.props;
     return(
       <Modal open={open} >
         <Box sx={modalStyle}>
-          <h3>{user.username}</h3>
-          <h5>{user.email}</h5>
-          <h5>{user.firstName}</h5>
-          <h5>{user.lastName}</h5>
-          <label><input type="checkbox" checked={isAdmin} onChange={this.handleChange}/>Admin</label>
-          
-          <button onClick={done}>Back</button>
+          <form onSubmit={this.handleSubmit}>
+            <h3>{user.username}</h3>
+            <h5>{user.email}</h5>
+            <h5>{user.firstName}</h5>
+            <h5>{user.lastName}</h5>
+            <label><input type="checkbox" checked={isAdmin} onChange={this.handleChange}/>Admin</label>
+            
+            <button>Submit</button>
+          </form>
         </Box>
       </Modal>
     )
