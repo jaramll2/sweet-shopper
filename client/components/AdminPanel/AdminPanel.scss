@@ -30,7 +30,9 @@
       li{
         padding: 1.5em;
       }
-
+      li:hover{
+        background-color: $soft-green;
+      }
     }
   }
 }

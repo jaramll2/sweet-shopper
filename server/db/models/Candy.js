@@ -81,9 +81,7 @@ Candy.generateRandom = () => {
     
   ]
 const randomName = 
-  `
-    ${adjective[Math.floor(Math.random() * adjective.length)]} ${prefixes[Math.floor(Math.random() * prefixes.length)]}${candy[Math.floor(Math.random() * candy.length)]}    
-  `
+  `${adjective[Math.floor(Math.random() * adjective.length)]} ${prefixes[Math.floor(Math.random() * prefixes.length)]}${candy[Math.floor(Math.random() * candy.length)]}`
 
 
   //List of possible random names. Could use an api later.
