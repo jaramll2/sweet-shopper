@@ -10,7 +10,7 @@ class OrderHistory extends Component{
 
     render(){
         const carts = this.props.orderHistory;
-        
+
         if(carts.length <= 0){
             return (
                 <div>
@@ -44,6 +44,8 @@ class OrderHistory extends Component{
                             }) }
                     </tbody>
                 </table>
+                
+                {/* FIGURE OUT PAGNATION INSTEAD OF LINKING TO ALL ORDERS */}
             </div>
         )
     }
