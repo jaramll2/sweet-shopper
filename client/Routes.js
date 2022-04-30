@@ -20,9 +20,8 @@ class Routes extends Component {
   async componentDidMount() {
     this.props.loadInitialData();
 
-    if (!this.props.isLoggedIn) {
-      this.props.loadGuestCart();
-    }
+    this.props.loadGuestCart();
+
   }
 
   render() {
