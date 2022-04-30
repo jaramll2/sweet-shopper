@@ -6,7 +6,7 @@ const Orders = ({orders, loading})=>{
     if(loading){
         return;
     }
-
+    
     return (
         <div>
             <table width='60%'>

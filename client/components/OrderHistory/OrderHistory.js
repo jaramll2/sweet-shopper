@@ -1,7 +1,6 @@
 import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
 import { loadPurchased } from '../../store/cart'
-import { Link } from "react-router-dom";
 import Orders from "../Orders/Orders";
 import Pagination from "../Pagination/Pagination";
 
@@ -15,6 +14,8 @@ class OrderHistory extends Component{
             currentPage: 1,
             postsPerPage: 5 
         }
+
+        this.paginate = this.paginate.bind(this);
     }
 
     componentDidMount(){
@@ -29,6 +30,9 @@ class OrderHistory extends Component{
         }
     }
 
+    paginate (pageNum){
+        this.setState({currentPage: pageNum});
+    }
     render(){
         const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
         const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
@@ -48,7 +52,7 @@ class OrderHistory extends Component{
                 <h3>Order History</h3>
 
                 <Orders orders={currentOrders} loading={this.state.loading}/>
-                <Pagination postsPerPage={this.state.postsPerPage} totalPosts = {this.state.orders.length}/>
+                <Pagination postsPerPage={this.state.postsPerPage} totalPosts = {this.state.orders.length} paginate={this.paginate}/>
             </div>
         )
     }

@@ -1,12 +1,8 @@
 import React from "react";
 
 function OrderSummary (props){
-    if(!props){
-        return;
-    }
-
-    const lines = !props.cart ? props.location.state.cart.lineitems : props.cart.lineitems;
-    const total = !props.total ? props.location.state.cart.total : props.total;
+    const lines = !props.cart ? props.location.state.order.lineitems : props.cart.lineitems;
+    const total = !props.total ? props.location.state.order.total : props.total;
 
     return(
         <div>
