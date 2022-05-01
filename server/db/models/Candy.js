@@ -8,14 +8,20 @@ const Candy = db.define('candy', {
     //add this back in after we have a better way to seed.
     // unique: true,
     validate: {
-      notEmpty: true
+      notEmpty: {
+        args: true,
+        msg: 'Candy name cannot be empty'
+      }
     }
   },
   price: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: {
+        args: true,
+        msg: 'Candy must have a price'
+      }
     }
   },
   weight: {
