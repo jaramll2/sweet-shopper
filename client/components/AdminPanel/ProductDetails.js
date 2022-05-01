@@ -15,7 +15,8 @@ class ProductDetails extends Component{
       name,
       price,
       weight,
-      newProduct
+      newProduct,
+      error: null
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,32 +32,46 @@ class ProductDetails extends Component{
   async handleSubmit(evt){
     evt.preventDefault();
 
-    //a new product will make a post request, existing product will make a put request
-    if(this.state.newProduct){
-      await axios.post('/api/candy', this.state, {
-        headers: {
-          authorization: window.localStorage.token
-        }
-      })
+    try{
+      
+      //a new product will make a post request, existing product will make a put request
+      if(this.state.newProduct){
+        await axios.post('/api/candy', this.state, {
+          headers: {
+            authorization: window.localStorage.token
+          }
+        })
+      }
+      else{
+        await axios.put(`/api/candy/${this.props.product.id}`, this.state, {
+          headers: {
+            authorization: window.localStorage.token
+          }
+        })
+      }
+      this.props.done();
     }
-    else{
-      await axios.put(`/api/candy/${this.props.product.id}`, this.state, {
-        headers: {
-          authorization: window.localStorage.token
-        }
-      })
+    catch( error ){
+      this.setState({error: error.response.data})
+
     }
 
-    this.props.done();
+
   }
 
   async handleDelete(id){
 
-    await axios.delete(`/api/candy/${id}`, {
-      headers: {
-        authorization: window.localStorage.token
-      }
-    });
+    try{
+      await axios.delete(`/api/candy/${id}`, {
+        headers: {
+          authorization: window.localStorage.token
+        }
+      });
+    }
+    catch(error){
+      this.setState({error: error.response.data})
+    }
+
 
 
     this.props.done();
@@ -64,12 +79,12 @@ class ProductDetails extends Component{
 
   render(){
     const { open, done, product: { id } } = this.props;
-    const { name, price, weight, newProduct} = this.state
-
+    const { name, price, weight, newProduct, error} = this.state
     return(
       <Modal open={open}>
         <Box sx={modalStyle}>
           <form onSubmit={this.handleSubmit} className="details-form">
+            {error ? <h5 className="login-error-msg">{error}</h5> : null}
             <input value={name} name="name" onChange={this.handleChange}></input>
             <input value={price} name="price" onChange={this.handleChange}></input>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
