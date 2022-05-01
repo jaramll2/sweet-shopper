@@ -52,3 +52,20 @@ router.post('/', async (req, res, next) => {
     next(err);
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try { 
+    const user = await User.findByToken(req.headers.authorization);
+    
+    //only admins can delete a product
+    if(!user.admin)
+      res.sendStatus(401);
+
+    const candy = await Candy.findByPk(req.params.id);
+    await candy.destroy();
+    res.sendStatus(204);
+  }
+  catch(err){
+    next(err);
+  }
+})
