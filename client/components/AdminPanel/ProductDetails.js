@@ -50,9 +50,22 @@ class ProductDetails extends Component{
     this.props.done();
   }
 
+  async handleDelete(id){
+
+    await axios.delete(`/api/candy/${id}`, {
+      headers: {
+        authorization: window.localStorage.token
+      }
+    });
+
+
+    this.props.done();
+  }
+
   render(){
-    const { open, done } = this.props;
-    const { name, price, weight, newProduct } = this.state
+    const { open, done, product: { id } } = this.props;
+    const { name, price, weight, newProduct} = this.state
+
     return(
       <Modal open={open}>
         <Box sx={modalStyle}>
@@ -60,6 +73,7 @@ class ProductDetails extends Component{
             <input value={name} name="name" onChange={this.handleChange}></input>
             <input value={price} name="price" onChange={this.handleChange}></input>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
+            {newProduct ? null : <button type='button' onClick={() => this.handleDelete(id)}>Delete Item</button>}
             <button type='button' onClick={done}>Cancel</button>
             <button>Submit</button>
           </form>
