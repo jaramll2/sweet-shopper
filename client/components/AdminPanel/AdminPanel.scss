@@ -1,6 +1,13 @@
 @import "../../variables.scss";
 
+.details-form{
+  display: flex;
+  flex-direction: column;
 
+  *{
+    margin: 1em;
+  }
+}
 .admin-panel{
   display: flex;
   flex-direction: column;
@@ -19,8 +26,11 @@
     }
   }
 
+
+
   flex-direction: column;
   .admin-items{
+
 
 
     .unordered-list {

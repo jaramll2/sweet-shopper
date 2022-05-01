@@ -7,11 +7,15 @@ class ProductDetails extends Component{
 
   constructor(props){
     super(props);
-    const { name, price, weight } = this.props.product
+
+  const { name, price, weight, newProduct } = this.props.product
+
+
     this.state = {
       name,
       price,
-      weight
+      weight,
+      newProduct
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,24 +30,37 @@ class ProductDetails extends Component{
 
   async handleSubmit(evt){
     evt.preventDefault();
-    await axios.put(`/api/candy/${this.props.product.id}`, this.state, {
-      headers: {
-        authorization: window.localStorage.token
-      }
-    })
+
+    //a new product will make a post request, existing product will make a put request
+    if(this.state.newProduct){
+      await axios.post('/api/candy', this.state, {
+        headers: {
+          authorization: window.localStorage.token
+        }
+      })
+    }
+    else{
+      await axios.put(`/api/candy/${this.props.product.id}`, this.state, {
+        headers: {
+          authorization: window.localStorage.token
+        }
+      })
+    }
+
     this.props.done();
   }
 
   render(){
-    const { open } = this.props;
-    const { name, price, weight } = this.state
+    const { open, done } = this.props;
+    const { name, price, weight, newProduct } = this.state
     return(
       <Modal open={open}>
         <Box sx={modalStyle}>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="details-form">
             <input value={name} name="name" onChange={this.handleChange}></input>
             <input value={price} name="price" onChange={this.handleChange}></input>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
+            <button type='button' onClick={done}>Cancel</button>
             <button>Submit</button>
           </form>
 

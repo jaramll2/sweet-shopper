@@ -35,6 +35,9 @@ class ProductList extends Component{
   render(){
     const { products, displayDetails, selectedProduct } = this.state
 
+    //object to send to form when we're creating a new product
+    const newProduct = {name: 'New Product', price: 'price', weight: 'weight', newProduct: true}
+
     //sorts alphabetically by username
     products.sort((a, b) => a.name.localeCompare(b.name))
     
@@ -47,6 +50,7 @@ class ProductList extends Component{
           })}
         </ul>
         }
+        <button onClick={() => this.setState({displayDetails: true, selectedProduct: newProduct})}>New Product</button>
       </div>
     )
   }
