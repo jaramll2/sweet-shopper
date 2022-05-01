@@ -34,11 +34,37 @@ async function seed() {
     candy.push(await Candy.generateRandom());
   }
 
+  //for each user, create an order (a cart with isPurchased true). 
+  //The, create a random number of lineItems for that order.
+  for(let i = 0; i < users.length; i++){
+
+
+    //random number of orders
+    for(let k = 0; k < Math.ceil(Math.random() * 10); k++){
+      const cart = await Cart.create({userId: users[i].id, isPurchased: true});
+
+      //random number of lineitems in that order
+      for(let j = 0; j < Math.ceil(Math.random() * 5); j++){
+        const candyId = candy[Math.floor(Math.random() * candy.length)].id
+        const seededCandy = await Candy.findByPk(candyId);
+        const qty = Math.ceil(Math.random() * 10)
+        const seededLineItem = await LineItem.create({
+          candyId: candyId,
+          qty: qty,
+          cartId: cart.id,
+        })
+        cart.total = (cart.total * 1 + (seededLineItem.qty * seededCandy.price)) * 1;
+      }
+      await cart.save()
+    }
+
+  }
+
   //seed lineitems
   for(let i = 0; i < 10; i++){
     await LineItem.create({
       candyId: candy[Math.floor(Math.random() * candy.length)].id,
-      qty: Math.floor(Math.random() * 10),
+      qty: Math.ceil(Math.random() * 10),
       cartId: carts[Math.floor(Math.random() * carts.length)].id
     })
   }
