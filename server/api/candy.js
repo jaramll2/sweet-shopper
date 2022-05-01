@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.put('/:id', async (req, res, next) => {
-  try{
+  try{ 
     console.log(req.headers.authorization)
     const user = await User.findByToken(req.headers.authorization);
     
@@ -30,6 +30,23 @@ router.put('/:id', async (req, res, next) => {
     }
 
     
+  }
+  catch(err){
+    next(err);
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  try{
+    const user = await User.findByToken(req.headers.authorization)
+
+    //only admins can create new product
+    if(!user.admin)
+      res.sendStatus(401);
+
+    await Candy.create({name: req.body.name, price: req.body.price, weight: req.body.weight})
+    
+    res.sendStatus(201);
   }
   catch(err){
     next(err);
