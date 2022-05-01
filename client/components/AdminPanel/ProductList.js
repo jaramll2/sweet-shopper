@@ -47,6 +47,7 @@ class ProductList extends Component{
           })}
         </ul>
         }
+        <button>New Product</button>
       </div>
     )
   }

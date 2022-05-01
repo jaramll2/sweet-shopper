@@ -40,7 +40,7 @@ class ProductDetails extends Component{
     return(
       <Modal open={open}>
         <Box sx={modalStyle}>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="details-form">
             <input value={name} name="name" onChange={this.handleChange}></input>
             <input value={price} name="price" onChange={this.handleChange}></input>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
