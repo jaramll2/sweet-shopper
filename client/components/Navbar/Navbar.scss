@@ -55,8 +55,15 @@
     margin-left: 30px;
     justify-content: center;
 
+    //This selects the nav that we
+    //are currently on
+    .selected{
+      color: $black;
+    }
+
     a {
       margin-right: 30px;
+      color: $dark-gray;
     }
   }
 

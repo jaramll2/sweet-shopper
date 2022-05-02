@@ -47,9 +47,9 @@ class Navbar extends Component {
   };
 
   render() {
+    const { location: { pathname } } = this.props;
     const { navbarScrolled, isHomePage, isCandyPage } = this.state;
     const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""} ${isCandyPage ? "candy-page" : ""}`;
-
     return (
       <div className={navbarClass}>
         <MobileNavbar />
@@ -57,9 +57,9 @@ class Navbar extends Component {
           <Link to="/">SWEET SHOPPER</Link>
         </span>
         <span className="navbar-center">
-          <Link to="/">Home</Link>
-          <Link to="/candy">Shop</Link>
-          <Link to="/about">About</Link>
+          <Link to="/" className={pathname === '/' ? 'selected' : ''}>Home</Link>
+          <Link to="/candy" className={pathname === '/candy' ? 'selected' : ''}>Shop</Link>
+          <Link to="/about" className={pathname === '/about' ? 'selected' : ''}>About</Link>
         </span>
         <span className="navbar-right">
           <NavbarSearch />
