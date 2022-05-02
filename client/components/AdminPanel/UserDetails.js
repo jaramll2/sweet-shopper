@@ -1,6 +1,7 @@
 import { Box, Modal } from "@mui/material";
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 
 class UserDetails extends Component {
   constructor(props){
@@ -45,7 +46,7 @@ class UserDetails extends Component {
             <h5>{user.email}</h5>
             <h5>{user.firstName}</h5>
             <h5>{user.lastName}</h5>
-            <label><input type="checkbox" checked={isAdmin} onChange={this.handleChange}/>Admin</label>
+            <label><input type="checkbox" checked={isAdmin} onChange={this.handleChange} disabled={user.id === this.props.auth.id ? true : false}/>Admin</label>
             
             <button>Submit</button>
           </form>
@@ -67,4 +68,4 @@ const modalStyle = {
   boxShadow: 24,
   p: 4,
 };
-export default UserDetails;
+export default connect(state => state)(UserDetails);
