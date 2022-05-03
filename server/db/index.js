@@ -6,6 +6,10 @@ const User = require('./models/User');
 const Candy = require('./models/Candy')
 const LineItem = require('./models/LineItem');
 const Cart = require('./models/Cart');
+const Tag = require('./models/Tag');
+
+Candy.belongsToMany(Tag, {through: 'CandyTags'});
+Tag.belongsToMany(Candy, {through: 'CandyTags'});
 
 
 User.hasOne(Cart);
@@ -22,6 +26,7 @@ module.exports = {
     User,
     Candy,
     LineItem,
-    Cart
+    Cart,
+    Tag
   },
 }
