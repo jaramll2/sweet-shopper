@@ -9,6 +9,7 @@ import Select from "@mui/material/Select";
 
 import Footer from "../Footer";
 import CandyItem from "../CandyItem";
+import Candies from "../Candies/Candies";
 
 import "./CandyList.scss";
 
@@ -47,7 +48,9 @@ class CandyList extends React.Component {
     const { sortBy } = this.state;
     const { candies } = this.props;
     const containerCountMsg = `${candies.length} product${candies.length > 1 ? "s" : ""}`;
+    const sortedCandies = this.getSortedCandies();
 
+    console.log(sortedCandies);
     return (
       <div className="shop">
         <div className="shop-header">
@@ -82,11 +85,12 @@ class CandyList extends React.Component {
                 </FormControl>
               </span>
             </div>
-            <div className="container-contents">
+            {/* <div className="container-contents">
               {this.getSortedCandies().map((candy) => (
                 <CandyItem key={candy.id} candy={candy} />
               ))}
-            </div>
+            </div> */}
+            <Candies candies={sortedCandies}/>
           </div>
         </div>
         <div className="page"> 1 2 3 </div>
