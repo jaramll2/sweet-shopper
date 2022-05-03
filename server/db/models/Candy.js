@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
+const Tag = require('./Tag');
 
 const Candy = db.define('candy', {
   name: {
@@ -95,6 +96,11 @@ const randomName =
     price: Math.floor(Math.random() * 8) + Math.random(),
     weight: '16oz'
   })
+}
+
+Candy.addTag = async (tagId) => {
+  const tag = await Tag.findByPk(tagId);
+  this.addTag(tag, {through: 'CandyTags'})
 }
 
 module.exports = Candy ;

@@ -5,6 +5,7 @@ router.use('/users', require('./users'));
 router.use('/candy', require('./candy'));
 router.use('/cart', require('./cart'));
 router.use('/lineItem',require('./lineItem'));
+router.use('/tag', require('./tag'));
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
