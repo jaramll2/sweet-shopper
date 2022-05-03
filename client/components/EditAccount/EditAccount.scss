@@ -1,27 +1,10 @@
 @import "../../variables.scss";
 
-
-
-
 .edit-modal-body {
+  margin: 20px 0;
   text-align: center;
   font-size: 22px;
   color: $thunder;
-
-  div{
-    display:block;
-  }
-
-  h4 {
-    font-weight: 400;
-    margin: 20px 0;
-  }
-
-  // .login-error-msg {
-  //   color: red;
-  //   font-size: 14px;
-  //   margin-bottom: 20px;
-  // }
 
   .edit-modal-form {
     display: block;
@@ -30,12 +13,26 @@
     max-width: 600px;
     box-sizing: border-box;
 
+    div {
+      display: block;
+    }
+
+    .user-info {
+      margin: 20px;
+
+      .header-name {
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 0 10px 0;
+        font-size: 18px;
+      }
+    }
+
     input,
     button {
       display: block;
       width: 100%;
       font-size: 20px;
-      margin-bottom: 20px;
       border-radius: 8px;
       padding: 14px;
       outline: none;
@@ -45,24 +42,7 @@
     button {
       color: $white;
       background-color: $green;
+      margin-top: 30px;
     }
-
-    // &.error {
-    //   input {
-    //     border: 1px solid red;
-    //   }
-    // }
   }
-  // .check-member {
-  //   margin-bottom: 29.26px;
-  // }
-
-  // .signup-link {
-  //   cursor: pointer;
-  //   transition: 0.2s ease;
-    
-  //   &:hover {
-  //     color: $gray;
-  //   }
-  // }
 }

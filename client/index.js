@@ -6,6 +6,9 @@ import history from "./history";
 import store from "./store";
 import App from "./App";
 
+import "./index.scss";
+
+
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
