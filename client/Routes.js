@@ -31,7 +31,7 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div>
+      <div className="routes">
         <Route exact path="/" component={Home} />
         <Route path="/candy/:id" component={Candy} />
         <Route exact path="/candy" component={CandyList} />
