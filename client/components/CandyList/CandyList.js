@@ -67,11 +67,11 @@ class CandyList extends React.Component {
     const sortedCandies = this.getSortedCandies();
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
-    const currentOrders= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
+    const currentCandies= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
     console.log(this.props);
     console.log(sortedCandies);
-    console.log(currentOrders);
+    console.log(currentCandies);
     return (
       <div className="shop">
         <div className="shop-header">
@@ -111,7 +111,7 @@ class CandyList extends React.Component {
                 <CandyItem key={candy.id} candy={candy} />
               ))}
             </div> */}
-            <Candies candies={sortedCandies}/>
+            <Candies candies={currentCandies}/>
           </div>
         </div>
         <div className="page"> 1 2 3 </div>
