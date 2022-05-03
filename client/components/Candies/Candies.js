@@ -1,12 +1,8 @@
 import React from 'react'
 import CandyItem from "../CandyItem";
 
-const Candies = ({candies, loading})=>{
+const Candies = ({candies})=>{
 
-    // if(loading){
-    //     return;
-    // }
-    
     return (
         <div className="container-contents">
               {candies.map((candy) => (

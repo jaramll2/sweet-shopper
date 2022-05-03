@@ -14,12 +14,28 @@ import Candies from "../Candies/Candies";
 import "./CandyList.scss";
 
 class CandyList extends React.Component {
-  state = {
-    sortBy: "",
-  };
-
+  constructor(){
+    super();
+    this.state = {
+      sortBy: "",
+      loading: false,
+      currentPage: JSON.parse(window.localStorage.getItem('pageNumber')) || 1,
+      postsPerPage: 5
+    };
+    this.paginate = this.paginate.bind(this);
+  }
+  
   async componentDidMount() {
     await this.props.getCandy();
+  }
+
+  componentWillUnmount() {
+    window.localStorage.removeItem('pageNumber');
+  }
+
+  paginate (pageNum){
+    this.setState({currentPage: pageNum});
+    window.localStorage.setItem('pageNumber', JSON.stringify(pageNum));
   }
 
   handleSort = (event) => {
@@ -49,8 +65,13 @@ class CandyList extends React.Component {
     const { candies } = this.props;
     const containerCountMsg = `${candies.length} product${candies.length > 1 ? "s" : ""}`;
     const sortedCandies = this.getSortedCandies();
+    const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
+    const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
+    const currentOrders= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
+    console.log(this.props);
     console.log(sortedCandies);
+    console.log(currentOrders);
     return (
       <div className="shop">
         <div className="shop-header">
