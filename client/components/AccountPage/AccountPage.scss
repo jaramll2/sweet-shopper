@@ -1,9 +1,12 @@
 @import "../../variables.scss";
 
+.App {
+  background-color: rgb(244, 243, 243);
+}
+
 .account-page {
   height: 100%;
   color: $thunder;
-  background-color: rgb(244, 243, 243);
 
   h3 {
     font-size: xx-large;

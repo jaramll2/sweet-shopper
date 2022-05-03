@@ -1,6 +1,7 @@
 import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
 
+
 import { loadPurchased } from "../../store/cart";
 import Orders from "../Orders/Orders";
 import Pagination from "../Pagination/Pagination";

@@ -1,0 +1,45 @@
+@import "../../variables.scss";
+
+.orders {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 50px;
+
+  .order-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: large;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    thead tr {
+      background-color: $dark-gray;
+      color: #ffffff;
+      text-align: left;
+    }
+
+    th,
+    td {
+      padding: 12px 15px;
+      height: 30px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 2px solid $dark-gray;
+    }
+
+    tbody tr.active-row {
+      font-weight: bold;
+      color: #009879;
+    }
+  }
+}
