@@ -9,16 +9,34 @@ import Select from "@mui/material/Select";
 
 import Footer from "../Footer";
 import CandyItem from "../CandyItem";
+import Candies from "../Candies/Candies";
+import Pagination from "../Pagination/Pagination";
 
 import "./CandyList.scss";
 
 class CandyList extends React.Component {
-  state = {
-    sortBy: "",
-  };
-
+  constructor(){
+    super();
+    this.state = {
+      sortBy: "",
+      loading: false,
+      currentPage: JSON.parse(window.localStorage.getItem('pageNumber')) || 1,
+      postsPerPage: 6
+    };
+    this.paginate = this.paginate.bind(this);
+  }
+  
   async componentDidMount() {
     await this.props.getCandy();
+  }
+
+  componentWillUnmount() {
+    window.localStorage.removeItem('pageNumber');
+  }
+
+  paginate (pageNum){
+    this.setState({currentPage: pageNum});
+    window.localStorage.setItem('pageNumber', JSON.stringify(pageNum));
   }
 
   handleSort = (event) => {
@@ -47,7 +65,14 @@ class CandyList extends React.Component {
     const { sortBy } = this.state;
     const { candies } = this.props;
     const containerCountMsg = `${candies.length} product${candies.length > 1 ? "s" : ""}`;
+    const sortedCandies = this.getSortedCandies();
+    const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
+    const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
+    const currentCandies= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
+    console.log(this.props);
+    console.log(sortedCandies);
+    console.log(currentCandies);
     return (
       <div className="shop">
         <div className="shop-header">
@@ -82,14 +107,17 @@ class CandyList extends React.Component {
                 </FormControl>
               </span>
             </div>
-            <div className="container-contents">
+            {/* <div className="container-contents">
               {this.getSortedCandies().map((candy) => (
                 <CandyItem key={candy.id} candy={candy} />
               ))}
-            </div>
+            </div> */}
+            <Candies candies={currentCandies}/>
           </div>
         </div>
-        <div className="page"> 1 2 3 </div>
+        <div className="page"> 
+          <Pagination postsPerPage={this.state.postsPerPage} totalPosts = {this.props.candies.length} paginate={this.paginate}/>
+        </div>
         <Footer />
       </div>
     );

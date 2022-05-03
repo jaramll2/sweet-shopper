@@ -17,14 +17,11 @@ class Confirmation extends Component{
         if(!this.props){
             return;
         }
+        
         this.props.completePurchase(this.props.auth,this.props.guestCart);
     }
     
     render(){
-        //TODO: 
-        //store cart in order history eventually
-        //go back and ensure that if there are no line items (empty cart)
-        //you cannot complete purcahse, thus cannot get to this page
         const {cart,username} = this.state;
 
         if(!cart){
