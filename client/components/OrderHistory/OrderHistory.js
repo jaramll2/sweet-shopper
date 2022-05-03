@@ -22,6 +22,10 @@ class OrderHistory extends Component{
         this.props.loadPurchased();
     }
 
+    componentWillUnmount() {
+        window.localStorage.removeItem('pageNumber');
+      }
+
     componentDidUpdate(prevProps){
         if(this.props !== prevProps){
             this.setState({loading:true});
