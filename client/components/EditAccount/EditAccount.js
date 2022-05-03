@@ -1,6 +1,8 @@
-import { Box, Modal } from "@mui/material";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
+import { Box, Modal } from "@mui/material";
+
 import { editUserInfo } from "../../store/auth";
 
 import "./EditAccount.scss";
@@ -29,14 +31,14 @@ class EditAccount extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.editUserInfo(this.state);
-    this.props.doneUpdating();
+    this.props.toggleModal();
   }
 
   render() {
     const { username, email, firstName, lastName, password } = this.state;
-    const { open, doneUpdating } = this.props;
+    const { open, toggleModal } = this.props;
     return (
-      <Modal open={open} onClose={doneUpdating}>
+      <Modal open={open} onClose={toggleModal}>
         <Box sx={modalStyle}>
           <div className="edit-modal-body">
             <h2>Edit User Information</h2>
@@ -57,8 +59,8 @@ class EditAccount extends Component {
                 <div className="header-name">Last Name</div>
                 <input value={lastName} name="lastName" onChange={this.handleChange} />
               </div>
-              <div className="back-button">
-                <button type="button" onClick={this.props.doneUpdating}>Back</button>
+              <div>
+                <button type="button" onClick={this.props.toggleModal}>Back</button>
               </div>
               <div>
                 <button>Submit Changes</button>
