@@ -10,6 +10,7 @@ import Select from "@mui/material/Select";
 import Footer from "../Footer";
 import CandyItem from "../CandyItem";
 import Candies from "../Candies/Candies";
+import Pagination from "../Pagination/Pagination";
 
 import "./CandyList.scss";
 
@@ -20,7 +21,7 @@ class CandyList extends React.Component {
       sortBy: "",
       loading: false,
       currentPage: JSON.parse(window.localStorage.getItem('pageNumber')) || 1,
-      postsPerPage: 5
+      postsPerPage: 6
     };
     this.paginate = this.paginate.bind(this);
   }
@@ -114,7 +115,9 @@ class CandyList extends React.Component {
             <Candies candies={currentCandies}/>
           </div>
         </div>
-        <div className="page"> 1 2 3 </div>
+        <div className="page"> 
+          <Pagination postsPerPage={this.state.postsPerPage} totalPosts = {this.props.candies.length} paginate={this.paginate}/>
+        </div>
         <Footer />
       </div>
     );
