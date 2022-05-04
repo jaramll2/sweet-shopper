@@ -6,9 +6,10 @@ import auth from './auth'
 import candies from './candy';
 import orderHistory from './cart';
 import guestCart from './guestCart';
-import displayCart from './displayCart'
+import displayCart from './displayCart';
+import tags from './tags'
 
-const reducer = combineReducers({ auth, candies, orderHistory, guestCart, displayCart});
+const reducer = combineReducers({ auth, candies, orderHistory, guestCart, displayCart, tags});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
