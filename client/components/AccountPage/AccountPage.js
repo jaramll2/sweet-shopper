@@ -36,6 +36,10 @@ class AccountPage extends Component {
     const { username, firstName, lastName, email } = this.props.auth;
     const { accountModalOpen, shippingModalOpen } = this.state;
     
+    if(!window.localStorage.token){
+      this.props.history.push('/');
+    }
+
     if(!firstName){
       return;
     }
