@@ -39,7 +39,6 @@ class Confirmation extends Component{
             return prev + price;
         },0);
 
-        console.log(lines);
 
         return(
             <div>
