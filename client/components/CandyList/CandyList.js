@@ -64,7 +64,7 @@ class CandyList extends React.Component {
   };
 
   render() {
-    const { sortBy } = this.state;
+    const { sortBy, currentPage } = this.state;
     const { candies, tags } = this.props;
     const containerCountMsg = `${candies.length} product${candies.length > 1 ? "s" : ""}`;
     const sortedCandies = this.getSortedCandies();
@@ -117,28 +117,19 @@ class CandyList extends React.Component {
             <Candies candies={currentCandies}/>
           </div>
         </div>
-        <div className="page"> 
-          <Pagination postsPerPage={this.state.postsPerPage} totalPosts = {this.props.candies.length} paginate={this.paginate}/>
+        <div className="pagination"> 
+          <Pagination 
+            postsPerPage={this.state.postsPerPage} 
+            totalPosts = {this.props.candies.length} 
+            paginate={this.paginate}
+            currentPage={currentPage}
+          />
         </div>
         <Footer />
       </div>
     );
   }
 }
-
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  background: "#ffffff",
-  transform: "translate(-50%, -50%)",
-  minWidth: "40%",
-  maxWidth: "80%",
-  border: "none",
-  outline: "none",
-  boxShadow: 24,
-  p: 4,
-};
 
 const mapStateToProps = (state, {match}) => {
   // const filter = JSON.parse(match.params.filter);
