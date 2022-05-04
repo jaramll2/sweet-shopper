@@ -72,6 +72,9 @@ class CandyList extends React.Component {
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
     const currentCandies= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
+    // this.props.history.push(JSON.stringify(['chocolate']));
+    console.log(this.props);
+
     return (
       <div className="shop">
         <div className="shop-header">
@@ -138,7 +141,9 @@ const modalStyle = {
   p: 4,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, {match}) => {
+  const filter = JSON.parse(match.params.filter);
+  state.filter = filter;
   return state;
 };
 
