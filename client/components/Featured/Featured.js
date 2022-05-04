@@ -15,7 +15,6 @@ class Featured extends React.Component {
     const featured = [];
     while (featured.length < 3) {
       const random = Math.floor(Math.random() * candies.length);
-      console.log("asdf");
       if (!(candies[random] in featured)) {
         featured.push(candies[random]);
       }
