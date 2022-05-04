@@ -2,10 +2,16 @@
 
 .featured {
   display: flex;
-  background: $gray;
-  height: 300px;
+  background: #F5E7C1;
+  height: 500px;
   justify-content: center;
   align-items: center;
   font-size: 42px;
   margin-bottom: 50px;
+
+  .featured-items-container {
+    height: 300px;
+    width: 600px;
+    border: solid black 0.2px;
+  }
 }

@@ -18,12 +18,13 @@ class Featured extends React.Component {
     }
     return (
       <div className="featured">
-        Featured Sweets
-        <ul className="featured-items">
-          <li><Link to={`candy/${featured[0]?.id}`}>{featured[0]?.name}</Link></li>
-          <li><Link to={`candy/${featured[1]?.id}`}>{featured[1]?.name}</Link></li>
-          <li><Link to={`candy/${featured[0]?.id}`}>{featured[2]?.name}</Link></li>
-        </ul>
+        <div className="featured-items-container">
+          <ul className="featured-items">
+            <li><Link to={`candy/${featured[0]?.id}`}>{featured[0]?.name}</Link></li>
+            <li><Link to={`candy/${featured[1]?.id}`}>{featured[1]?.name}</Link></li>
+            <li><Link to={`candy/${featured[0]?.id}`}>{featured[2]?.name}</Link></li>
+          </ul>
+        </div>
       </div>
     );
   }
