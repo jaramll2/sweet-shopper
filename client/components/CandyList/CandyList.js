@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getCandy } from "../../store/candy";
+import { getTags } from "../../store/tags";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -28,6 +29,7 @@ class CandyList extends React.Component {
   
   async componentDidMount() {
     await this.props.getCandy();
+    await this.props.getTags();
   }
 
   componentWillUnmount() {
@@ -63,16 +65,13 @@ class CandyList extends React.Component {
 
   render() {
     const { sortBy } = this.state;
-    const { candies } = this.props;
+    const { candies, tags } = this.props;
     const containerCountMsg = `${candies.length} product${candies.length > 1 ? "s" : ""}`;
     const sortedCandies = this.getSortedCandies();
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
     const currentCandies= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
-    console.log(this.props);
-    console.log(sortedCandies);
-    console.log(currentCandies);
     return (
       <div className="shop">
         <div className="shop-header">
@@ -81,10 +80,11 @@ class CandyList extends React.Component {
         </div>
         <div className="shop-body">
           <div className="category-container">
-            <div>Candy</div>
-            <div>Caramel</div>
-            <div>Chocolate</div>
-            <div>Gummy</div>
+            {tags.map(tag => {
+              return(
+                <div key={tag.id}>{tag.name}</div>
+              )
+            })}
           </div>
           <div className="item-container">
             <div className="container-header">
@@ -147,6 +147,9 @@ const mapDispatchToProps = (dispatch) => {
     getCandy: async () => {
       return dispatch(getCandy());
     },
+    getTags: function(){
+      return dispatch(getTags());
+    }
   };
 };
 
