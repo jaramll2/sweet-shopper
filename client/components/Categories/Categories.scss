@@ -1,16 +1,46 @@
 @import '../../variables.scss';
 
-.categories {
+.categories-container {
   display: flex;
-  flex-flow: row wrap;
-  margin: 0 30px;
-  justify-content: space-around;
-  margin: 50px 0;
+  justify-content: center;
 
-  .category {
-    width: 200px;
-    height: 200px;
-    margin: 30px;
-    background: $soft-green;
+  .categories {
+    display: grid;
+    margin: 0 30px;
+    justify-content: center;
+    margin: 50px 0;
+  
+    .category {
+      width: 200px;
+      height: 200px;
+      margin: 30px;
+      background: $soft-green;
+      
+    }
+
+    .pink-square {
+      background-color: #F3E5E4;;
+    }
+
+    .green-square {
+      background-color: #DADBA5;
+    }
+
+    .dark-orange-square {
+      background-color: #EAA883;
+    }
+
+    .beige-square {
+      background-color: #FAF2E7;
+    }
+
+    .cream-square {
+      background-color: #F7CEA1;
+    }
+
+    .orange-square {
+      background-color: #E7A730;
+    }
   }
+  
 }
