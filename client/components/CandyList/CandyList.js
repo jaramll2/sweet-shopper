@@ -70,9 +70,6 @@ class CandyList extends React.Component {
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
     const currentCandies= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
-    console.log(this.props);
-    console.log(sortedCandies);
-    console.log(currentCandies);
     return (
       <div className="shop">
         <div className="shop-header">

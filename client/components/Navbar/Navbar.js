@@ -63,7 +63,7 @@ class Navbar extends Component {
         </span>
         <span className="navbar-right">
           <NavbarSearch />
-          <AccountMenu />
+          <AccountMenu history={this.props.history} />
           <Cart />
         </span>
       </div>
