@@ -1,8 +1,8 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 .featured {
   display: flex;
-  background: #F5E7C1;
+  background: #f5e7c1;
   height: 500px;
   justify-content: center;
   align-items: center;
@@ -13,5 +13,16 @@
     height: 300px;
     width: 600px;
     border: solid black 0.2px;
+
+    .slider-container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      .featured-item {
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 }
