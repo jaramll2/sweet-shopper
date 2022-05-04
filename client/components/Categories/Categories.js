@@ -8,7 +8,7 @@ export default () => {
       <div className="categories-container">
         <div className="categories">
           <div className="category pink-square">
-            {/* <img src="./candy-img.jpeg" /> */}
+            <img className="img-square" src="./candy-img.jpeg" />
           </div>
           <div className="category green-square" />
         </div>      
