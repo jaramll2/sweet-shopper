@@ -25,6 +25,7 @@ class CandyList extends React.Component {
       postsPerPage: 6
     };
     this.paginate = this.paginate.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
   }
   
   async componentDidMount() {
@@ -63,17 +64,45 @@ class CandyList extends React.Component {
     return candies;
   };
 
+  //takes a string and adds it to the url if it's not already there,
+  //or removes the filter if it is already there
+  toggleFilter(filter){
+    if(!this.props.filter){
+      this.props.history.push(`/candy/filter/${JSON.stringify([filter])}`)
+    }
+    else{
+      if(this.props.filter.includes(filter)){
+        this.props.history.push(`/candy/filter/${JSON.stringify([...this.props.filter.filter(filt => filt !== filter)])}`)
+      }
+      else{
+        this.props.history.push(`/candy/filter/${JSON.stringify([...this.props.filter, filter])}`)
+      }
+    }
+
+  }
+
   render() {
+    const { candies, tags, filter, history } = this.props;
     const { sortBy, currentPage } = this.state;
-    const { candies, tags } = this.props;
     const containerCountMsg = `${candies.length} product${candies.length > 1 ? "s" : ""}`;
     const sortedCandies = this.getSortedCandies();
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
-    const currentCandies= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
+    let currentCandies= sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
 
+    //filter candies based on the array of filters that are on the url
+    if(filter){
+      currentCandies = candies.filter(candy => {
+        let candyIsInFilter;
+        candy.tags.forEach((tag) => {
+          candyIsInFilter = filter.every((filt) => tag.name === filt)
+        })
+        return candyIsInFilter
+      })
+    }
 
+    console.log(this.props);
     return (
       <div className="shop">
         <div className="shop-header">
@@ -84,7 +113,12 @@ class CandyList extends React.Component {
           <div className="category-container">
             {tags.map(tag => {
               return(
-                <div key={tag.id}>{tag.name}</div>
+                <div 
+                className={`category ${filter.includes(tag.name) ? `selected` : null}`}
+                key={tag.id} 
+                onClick={() => this.toggleFilter(tag.name)}>
+                  {tag.name}
+                </div>
               )
             })}
           </div>
@@ -132,9 +166,15 @@ class CandyList extends React.Component {
 }
 
 const mapStateToProps = (state, {match}) => {
-  // const filter = JSON.parse(match.params.filter);
-  // state.filter = filter;
-  return state;
+  let filter;
+  if(match.params.filter){
+    filter = JSON.parse(match.params?.filter);
+  }
+
+  return {
+    filter,
+    ...state
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
