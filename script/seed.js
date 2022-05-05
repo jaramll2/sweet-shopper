@@ -79,7 +79,10 @@ async function seed() {
 
   //add one random tag to each candy
   for(let i = 0; i < candy.length; i++){
-    await candy[i].addTag(Math.floor(Math.random() * tagNames.length));
+    for(let j = 0 ; j < 2; j++){
+      await candy[i].addTag(Math.floor(Math.random() * tagNames.length));
+    }
+
   }
 
   return {

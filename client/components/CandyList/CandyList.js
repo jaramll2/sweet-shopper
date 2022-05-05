@@ -94,15 +94,17 @@ class CandyList extends React.Component {
     //filter candies based on the array of filters that are on the url
     if(filter){
       currentCandies = candies.filter(candy => {
-        let candyIsInFilter;
-        candy.tags.forEach((tag) => {
-          candyIsInFilter = filter.every((filt) => tag.name === filt)
+        return filter.every((filt) => {
+          let hasTag = false;
+          candy.tags.forEach(tag => {
+            if(tag.name === filt)
+            hasTag = true;
+          })
+          return hasTag;
         })
-        return candyIsInFilter
       })
     }
-
-    console.log(this.props);
+    
     return (
       <div className="shop">
         <div className="shop-header">
@@ -114,7 +116,7 @@ class CandyList extends React.Component {
             {tags.map(tag => {
               return(
                 <div 
-                className={`category ${filter.includes(tag.name) ? `selected` : null}`}
+                className={`category ${filter?.includes(tag.name) ? `selected` : null}`}
                 key={tag.id} 
                 onClick={() => this.toggleFilter(tag.name)}>
                   {tag.name}
