@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Box, Modal } from "@mui/material";
 
 import { editUserInfo } from "../../store/auth";
+import { modalStyle } from "../../utils";
 
 import "./EditAccount.scss";
 
@@ -73,19 +74,6 @@ class EditAccount extends Component {
   }
 }
 
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  background: "#ffffff",
-  transform: "translate(-50%, -50%)",
-  minWidth: "40%",
-  maxWidth: "80%",
-  border: "none",
-  outline: "none",
-  boxShadow: 24,
-  p: 4,
-};
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -1,0 +1,10 @@
+.pagination-container {
+
+  .num {
+    cursor: pointer;
+
+    &.active {
+      text-decoration: underline;
+    }
+  }
+}
