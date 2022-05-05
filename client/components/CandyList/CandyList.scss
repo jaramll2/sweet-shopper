@@ -32,11 +32,16 @@
       padding: 86px 30px;
       width: 200px;
 
-      div {
+      .category {
+        color: $dark-gray;
         margin-bottom: 30px;
+      }
+      .selected{ 
+        color: $black;
       }
     }
   }
+
 
   .item-container {
     display: inline-block;
