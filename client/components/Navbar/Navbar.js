@@ -54,7 +54,13 @@ class Navbar extends Component {
       <div className={navbarClass}>
         <MobileNavbar />
         <span className="navbar-left">
-          <Link to="/">SWEET SHOPPER</Link>
+          <Link to="/" className="shop-name-container">
+            <span className="sweet-shopper">
+              <span>SWEET</span>
+              <span>SHOPPER</span>
+            </span>
+            <img src="./candy.png" />
+          </Link>
         </span>
         <span className="navbar-center">
           <Link to="/" className={pathname === '/' ? 'selected' : ''}>Home</Link>
