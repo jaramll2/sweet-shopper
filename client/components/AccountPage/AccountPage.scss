@@ -1,100 +1,105 @@
 @import "../../variables.scss";
 
-.account-page {
-  height: 100%;
-  color: $thunder;
+.App {
   background-color: rgb(244, 243, 243);
 
-  h3 {
-    font-size: xx-large;
-    margin: 30px;
-  }
-}
+  .account-page {
+    height: 100%;
+    color: $thunder;
+    background-color: rgb(244, 243, 243);
 
-.account-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-
-  .paper-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-  }
-}
-
-.profile-container {
-  margin: 30px 50px;
-  color: $thunder;
-
-  .profile{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  div {
-    font-size: large;
-    padding-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .title {
-      color: $dark-gray;
+    h3 {
+      font-size: xx-large;
+      margin: 30px;
     }
   }
-}
 
-
-.shopping-address-container {
-  margin: 30px 50px;
-  color: $thunder;
-
-  .shopping-address {
+  .account-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    justify-content: center;
+    flex-direction: column;
 
-  div {
-    font-size: large;
-    padding-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .title {
-      color: $dark-gray;
+    .paper-container {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
     }
   }
-}
 
-.payment-methods-container {
-  margin: 30px 50px;
-  color: $thunder;
+  .profile-container {
+    margin: 30px 50px;
+    color: $thunder;
 
-  .payment-methods {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    .profile{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  div {
-    font-size: large;
-    padding-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    div {
+      font-size: large;
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    .title {
-      color: $dark-gray;
+      .title {
+        color: $dark-gray;
+      }
     }
   }
-}
 
-.order-history-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+
+  .shopping-address-container {
+    margin: 30px 50px;
+    color: $thunder;
+
+    .shopping-address {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    div {
+      font-size: large;
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        color: $dark-gray;
+      }
+    }
+  }
+
+  .payment-methods-container {
+    margin: 30px 50px;
+    color: $thunder;
+
+    .payment-methods {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    div {
+      font-size: large;
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        color: $dark-gray;
+      }
+    }
+  }
+
+  .order-history-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+  }
 }
