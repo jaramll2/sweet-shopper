@@ -3,19 +3,18 @@
 .orders {
   display: flex;
   justify-content: flex-start;
-  margin-left: 50px;
 
   .order-table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 30px;
     font-size: large;
     font-family: sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
     thead tr {
       background-color: $dark-gray;
-      color: #ffffff;
+      color: $white;
       text-align: left;
     }
 
@@ -27,19 +26,11 @@
 
     tbody tr {
       border-bottom: 1px solid #dddddd;
-    }
-
-    tbody tr:nth-of-type(even) {
-      background-color: #f3f3f3;
+      background-color: $white;
     }
 
     tbody tr:last-of-type {
       border-bottom: 2px solid $dark-gray;
-    }
-
-    tbody tr.active-row {
-      font-weight: bold;
-      color: #009879;
     }
   }
 }
