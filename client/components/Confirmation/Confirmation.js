@@ -17,25 +17,70 @@ class Confirmation extends Component{
             return;
         }
 
-        
-        if(window.localStorage.token && !this.props.auth.cart || !window.localStorage.token && !this.props.guestCart){
-            return;
+        if(window.localStorage.token){
+            if(!this.props.auth.cart){
+                return;
+            }
+
+            if(this.props.auth.cart.lineitems){
+                if(this.state.username ===''){
+                    const stateProps = {
+                        cart: !this.props? {} : this.props.auth.cart,
+                        username: !this.props ? '' : `, ${this.props.auth.username}!`
+                    }
+            
+                    localStorage.setItem("state", JSON.stringify(stateProps));
+                    this.setState(JSON.parse(localStorage.getItem("state")));
+                }
+                
+                this.props.completePurchase(this.props.auth, this.props.guestCart);
+                //window.location.reload(true);
+            }
+
+        }
+        else{
+            if(!this.props.guestCart){
+                return;
+            }
+
+            if(this.props.guestCart.lineitems){
+                if(this.state.username ===''){
+                    const stateProps = {
+                        cart: !this.props? {} : this.props.guestCart,
+                        username: !this.props ? '' : '!'
+                    }
+            
+                    localStorage.setItem("state", JSON.stringify(stateProps));
+                    this.setState(JSON.parse(localStorage.getItem("state")));
+                }
+                
+                this.props.completePurchase(this.props.auth, this.props.guestCart);
+            }
         }
 
-        if(window.localStorage.token && this.props.auth.cart.lineitems || !window.localStorage.token && this.props.guestCart.lineitems){
+
+
+
+
+        // if(window.localStorage.token && !this.props.auth.cart || !window.localStorage.token && !this.props.guestCart){
+        //     return;
+        // }
+
+        // if(window.localStorage.token && this.props.auth.cart.lineitems || !window.localStorage.token && this.props.guestCart.lineitems){
  
-            if(this.state.username ===''){
-                const stateProps = {
-                    cart: !this.props? {} : (!window.localStorage.token ? this.props.guestCart : this.props.auth.cart),
-                    username: !this.props ? '' : (!window.localStorage.token ? '!' : `, ${this.props.auth.username}!`)
-                }
+        //     if(this.state.username ===''){
+        //         const stateProps = {
+        //             cart: !this.props? {} : (!window.localStorage.token ? this.props.guestCart : this.props.auth.cart),
+        //             username: !this.props ? '' : (!window.localStorage.token ? '!' : `, ${this.props.auth.username}!`)
+        //         }
         
-                localStorage.setItem("state", JSON.stringify(stateProps));
-                this.setState(JSON.parse(localStorage.getItem("state")));
-            }
+        //         localStorage.setItem("state", JSON.stringify(stateProps));
+        //         this.setState(JSON.parse(localStorage.getItem("state")));
+        //     }
             
-            this.props.completePurchase(this.props.auth, this.props.guestCart);
-        }
+        //     this.props.completePurchase(this.props.auth, this.props.guestCart);
+        //     //window.location.reload(true);
+        // }
     }
 
     componentWillUnmount(){

@@ -17,15 +17,8 @@ class Cart extends Component {
   toggleCart = () => {
     this.props.toggleCart();
   };
-
-  componentDidUpdate(prevProps){
-    if(prevProps !==this.props){
-      console.log('IM CRYING');
-    }
-  }
   
   render() {
-    console.log('in cart comp render');
     const cartOpen = this.props.displayCart;
     const items = this.props.auth.cart?.lineitems || this.props.guestCart.lineitems || [];
     const totalPrice =
@@ -38,10 +31,10 @@ class Cart extends Component {
     if(!cart){
       return;
     }
-    console.log(cart);
+
     return (
       <div className="navbar-cart">
-        {totalCount > 0 && <span className="cart-count-icon">{cart.price ? 0 : totalCount}</span>}
+        {totalCount > 0 && <span className="cart-count-icon">{totalCount}</span>}
         <ShoppingCartOutlinedIcon
           fontSize="large"
           className="navbar-icon shopping-cart"
