@@ -108,8 +108,8 @@ class CandyList extends React.Component {
     return (
       <div className="shop">
         <div className="shop-header">
-          <img src="./candy-image.jpeg" />
-          <div className="shop-name">Category</div>
+          <img src="/candy-image.jpeg" />
+          <div className="shop-name">All Candies</div>
         </div>
         <div className="shop-body">
           <div className="category-container">

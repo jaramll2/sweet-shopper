@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
-import './AdminPanel.scss'
-import UserDetails from "./UserDetails";
+import UserDetails from "../AdminPanel/UserDetails";
+
+import "./UserList.scss";
 
 class UserList extends Component{
   constructor(){
@@ -54,12 +55,14 @@ class UserList extends Component{
     return(
       <div className="admin-items">
         {showUserDetails ? <UserDetails open={showUserDetails} done={this.closeUserInfo} user={selectedUser}/> :
-        <ul className="unordered-list">
-            {users.map(user => {
-              return <li key={user.id} className="user" onClick={() => this.displayUserInfo(user.id)}>{user.username}</li>
-            })}
-        </ul> 
-  }
+          <ul className="unordered-list">
+              {users.map(user => {
+                return (
+                  <li key={user.id} className="user" onClick={() => this.displayUserInfo(user.id)}>{user.username}</li>
+                )
+              })}
+          </ul> 
+        }
       </div>
     )
   }
