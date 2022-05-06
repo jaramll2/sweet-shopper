@@ -32,9 +32,12 @@
       padding: 86px 30px;
       width: 200px;
 
+
       .category {
+        cursor: pointer;
         color: $dark-gray;
         margin-bottom: 30px;
+        
       }
       .selected{ 
         color: $black;

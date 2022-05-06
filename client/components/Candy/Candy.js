@@ -50,7 +50,6 @@ class Candy extends Component {
 
   render() {
     const { qty, candy } = this.state;
-
     return (
       <div className="candy-body">
         <div className="candy-img">
@@ -61,6 +60,9 @@ class Candy extends Component {
             {candy.name}
             <span className="candy-weight">({candy.weight})</span>
           </h2>
+          <h5 className="tags">
+            {candy.tags?.map((tag) => tag.name).join(', ')}
+          </h5>
           <div className="candy-price">${candy.price}</div>
           <div className="add-to-cart">
             <QtyController

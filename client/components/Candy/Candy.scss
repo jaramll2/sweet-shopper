@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .candy-body {
   display: flex;
   height: 100vh;
@@ -22,6 +24,12 @@
     background-color: #f9f2e8;
     box-sizing: border-box;
     font-size: 22px;
+
+    .tags{
+      font-weight:normal;
+      color: $heavier-green;
+      font-style: italic;
+    }
 
     .candy-weight {
       font-size: 22px;
