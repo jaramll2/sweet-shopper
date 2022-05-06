@@ -6,6 +6,7 @@ import { Box, Modal } from "@mui/material";
 
 import { modalStyle } from "../../utils";
 
+import "./UserDetails.scss";
 
 class UserDetails extends Component {
   constructor(props){

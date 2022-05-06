@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
-import UserDetails from "../AdminPanel/UserDetails";
+import UserDetails from "../UserDetails";
 
 import "./UserList.scss";
 
