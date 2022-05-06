@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { completePurchase, getUserCart } from "../../store/cart"
+import { completePurchase } from "../../store/cart"
 import OrderSummary from "../OrderSummary/OrderSummary";
 
 class Confirmation extends Component{
@@ -17,7 +17,8 @@ class Confirmation extends Component{
             return;
         }
 
-        if(!this.props.auth.cart && !this.props.guestCart){
+        
+        if(window.localStorage.token && !this.props.auth.cart || !window.localStorage.token && !this.props.guestCart){
             return;
         }
 
@@ -72,9 +73,6 @@ const mapDispatchToProps = (dispatch)  => {
     return{
         completePurchase: (auth,cart)=>{
             dispatch(completePurchase(auth,cart));
-        },
-        getUserCart: ()=>{
-            dispatch(getUserCart());
         }
     }
   };
