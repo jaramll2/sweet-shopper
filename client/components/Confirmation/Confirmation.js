@@ -25,8 +25,8 @@ class Confirmation extends Component{
             if(this.props.auth.cart.lineitems){
                 if(this.state.username ===''){
                     const stateProps = {
-                        cart: !this.props? {} : this.props.auth.cart,
-                        username: !this.props ? '' : `, ${this.props.auth.username}!`
+                        cart: this.props.auth.cart,
+                        username: `, ${this.props.auth.username}!`
                     }
             
                     localStorage.setItem("state", JSON.stringify(stateProps));
@@ -34,7 +34,7 @@ class Confirmation extends Component{
                 }
                 
                 this.props.completePurchase(this.props.auth, this.props.guestCart);
-                //window.location.reload(true);
+               // window.location.reload(true);
             }
 
         }
@@ -46,8 +46,8 @@ class Confirmation extends Component{
             if(this.props.guestCart.lineitems){
                 if(this.state.username ===''){
                     const stateProps = {
-                        cart: !this.props? {} : this.props.guestCart,
-                        username: !this.props ? '' : '!'
+                        cart: this.props.guestCart,
+                        username:'!'
                     }
             
                     localStorage.setItem("state", JSON.stringify(stateProps));
