@@ -16,7 +16,6 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try{ 
-    console.log(req.headers.authorization)
     const user = await User.findByToken(req.headers.authorization);
     
     //only admins can modify product info

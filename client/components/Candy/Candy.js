@@ -50,7 +50,6 @@ class Candy extends Component {
 
   render() {
     const { qty, candy } = this.state;
-    console.log(candy.tags?.map((tag) => tag.name))
     return (
       <div className="candy-body">
         <div className="candy-img">

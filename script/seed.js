@@ -30,7 +30,7 @@ async function seed() {
 
   //seed candy
   const candy = [];
-  for(let i = 0; i < 10; i++){
+  for(let i = 0; i < 100; i++){
     candy.push(await Candy.generateRandom());
   }
 
@@ -70,16 +70,16 @@ async function seed() {
   }
 
   //create some tags
-  const tagNames = ['Chocolate', 'Fruit', 'Hard Candy', 'Caramel', 'Lactose-Free']
+  const tagNames = ['Chocolate', 'Fruit', 'Hard Candy', 'Caramel', 'Lactose-Free', 'Gummy', 'Licorice', 'Sour', 'Lollipop', 'Chewing Gum']
   const tags = []
   for(let i = 0; i < tagNames.length; i++){
     tags.push(await Tag.create({name: tagNames[i]}));
   }
 
 
-  //add one random tag to each candy
+  //add three random tag to each candy
   for(let i = 0; i < candy.length; i++){
-    for(let j = 0 ; j < 2; j++){
+    for(let j = 0 ; j < 3; j++){
       await candy[i].addTag(Math.floor(Math.random() * tagNames.length));
     }
 
