@@ -103,7 +103,7 @@ export const completePurchase = (auth,guestCart)=>{
         const newCart = (await axios.post('/api/cart/', null, {headers: {authorization: window.localStorage.token}})).data;
 
         auth.cart = newCart;
-
+        
         return dispatch({
             type: "SET_AUTH",
             auth

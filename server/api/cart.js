@@ -91,7 +91,7 @@ router.post('/', async (req, res, next) => {
         }]
       }]
     });
-
+    cart.dataValues.lineitems = [];
     res.send(cart);
   }
   catch(err){
