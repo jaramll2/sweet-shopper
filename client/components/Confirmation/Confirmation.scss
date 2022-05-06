@@ -1,0 +1,18 @@
+
+.confirmation {
+  display: flex;
+  justify-content: center;
+  margin: 100px;
+  padding: 90px 0;
+  border-radius: 10px;
+
+  .confirmation-header {
+    font-size: xx-large;
+    font-weight: bolder;
+    padding: 40px 0;
+  }
+
+  .confirmation-body {
+    padding-top: 40px;
+  }
+}
