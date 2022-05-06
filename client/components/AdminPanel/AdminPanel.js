@@ -1,6 +1,6 @@
 import React, { Component }  from "react";
-import ProductList from "./ProductList";
-import UserList from "../UserList/UserList";
+import ProductList from "../ProductList";
+import UserList from "../UserList";
 
 import './AdminPanel.scss'
 

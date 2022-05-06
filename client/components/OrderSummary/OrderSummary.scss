@@ -1,0 +1,35 @@
+.order-summary {
+
+  h3 {
+    font-size: x-large;
+  }
+
+  .order-summary-container {
+    display: flex;
+    padding-bottom: 40px;
+    flex-direction: column;
+
+    .order-details {
+      padding-bottom: 30px;
+      display: flex;
+
+      .image-container {
+        border: solid black 1px;
+        width: 130px;
+        height: 130px;
+      }
+
+      .item-details {
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+      }
+    }
+  }
+
+  .total {
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

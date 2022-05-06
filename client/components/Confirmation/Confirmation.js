@@ -1,8 +1,13 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
+
+import Paper from "@mui/material/Paper";
+
 import { completePurchase } from "../../store/cart"
 import OrderSummary from "../OrderSummary/OrderSummary";
+
+import "./Confirmation.scss";
 
 class Confirmation extends Component{
     constructor(props){
@@ -41,10 +46,16 @@ class Confirmation extends Component{
 
 
         return(
-            <div>
-                <h1>Thank you for your purchase{ username }</h1>
+          <Paper elevation={3} className="confirmation">
+            <div className="confirmation-container">
+              <div className="confirmation-header">
+                Thank you for your purchase{ username }
+              </div>
+              <div className="confirmation-body">
                 <OrderSummary cart = {cart} total = {total}/>
+              </div>
             </div>
+          </Paper>
         )
     }
 }
