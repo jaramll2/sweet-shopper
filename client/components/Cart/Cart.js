@@ -13,11 +13,13 @@ import { toggleCart } from "../../store/displayCart";
 import { Paper } from "@mui/material";
 
 class Cart extends Component {
+
   toggleCart = () => {
     this.props.toggleCart();
   };
 
   render() {
+    console.log('in cart comp render');
     const cartOpen = this.props.displayCart;
     const items = this.props.auth.cart?.lineitems || this.props.guestCart.lineitems || [];
     const totalPrice =
@@ -30,7 +32,7 @@ class Cart extends Component {
     if(!cart){
       return;
     }
-
+    
     return (
       <div className="navbar-cart">
         {totalCount > 0 && <span className="cart-count-icon">{totalCount}</span>}
@@ -53,7 +55,12 @@ class Cart extends Component {
                   <span className="cart-subtotal-label">{subtotalMessage}</span>
                   <span className="cart-subtotal-value">${totalPrice.toFixed(2)}</span>
                 </div>
-                <Link to="/confirmation">
+                <Link to = {{pathname: "/confirmation",
+                        state: {
+                          auth: this.props.auth,
+                          guestCart: this.props.guestCart
+                        },
+                      }}>
                   <button disabled={!cart.lineitems || cart.lineitems <=0} className="cart-checkout-button" onClick={this.toggleCart}>
                     Continue to Checkout
                   </button>

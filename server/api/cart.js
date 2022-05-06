@@ -85,11 +85,9 @@ router.post('/', async (req, res, next) => {
     const id = user ? user.id : null;
 
     const cart = await Cart.create({userId: id},{
-      include: [{
-        model: LineItem, include: [{
-          model: Candy
-        }]
-      }]
+      include:[
+        {model: LineItem, include: [Candy]}
+      ],
     });
 
     res.send(cart);
