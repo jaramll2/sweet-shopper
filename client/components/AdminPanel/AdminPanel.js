@@ -1,6 +1,6 @@
 import React, { Component }  from "react";
 import ProductList from "./ProductList";
-import UserList from "./UserList";
+import UserList from "../UserList/UserList";
 
 import './AdminPanel.scss'
 
@@ -32,11 +32,13 @@ class AdminPanel extends Component{
 
     return(
       <div className="admin-panel">
-        <nav className="admin-nav">
+        <div className="admin-nav">
           <h3 onClick={this.displayUsers} className={displayUsers ? "selected" : ""}>users</h3>
           <h3 onClick={this.displayProducts} className={displayUsers ? "" : "selected"}>products</h3>
-        </nav>
-        {displayUsers ? <UserList/> : <ProductList/>}
+        </div>
+        <div className="admin-body">
+          {displayUsers ? <UserList/> : <ProductList/>}
+        </div>
       </div>
       
     )
