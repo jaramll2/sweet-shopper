@@ -1,10 +1,15 @@
 .pagination-container {
+  display: flex;
+  justify-content: center;
 
   .num {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
 
     &.active {
       text-decoration: underline;
     }
-  }
+  } 
 }

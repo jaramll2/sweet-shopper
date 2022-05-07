@@ -1,4 +1,10 @@
 .order-history {
+
+  .order-history-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
    
   h3 {
     font-size: xx-large;

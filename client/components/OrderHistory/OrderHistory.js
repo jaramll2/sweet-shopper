@@ -58,12 +58,14 @@ class OrderHistory extends Component {
     return (
       <div className="order-history">
         <h3>Order History</h3>
-        <Orders orders={currentOrders} loading={this.state.loading} />
-        {/* <Pagination
-          postsPerPage={this.state.postsPerPage}
-          totalPosts={this.state.orders.length}
-          paginate={this.paginate}
-        /> */}
+        <div className="order-history-conteiner">
+          <Orders orders={currentOrders} loading={this.state.loading} />
+          <Pagination
+            postsPerPage={this.state.postsPerPage}
+            totalPosts={this.state.orders.length}
+            paginate={this.paginate}
+        />
+        </div>
       </div>
     );
   }
