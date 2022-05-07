@@ -1,18 +1,114 @@
+@import "../../variables.scss";
 
 .confirmation {
-  display: flex;
-  justify-content: center;
-  margin: 100px;
-  padding: 90px 0;
-  border-radius: 10px;
+  height: 100%;
 
-  .confirmation-header {
-    font-size: xx-large;
-    font-weight: bolder;
-    padding: 40px 0;
-  }
+  .confirmation-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    border-top: solid lightgray 0.1px;
+    
 
-  .confirmation-body {
-    padding-top: 40px;
+    .sidebar-left {
+      width: 80px;
+      height: auto;
+      background-color: rgb(237, 166, 33);
+    }
+
+    .body {
+      padding-top: 60px;
+      width: 65%;;
+      color: grey;
+
+      .confirmation-header {
+        
+        .shop-name {
+          font-size: xx-large;
+          font-weight: bold;
+          display: flex;
+          justify-content: center;
+          color: black;
+        }
+
+        .text {
+          font-size: 20px;
+          margin: 40px 0;
+          display: flex;
+          justify-content: center;
+          color: black;
+        }
+
+        .order-number {
+          font-size: 18px;
+          font-weight: bold;
+          display: flex;
+          justify-content: center;
+          color: black;
+        }
+
+        .order-date {
+          font-size: 18px;
+          padding-top: 10px;
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+      .confirmation-body {
+
+        hr {
+          margin: 40px;
+        }
+      }
+    }
+
+    .customer-info {
+      margin: 50px;
+
+      h3 {
+        font-size: revert;
+      }
+
+      .customer-info-body {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;;
+
+        .info-left {
+          .title {
+            font-weight: bold;
+          }
+
+          .details {
+            margin-top: 10px;
+          }
+        }
+
+        .info-right{
+          .title {
+            font-weight: bold;
+          }
+
+          .details {
+            margin-top: 10px;
+          }
+        }
+
+        .shipping-method {
+          margin-top: 50px;
+        }
+
+        .payment-method {
+          margin-top: 50px;
+        }
+      }
+    }
+
+    .sidebar-right {
+      width: 80px;
+      height: auto;
+      background-color: rgb(237, 166, 33);
+    }
   }
 }
