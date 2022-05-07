@@ -56,7 +56,7 @@ class OrderHistory extends Component {
     }
 
     return (
-      <div>
+      <div className="order-history">
         <h3>Order History</h3>
         <Orders orders={currentOrders} loading={this.state.loading} />
         {/* <Pagination
