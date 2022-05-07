@@ -33,7 +33,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/candy/:id" component={Candy} />
         <Route exact path="/candy" component={CandyList} />
-        <Route exact path="/candy/filter/:filter" component={CandyList} />
+        <Route exact path="/candy/filter/:filter?/:sort?" component={CandyList} />
         <Route path="/cart" component={Cart} />
         <Route exact path="/confirmation" component={Confirmation} />
         <Route exact path='/admin-panel' component={AdminPanel} />
