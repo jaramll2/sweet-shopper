@@ -36,10 +36,19 @@ class AccountPage extends Component {
   render() {
     const { username, firstName, lastName, email } = this.props.auth;
     const { accountModalOpen, shippingModalOpen } = this.state;
+    
+    if(!window.localStorage.token){
+      this.props.history.push('/');
+    }
+
+    if(!firstName){
+      return;
+    }
+
     return (
       <div className="account-page">
         <div className="account-container">
-          <h3>Account</h3>
+          <h3>Hello, {firstName.substring(0,1).toUpperCase() + firstName.substring(1).toLowerCase()}!</h3>
           <div>
             {this.props.auth.id && (
               <>

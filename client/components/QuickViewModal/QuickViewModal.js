@@ -37,7 +37,6 @@ class QuickViewModal extends Component {
                 <div className="item-name">{name} ({weight})</div>
                 <div className="item-details">
                   <div>${price}</div>
-                  <div>Ingredients:</div>
                 </div>
                 <Button variant="contained" onClick={this.addToCart}>
                   Add to Cart

@@ -81,8 +81,6 @@ class AccountMenu extends Component {
     const { user } = this.props;
     const userMenuClass = `user-menu ${userMenuOpen ? "open" : ""}`;
 
-
-
     return (
       <div className="user-menu-container" ref={this.wrapperRef}>
         <PersonOutlineIcon fontSize="large" className="navbar-icon" onClick={this.handleUserIconClick} />
@@ -111,6 +109,7 @@ class AccountMenu extends Component {
           toggleLoginModal={this.toggleLoginModal}
           openNotification={this.openNotification}
           modalOpen={loginModalOpen}
+          history = {this.props.history}
         />
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
