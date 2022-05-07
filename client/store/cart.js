@@ -83,9 +83,20 @@ export const updateItem = (item) => async (dispatch, getState) => {
   }
 };
 
-export const completePurchase = (auth,guestCart)=>{
+let getUserCart = async () => {
+  try{
+    const cart = (await axios.get('/api/cart/',{headers: {authorization: window.localStorage.token}})).data;
+    
+    return cart;
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+
+export const completePurchase = (auth, guestCart)=>{
   return async(dispatch)=>{
-      const cart = !window.localStorage.token ? guestCart : auth.cart;
+      const cart = !window.localStorage.token ? guestCart : await getUserCart();
 
       const total = cart.lineitems.reduce((prev,curr)=>{
         let price = curr.candy.price * curr.qty * 1;
@@ -95,15 +106,17 @@ export const completePurchase = (auth,guestCart)=>{
       const date = new Date();  
       
       //route for logged in user
-      if(auth.cart){
-        //use put command to update the user's cart to isPurchased === true
-        await axios.put(`/api/cart/${auth.cart.id}`, {...auth.cart, ...{isPurchased: true, date: date, total: total} } );
-        
-        //create a new cart for the logged in user
-        const newCart = (await axios.post('/api/cart/', null, {headers: {authorization: window.localStorage.token}})).data;
+      if(window.localStorage.token){
+        // //use put command to update the user's cart to isPurchased === true
+        (await axios.put(`/api/cart/${cart.id}`, {...cart, ...{isPurchased: true, date: date, total: total} } )).data;
 
-        auth.cart = newCart;
+        //create a new cart for the logged in user
+        (await axios.post('/api/cart/', null, {headers: {authorization: window.localStorage.token}})).data;
         
+        //includes line items
+        const getNewCart = await getUserCart();
+        auth.cart = getNewCart;
+
         return dispatch({
             type: "SET_AUTH",
             auth
@@ -151,6 +164,5 @@ export default(state = [], action) => {
   if(action.type === LOAD_PURCHASED){
     return action.orderHistory;
   }
-
   return state;
 }

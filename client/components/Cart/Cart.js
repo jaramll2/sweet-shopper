@@ -13,9 +13,19 @@ import { toggleCart } from "../../store/displayCart";
 import { Paper } from "@mui/material";
 
 class Cart extends Component {
+  state = {
+    number : 0
+  }
+
   toggleCart = () => {
     this.props.toggleCart();
   };
+  
+  componentDidUpdate(prevProps){
+    if(prevProps!==this.props){
+      console.log('CART UPDATED');
+    }
+  }
 
   render() {
     const cartOpen = this.props.displayCart;
@@ -47,12 +57,18 @@ class Cart extends Component {
                 {items.map((item) => (
                   <CartItem key={item.id} item={item} />
                 ))}
+                
               </div>
               <div className="cart-subtotal">
                 <span className="cart-subtotal-label">{subtotalMessage}</span>
                 <span className="cart-subtotal-value">${totalPrice.toFixed(2)}</span>
               </div>
-              <Link to="/confirmation">
+              <Link to = {{pathname: "/confirmation",
+                        state: {
+                          auth: this.props.auth,
+                          guestCart: this.props.guestCart
+                        },
+                }}>
                 <button disabled={!cart.lineitems || cart.lineitems <=0} className="cart-checkout-button" onClick={this.toggleCart}>
                   Continue to Checkout
                 </button>

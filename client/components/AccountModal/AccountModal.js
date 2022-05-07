@@ -43,6 +43,7 @@ class AccountModal extends Component {
       toggleLoginModal();
       openNotification("You have logged in.");
       this.setState({ username: "", password: "" });
+      this.props.history.push('/account');
     } else {
       this.setState({ error: true });
     }
