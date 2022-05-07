@@ -2,8 +2,6 @@ import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
 
-import Paper from "@mui/material/Paper";
-
 import { completePurchase } from "../../store/cart"
 import OrderSummary from "../OrderSummary/OrderSummary";
 
@@ -28,6 +26,7 @@ class Confirmation extends Component{
     
     render(){
         const {cart,username} = this.state;
+        const { order } = this.props;
 
         if(!cart){
             return;
@@ -46,16 +45,50 @@ class Confirmation extends Component{
 
 
         return(
-          <Paper elevation={3} className="confirmation">
+          <div className="confirmation">
             <div className="confirmation-container">
-              <div className="confirmation-header">
-                Thank you for your purchase{ username }
+              <div className="sidebar-left"></div>
+              <div className="body">
+                <div className="confirmation-header">
+                  <div className="shop-name">Sweet Shopper</div>
+                  <div className="text">Thank you for your purchase{ username }</div>
+                  <div className="order-number">Order#</div>
+                  <div className="order-date">date</div>
+                </div>
+                <div className="confirmation-body">
+                  <hr />
+                  <OrderSummary cart = {cart} total = {total}/>
+                  <hr />
+                </div>
+                <div className="customer-info">
+                  <h3>Customer Information</h3>
+                  <div className="customer-info-body">
+                    <div className="info-left">
+                      <div className="shipping-address">
+                        <div className="title">Shipping address</div>
+                        <div className="details">address</div>
+                      </div>
+                      <div className="shipping-method">
+                        <div className="title">Shipping method</div>
+                        <div className="details">UPS Ground</div>
+                      </div>
+                    </div>
+                    <div className="info-right">
+                      <div className="billing-address">
+                        <div className="title">Billing address</div>
+                        <div className="details">address</div>
+                      </div>
+                      <div className="payment-method">
+                        <div className="title">Payment method</div>
+                        <div className="details">Credit Card</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="confirmation-body">
-                <OrderSummary cart = {cart} total = {total}/>
-              </div>
+              <div className="sidebar-right"></div>
             </div>
-          </Paper>
+          </div>
         )
     }
 }

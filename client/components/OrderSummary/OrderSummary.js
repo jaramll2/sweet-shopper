@@ -13,10 +13,10 @@ function OrderSummary(props) {
             return (
               <>
                 <div className="order-summary-container">
-                  <div className="order-details">
+                  <div className="order-details" key={line.id}>
                     <div className="image-container">img</div>
                     {/* Eventually include image of candy */}
-                    <div key={line.id} className="item-details">
+                    <div className="item-details">
                       <span>
                         {line.candy.name} x {line.qty}
                       </span>
