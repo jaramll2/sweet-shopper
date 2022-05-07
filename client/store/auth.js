@@ -31,9 +31,6 @@ export const me = () => async dispatch => {
 
 export const authenticate = (username, password, method, firstName, lastName, email, address, city, usState, zipcode) => async dispatch => {
   try {
-    console.log('IN AUTH METHOD');
-    console.log(method);
-    console.log(address);
     const res = await axios.post(`/auth/${method}`, {username, password, guestCart: window.localStorage.cartId, firstName, lastName, email, address, city, usState, zipcode})
     window.localStorage.setItem(TOKEN, res.data.token)
     dispatch(emptyCart());

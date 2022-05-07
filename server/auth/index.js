@@ -43,10 +43,8 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    console.log('IN SIGNUP POST');
-    console.log(req.body);
-    const { username, password, guestCart, firstName, lastName, email } = req.body;
-    const user = await User.create({username, password, firstName, lastName, email});
+    const { username, password, guestCart, firstName, lastName, email, address, city, usState, zipcode } = req.body;
+    const user = await User.create({username, password, firstName, lastName, email, address, city, usState, zipcode});
     await Cart.create({ userId: user.id });
     
     //This block of code finds the user's cart, and the guest cart they were using,
