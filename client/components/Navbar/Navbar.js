@@ -64,7 +64,7 @@ class Navbar extends Component {
         </span>
         <span className="navbar-center">
           <Link to="/" className={pathname === '/' ? 'selected' : ''}>Home</Link>
-          <Link to="/candy" className={pathname === '/candy' ? 'selected' : ''}>Shop</Link>
+          <Link to="/candy" className={pathname.search('/candy') != -1 ? 'selected' : ''}>Shop</Link>
           <Link to="/about" className={pathname === '/about' ? 'selected' : ''}>About</Link>
         </span>
         <span className="navbar-right">
