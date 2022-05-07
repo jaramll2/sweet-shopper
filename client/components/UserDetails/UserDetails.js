@@ -43,12 +43,31 @@ class UserDetails extends Component {
       <Modal open={open} onClose={onClose}>
         <Box sx={modalStyle}>
           <form onSubmit={this.handleSubmit}>
-            <h3>{user.username}</h3>
-            <h5>{user.email}</h5>
-            <h5>{user.firstName}</h5>
-            <h5>{user.lastName}</h5>
-            <label><input type="checkbox" checked={isAdmin} onChange={this.handleChange} disabled={user.id === this.props.auth.id ? true : false}/>Admin</label>
-            
+            <div className="username">
+              <div className="title">Username: </div>
+              <div>{user.username}</div>
+            </div>
+            <div className="email">
+              <div className="title">Email: </div>
+              <div>{user.email}</div>
+            </div>
+            <div className="first-name">
+              <div className="title">First name: </div>
+              <div>{user.firstName}</div>
+            </div>
+            <div className="last-name">
+              <div className="title">Last name: </div>
+              <div>{user.lastName}</div>
+            </div>
+            <label>
+              <input type="checkbox" 
+                class="checkbox" 
+                checked={isAdmin} 
+                onChange={this.handleChange} 
+                disabled={user.id === this.props.auth.id ? true : false}
+              />
+              <span>Admin</span>
+            </label>
             <button>Submit</button>
           </form>
         </Box>
