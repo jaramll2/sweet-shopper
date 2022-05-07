@@ -32,8 +32,15 @@
       padding: 86px 30px;
       width: 200px;
 
-      div {
+
+      .category {
+        cursor: pointer;
+        color: $dark-gray;
         margin-bottom: 30px;
+        
+      }
+      .selected{ 
+        color: $black;
       }
     }
   }
@@ -59,11 +66,12 @@
     }
   }
 
-  .page {
+  .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    cursor: pointer;
   }
 }
 

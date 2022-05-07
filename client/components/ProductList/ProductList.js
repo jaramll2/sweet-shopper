@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ProductDetails from './ProductDetails';
+import ProductDetails from '../ProductDetails/ProductDetails';
+
+import "./ProductList.scss";
 
 class ProductList extends Component{
   constructor(){

@@ -1,9 +1,12 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
+
 import { completePurchase } from "../../store/cart"
 import OrderSummary from "../OrderSummary/OrderSummary";
 import { getGuestCart } from "../../store/guestCart";
+
+import "./Confirmation.scss";
 
 class Confirmation extends Component{
     constructor(props){
@@ -79,6 +82,7 @@ class Confirmation extends Component{
 
     render(){
         const {cart,username} = this.state;
+        const { order } = this.props;
 
         if(!cart){
             return;
@@ -94,12 +98,52 @@ class Confirmation extends Component{
             let price = curr.candy.price * curr.qty * 1;
             return prev + price;
         },0);
-        
+
         return(
-            <div>
-                <h1>Thank you for your purchase{ username }</h1>
-                <OrderSummary cart = {cart} total = {total}/>
+          <div className="confirmation">
+            <div className="confirmation-container">
+              <div className="sidebar-left"></div>
+              <div className="body">
+                <div className="confirmation-header">
+                  <div className="shop-name">Sweet Shopper</div>
+                  <div className="text">Thank you for your purchase{ username }</div>
+                  <div className="order-number">Order#</div>
+                  <div className="order-date">date</div>
+                </div>
+                <div className="confirmation-body">
+                  <hr />
+                  <OrderSummary cart = {cart} total = {total}/>
+                  <hr />
+                </div>
+                <div className="customer-info">
+                  <h3>Customer Information</h3>
+                  <div className="customer-info-body">
+                    <div className="info-left">
+                      <div className="shipping-address">
+                        <div className="title">Shipping address</div>
+                        <div className="details">address</div>
+                      </div>
+                      <div className="shipping-method">
+                        <div className="title">Shipping method</div>
+                        <div className="details">UPS Ground</div>
+                      </div>
+                    </div>
+                    <div className="info-right">
+                      <div className="billing-address">
+                        <div className="title">Billing address</div>
+                        <div className="details">address</div>
+                      </div>
+                      <div className="payment-method">
+                        <div className="title">Payment method</div>
+                        <div className="details">Credit Card</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="sidebar-right"></div>
             </div>
+          </div>
         )
     }
 }

@@ -115,7 +115,6 @@ export const completePurchase = (auth, guestCart)=>{
         
         //includes line items
         const getNewCart = await getUserCart();
-
         auth.cart = getNewCart;
 
         return dispatch({

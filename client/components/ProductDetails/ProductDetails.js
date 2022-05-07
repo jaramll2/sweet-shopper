@@ -1,7 +1,11 @@
-import { Box, Modal } from "@mui/material";
-import axios from "axios";
 import React, { Component } from "react";
+import axios from "axios";
 
+import { Box, Modal } from "@mui/material";
+
+import { modalStyle } from "../../utils";
+
+import "./ProductDetails.scss";
 
 class ProductDetails extends Component{
 
@@ -99,19 +103,5 @@ class ProductDetails extends Component{
     )
   }
 }
-
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  background: "#ffffff",
-  transform: "translate(-50%, -50%)",
-  minWidth: "40%",
-  maxWidth: "80%",
-  border: "none",
-  outline: "none",
-  boxShadow: 24,
-  p: 4,
-};
 
 export default ProductDetails;

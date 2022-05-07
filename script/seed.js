@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Candy, LineItem} } = require('../server/db')
+const {db, models: {User, Candy, LineItem, Tag} } = require('../server/db')
 const Cart = require('../server/db/models/Cart')
 
 /**
@@ -30,7 +30,7 @@ async function seed() {
 
   //seed candy
   const candy = [];
-  for(let i = 0; i < 10; i++){
+  for(let i = 0; i < 100; i++){
     candy.push(await Candy.generateRandom());
   }
 
@@ -68,7 +68,22 @@ async function seed() {
       cartId: carts[Math.floor(Math.random() * carts.length)].id
     })
   }
-  
+
+  //create some tags
+  const tagNames = ['Chocolate', 'Fruit', 'Hard Candy', 'Caramel', 'Lactose-Free', 'Gummy', 'Licorice', 'Sour', 'Lollipop', 'Chewing Gum']
+  const tags = []
+  for(let i = 0; i < tagNames.length; i++){
+    tags.push(await Tag.create({name: tagNames[i]}));
+  }
+
+
+  //add three random tag to each candy
+  for(let i = 0; i < candy.length; i++){
+    for(let j = 0 ; j < 3; j++){
+      await candy[i].addTag(Math.floor(Math.random() * tagNames.length));
+    }
+
+  }
 
   return {
     users: {
@@ -77,7 +92,12 @@ async function seed() {
     },
     candy
   }
+
+
 }
+
+
+
 
 /*
  We've separated the `seed` function from the `runSeed` function.

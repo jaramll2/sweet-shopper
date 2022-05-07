@@ -51,30 +51,29 @@ class Cart extends Component {
         />
         <Drawer anchor="right" open={cartOpen} onClose={this.toggleCart} transitionDuration={400}>
           <Box sx={{ width: 500, padding: "10px 20px" }} role="presentation">
-            <Paper>
-              <div className="cart-body">
-                <h3>Your Cart</h3>
-                <div className="cart-items">
-                  {items.map((item) => (
-                    <CartItem key={item.id} item={item} />
-                  ))}
-                </div>
-                <div className="cart-subtotal">
-                  <span className="cart-subtotal-label">{subtotalMessage}</span>
-                  <span className="cart-subtotal-value">${totalPrice.toFixed(2)}</span>
-                </div>
-                <Link to = {{pathname: "/confirmation",
+            <div className="cart-body">
+              <h3>Your Cart</h3>
+              <div className="cart-items">
+                {items.map((item) => (
+                  <CartItem key={item.id} item={item} />
+                ))}
+                
+              </div>
+              <div className="cart-subtotal">
+                <span className="cart-subtotal-label">{subtotalMessage}</span>
+                <span className="cart-subtotal-value">${totalPrice.toFixed(2)}</span>
+              </div>
+              <Link to = {{pathname: "/confirmation",
                         state: {
                           auth: this.props.auth,
                           guestCart: this.props.guestCart
                         },
-                      }}>
-                  <button disabled={!cart.lineitems || cart.lineitems <=0} className="cart-checkout-button" onClick={this.toggleCart}>
-                    Continue to Checkout
-                  </button>
-                </Link>
-              </div>
-            </Paper>
+                }}>
+                <button disabled={!cart.lineitems || cart.lineitems <=0} className="cart-checkout-button" onClick={this.toggleCart}>
+                  Continue to Checkout
+                </button>
+              </Link>
+            </div>
           </Box>
         </Drawer>
       </div>

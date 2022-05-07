@@ -1,10 +1,12 @@
 const router = require('express').Router();
-const { models: {Candy, User}} = require('../db');
+const { models: {Candy, User, Tag}} = require('../db');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try{
-    const candy = await Candy.findAll();
+    const candy = await Candy.findAll({
+      include: [Tag]
+    });
     res.send(candy);
   }
   catch(err){
@@ -14,7 +16,6 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try{ 
-    console.log(req.headers.authorization)
     const user = await User.findByToken(req.headers.authorization);
     
     //only admins can modify product info

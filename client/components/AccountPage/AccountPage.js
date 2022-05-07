@@ -8,6 +8,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 
 import EditAccount from "../EditAccount";
 import EditShippingAddress from "../EditShippingAddress";
+import OrderHistory from "../OrderHistory";
 
 import "./AccountPage.scss";
 
@@ -131,9 +132,8 @@ class AccountPage extends Component {
           </div>
         </div>
         <div className="order-history-container">
-          <h3>
-            <Link to="/orderHistory">View Order History</Link>
-          </h3>
+          <OrderHistory />
+          {/* <Link to="/orderHistory">View Order History</Link> */}
         </div>
       </div>
     );

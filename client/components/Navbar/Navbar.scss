@@ -44,6 +44,29 @@
     display: none;
   }
 
+  .navbar-left {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      .sweet-shopper {
+        display: inline-grid;
+      }
+      
+      img {
+        height: 40px;
+        width: 40px;
+        margin-left: 5px;
+      }
+    }
+
+   
+  }
+
   .navbar-left,
   .navbar-center,
   .navbar-right {

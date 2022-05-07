@@ -1,7 +1,12 @@
-import { Box, Modal } from "@mui/material";
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
+import axios from "axios";
+
+import { Box, Modal } from "@mui/material";
+
+import { modalStyle } from "../../utils";
+
+import "./UserDetails.scss";
 
 class UserDetails extends Component {
   constructor(props){
@@ -55,17 +60,6 @@ class UserDetails extends Component {
     )
   }
 }
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  background: "#ffffff",
-  transform: "translate(-50%, -50%)",
-  minWidth: "40%",
-  maxWidth: "80%",
-  border: "none",
-  outline: "none",
-  boxShadow: 24,
-  p: 4,
-};
+
+
 export default connect(state => state)(UserDetails);

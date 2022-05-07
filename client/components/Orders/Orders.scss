@@ -1,0 +1,36 @@
+@import "../../variables.scss";
+
+.orders {
+  display: flex;
+  justify-content: flex-start;
+
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px;
+    font-size: large;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    thead tr {
+      background-color: $dark-gray;
+      color: $white;
+      text-align: left;
+    }
+
+    th,
+    td {
+      padding: 12px 15px;
+      height: 30px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #dddddd;
+      background-color: $white;
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 2px solid $dark-gray;
+    }
+  }
+}

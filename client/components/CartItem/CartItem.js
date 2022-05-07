@@ -65,7 +65,7 @@ class CartItem extends Component {
           <div className="cart-item-details">
             <span className="cart-item-price">${candy.price}</span>
             <span className="cart-item-quantity">
-              <DeleteIcon className="cart-item-icon" onClick={this.handleDelete} />
+              <DeleteIcon className="cart-item-icon" onClick={this.handleDelete} sx={{ fontSize: 30 }}  />
               <QtyController
                 buttonHandler={this.handleClick}
                 inputHandler={this.handleQtyInputChange}

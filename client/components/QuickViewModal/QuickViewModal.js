@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 import { addToCart } from "../../store/cart";
+import { modalStyle } from "../../utils";
 
 import "./QuickViewModal.scss";
 
@@ -36,7 +37,6 @@ class QuickViewModal extends Component {
                 <div className="item-name">{name} ({weight})</div>
                 <div className="item-details">
                   <div>${price}</div>
-                  <div>Ingredients:</div>
                 </div>
                 <Button variant="contained" onClick={this.addToCart}>
                   Add to Cart
@@ -49,20 +49,6 @@ class QuickViewModal extends Component {
     )
   }
 }
-
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  background: "#ffffff",
-  transform: "translate(-50%, -50%)",
-  minWidth: "40%",
-  maxWidth: "80%",
-  border: "none",
-  outline: "none",
-  boxShadow: 24,
-  p: 4,
-};
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = (dispatch) => {

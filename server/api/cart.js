@@ -89,7 +89,7 @@ router.post('/', async (req, res, next) => {
         {model: LineItem, include: [Candy]}
       ],
     });
-
+    cart.dataValues.lineitems = [];
     res.send(cart);
   }
   catch(err){
