@@ -57,10 +57,6 @@ class AccountModal extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { isLoginForm } = this.state;
-    console.log('event target');
-    console.log(event.target);
-    console.log('state');
-    console.log(this.state);
     const { handleAuthenticate, toggleLoginModal, openNotification } = this.props;
     const { username, password, firstName, lastName, email, address, city, usState, zipcode } = this.state;
     
@@ -90,7 +86,7 @@ class AccountModal extends Component {
     if (!response.auth.error) {
       toggleLoginModal();
       openNotification("You have logged in.");
-      this.setState({ username: "", password: "" });
+      this.setState({ username: "", password: "", step: 1, firstName: "", lastName: "", email: "", address: "", city: "", usState: "", zipcode: ""});
       this.props.history.push('/account');
     } else {
       this.setState({ error: true });
@@ -197,8 +193,8 @@ class AccountModal extends Component {
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
-  handleAuthenticate: (username, password, formName, firstName, lastName, email) =>
-    dispatch(authenticate(username, password, formName, firstName, lastName, email)),
+  handleAuthenticate: (username, password, formName, firstName, lastName, email, address, city, usState, zipcode) =>
+    dispatch(authenticate(username, password, formName, firstName, lastName, email, address, city, usState, zipcode)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountModal);

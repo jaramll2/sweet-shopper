@@ -43,6 +43,8 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
+    console.log('IN SIGNUP POST');
+    console.log(req.body);
     const { username, password, guestCart, firstName, lastName, email } = req.body;
     const user = await User.create({username, password, firstName, lastName, email});
     await Cart.create({ userId: user.id });
