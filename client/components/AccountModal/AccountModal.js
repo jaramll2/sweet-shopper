@@ -101,6 +101,7 @@ class AccountModal extends Component {
               {!isLoginForm ? <input name="lastName" type="text" placeholder="Last Name" /> : null}
               {!isLoginForm ? <input name="email" type="text" placeholder="Email" /> : null}
               <button type="submit">{isLoginForm ? "LOG IN" : "SIGN UP"}</button>
+              <a href={`https://github.com/login/oauth/authorize?client_id=${window.GITHUB_CLIENT_ID}`}><button type='button'>LOGIN WITH GITHUB</button></a>
             </form>
             {isLoginForm && (
               <div className="check-member">
