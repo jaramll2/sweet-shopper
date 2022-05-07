@@ -4,17 +4,17 @@ account-page {
     height: 100%;
     color: $thunder;
     background-color: rgb(244, 243, 243);
-
-    h3 {
-      font-size: xx-large;
-      margin: 30px;
-    }
   }
 
   .account-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
+
+    h3 {
+      font-size: xx-large;
+      margin-left: 40px;
+    }
 
     .paper-container {
       display: flex;

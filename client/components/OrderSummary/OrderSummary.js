@@ -14,16 +14,26 @@ function OrderSummary(props) {
               <>
                 <div className="order-summary-container">
                   <div className="order-details" key={line.id}>
-                    <div className="image-container">img</div>
-                    {/* Eventually include image of candy */}
-                    <div className="item-details">
+                    <div className="order-details-left">
+                      <div className="image-container">img</div>
+                      {/* Eventually include image of candy */}
+                      <div className="item-details">
+                        <span>
+                          {line.candy.name} x {line.qty}
+                        </span>
+                        <span>
+                          Price: {line.candy.price}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="order-details-right">
+                    <div className="sub-total">
+                      <br />
                       <span>
-                        {line.candy.name} x {line.qty}
-                      </span>
-                      <span>
-                        Price: ${(line.qty * line.candy.price).toFixed(2)}
+                        ${(line.qty * line.candy.price).toFixed(2)}
                       </span>
                     </div>
+                  </div>
                   </div>
                 </div>
               </>
