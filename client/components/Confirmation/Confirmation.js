@@ -3,6 +3,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { completePurchase } from "../../store/cart"
 import OrderSummary from "../OrderSummary/OrderSummary";
+import { getGuestCart } from "../../store/guestCart";
 
 class Confirmation extends Component{
     constructor(props){
@@ -11,8 +12,6 @@ class Confirmation extends Component{
     }
 
     componentDidMount(){
-        console.log('confirmation mount');
-        console.log(this.props);
         if(!this.props){
             return;
         }
@@ -34,9 +33,7 @@ class Confirmation extends Component{
                 }
                 
                 this.props.completePurchase(this.props.auth, this.props.guestCart);
-               // window.location.reload(true);
             }
-
         }
         else{
             if(!this.props.guestCart){
@@ -57,30 +54,23 @@ class Confirmation extends Component{
                 this.props.completePurchase(this.props.auth, this.props.guestCart);
             }
         }
+    }
 
-
-
-
-
-        // if(window.localStorage.token && !this.props.auth.cart || !window.localStorage.token && !this.props.guestCart){
-        //     return;
-        // }
-
-        // if(window.localStorage.token && this.props.auth.cart.lineitems || !window.localStorage.token && this.props.guestCart.lineitems){
- 
-        //     if(this.state.username ===''){
-        //         const stateProps = {
-        //             cart: !this.props? {} : (!window.localStorage.token ? this.props.guestCart : this.props.auth.cart),
-        //             username: !this.props ? '' : (!window.localStorage.token ? '!' : `, ${this.props.auth.username}!`)
-        //         }
-        
-        //         localStorage.setItem("state", JSON.stringify(stateProps));
-        //         this.setState(JSON.parse(localStorage.getItem("state")));
-        //     }
-            
-        //     this.props.completePurchase(this.props.auth, this.props.guestCart);
-        //     //window.location.reload(true);
-        // }
+    componentDidUpdate(prevProps){
+        /*
+        This code is janky and  exists soley to ensure the cart number gets updated for the logged in user
+        upon checkout. because the confirmation component is not a child of the cart component, the set auth that
+        is called from the confirmation component does not register until the cart icon is clicked. we need to
+        do something that will trigger an update for  the cart icon without being clicked. getting the guest cart
+        does just that and doesn't really have an effect on anything else going on
+        */
+        if(window.localStorage.token){
+            if(prevProps.auth.cart){
+                if(prevProps.auth.cart.id ===this.state.cart.id){
+                     this.props.getGuestCart();
+                }
+            }   
+        }
     }
 
     componentWillUnmount(){
@@ -118,7 +108,10 @@ const mapDispatchToProps = (dispatch)  => {
     return{
         completePurchase: (auth,cart)=>{
             dispatch(completePurchase(auth,cart));
-        }
+        },
+        getGuestCart: ()=> {
+            dispatch(getGuestCart());
+          },
     }
   };
 

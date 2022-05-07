@@ -13,11 +13,20 @@ import { toggleCart } from "../../store/displayCart";
 import { Paper } from "@mui/material";
 
 class Cart extends Component {
+  state = {
+    number : 0
+  }
 
   toggleCart = () => {
     this.props.toggleCart();
   };
   
+  componentDidUpdate(prevProps){
+    if(prevProps!==this.props){
+      console.log('CART UPDATED');
+    }
+  }
+
   render() {
     const cartOpen = this.props.displayCart;
     const items = this.props.auth.cart?.lineitems || this.props.guestCart.lineitems || [];
