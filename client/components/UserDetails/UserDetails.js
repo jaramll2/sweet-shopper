@@ -13,21 +13,17 @@ class UserDetails extends Component {
     super(props);
     
     this.state = {
-      isAdmin: this.props.user.admin
+      isAdmin: this.props.user.admin,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-
-
   handleChange(evt){
     this.setState({
       isAdmin: !this.state.isAdmin
     })
-    
   }
 
   async handleSubmit(evt){
@@ -42,9 +38,9 @@ class UserDetails extends Component {
 
   render(){
     const { isAdmin } = this.state;
-    const { open, done, user } = this.props;
+    const { open, onClose, user } = this.props;
     return(
-      <Modal open={open} >
+      <Modal open={open} onClose={onClose}>
         <Box sx={modalStyle}>
           <form onSubmit={this.handleSubmit}>
             <h3>{user.username}</h3>

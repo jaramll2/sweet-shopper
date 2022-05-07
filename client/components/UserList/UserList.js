@@ -1,78 +1,85 @@
 import React, { Component } from "react";
-import axios from 'axios';
+import { connect } from "react-redux";
+import axios from "axios";
 
-import Button from '@mui/material/Button';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Button from "@mui/material/Button";
 
 import UserDetails from "../UserDetails";
 
 import "./UserList.scss";
 
-class UserList extends Component{
-  constructor(){
-    super();
+class UserList extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       users: [],
       showUserDetails: false,
-      selectedUser: {}
-    }
+      selectedUser: {},
+    };
 
     this.displayUserInfo = this.displayUserInfo.bind(this);
     this.closeUserInfo = this.closeUserInfo.bind(this);
   }
 
-
-  async componentDidMount(){
-    const users = (await axios.get('/api/users')).data;
+  async componentDidMount() {
+    const users = (await axios.get("/api/users")).data;
     this.setState({
-      users
-    })
+      users,
+    });
   }
 
-  displayUserInfo(userId){
+  displayUserInfo(userId) {
     this.setState({
       showUserDetails: true,
-      selectedUser: this.state.users.find((user) => user.id === userId)
-    })
+      selectedUser: this.state.users.find((user) => user.id === userId),
+    });
   }
 
-  async closeUserInfo(){
+  async closeUserInfo() {
     this.setState({
-      showUserDetails: false
-    })
-    const users = (await axios.get('/api/users')).data;
+      showUserDetails: false,
+    });
+    const users = (await axios.get("/api/users")).data;
 
     this.setState({
-      users
-    })
+      users,
+    });
   }
 
-  render(){
-    const { users, showUserDetails, selectedUser } = this.state
-    if(!users)
-      return null;
+  render() {
+    const { users, showUserDetails, selectedUser } = this.state;
+    if (!users) return null;
 
     //sorts alphabetically by username
-    users.sort((a, b) => a.username.localeCompare(b.username))
+    users.sort((a, b) => a.username.localeCompare(b.username));
 
-    return(
+    console.log(users);
+
+    return (
       <div className="admin-items">
-        {showUserDetails ? <UserDetails open={showUserDetails} done={this.closeUserInfo} user={selectedUser}/> :
-          <ul className="responsive-table">
+        {showUserDetails ? (
+          <UserDetails open={showUserDetails} onClose={this.closeUserInfo} user={selectedUser} />
+        ) : (
+          // <ul className="unordered-list">
+          <ul className="responsive-table unordered-list">
             <li className="table-header">
               <div className="col-1">Admin</div>
               <div className="col-2">ID</div>
               <div className="col-3">Username</div>
               <div className="col-4">Email</div>
               <div className="col-5"></div>
-              <div className="col-6"></div>
             </li>
-            {users.map(user => {
+            {users.map((user) => {
               return (
-                <li className="table-row unordered-list" key={user.id}>
+                <li className="table-row" key={user.id}>
                   <div className="col col-1">
                     <div className="round">
-                      <input type="checkbox" checked="checkbox"/>
+                      <input
+                        type="checkbox"
+                        checked={user.admin}
+                        disabled={user.id === this.props.auth.id ? true : false}
+                        readOnly
+                      />
                       <label htmlFor="checkbox"></label>
                     </div>
                   </div>
@@ -82,17 +89,14 @@ class UserList extends Component{
                   <div className="col col-5" onClick={() => this.displayUserInfo(user.id)}>
                     <Button className="edit-button">Edit</Button>
                   </div>
-                  <div className="col col-6">
-                    <DeleteOutlineIcon fontSize="large"/>
-                  </div>
                 </li>
-              )
+              );
             })}
           </ul>
-        }
+        )}
       </div>
-    )
+    );
   }
 }
 
-export default UserList
+export default connect((state) => state)(UserList);
