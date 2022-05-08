@@ -4,11 +4,13 @@
   text-align: center;
   font-size: 22px;
   color: $thunder;
-  max-height: 100%;
 
+  h3{
+    margin-top: 70px;
+  }
   h4 {
     font-weight: 400;
-    margin: 2px auto 0;
+    margin: 1px 1px 0;
   }
 
   .login-error-msg {
@@ -19,6 +21,7 @@
 
   .login-modal-form {
     display: block;
+    margin-top: 0px;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -28,7 +31,7 @@
 
     div,
     input,
-    button {
+    button{
       display: block;
       width: 100%;
       font-size: 20px;
@@ -39,8 +42,13 @@
       box-sizing: border-box;
     }
 
-    
+    a{
+      color: white
+    }
+
     button {
+      padding: 5px;
+      margin-left:0px;
       color: $white;
       background-color: $green;
     }
