@@ -1,5 +1,7 @@
 const { db } = require('./db')
 const PORT = process.env.PORT || 8080
+// process.env.GITHUB_CLIENT_ID = 'f77097c434cd799409f4';
+// process.env.GITHUB_CLIENT_SECRET = 'd37bacb29518e923874c78c7afd1aaabc0e14522';
 const app = require('./app')
 const seed = require('../script/seed');
 

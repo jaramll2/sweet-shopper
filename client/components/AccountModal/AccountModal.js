@@ -114,22 +114,23 @@ class AccountModal extends Component {
     switch (step) {
       case 1:
         return (
-          <>
+          <div>
           <input name="username" value={username} type="text" placeholder="Username" onChange={this.handleInputChange}/>
           <input name="password" value={password} type="password" placeholder="Password" onChange={this.handleInputChange}/>
           <input name="firstName" value={firstName} type="text" placeholder="First Name" onChange={this.handleInputChange}/>
           <input name="lastName" value={lastName} type="text" placeholder="Last Name" onChange={this.handleInputChange}/>
           <input name="email" value={email} type="text" placeholder="Email" onChange={this.handleInputChange}/>
-          <button type='button' onClick={this.continue}>Continue</button></>
+          <button type='button' onClick={this.continue}>Continue</button></div>
         );
       case 2:
         return (
-          <><input name="address" value={address} type="text" placeholder="Address" onChange={this.handleInputChange}/>
+          <div>
+          <input name="address" value={address} type="text" placeholder="Address" onChange={this.handleInputChange}/>
           <input name="city" value={city} type="text" placeholder="City" onChange={this.handleInputChange}/>
           <input name="usState" value={usState} type="text" placeholder="State" onChange={this.handleInputChange}/>
           <input name="zipcode" value={zipcode} type="text" placeholder="Zipcode" onChange={this.handleInputChange}/>
           <button type='button'  onClick={this.prevStep}>Back</button>
-          <button type = 'submit'>SIGN UP</button></>
+          <button type = 'submit'>SIGN UP</button></div>
         );
     };
   }
@@ -153,22 +154,25 @@ class AccountModal extends Component {
             <form className={formClass} onSubmit={this.handleSubmit}>
               
               { isLoginForm? (
-                <><input
+                <div>
+                  <input
                   name="username"
                   value={username}
                   type="text"
                   placeholder="Username"
-                  onChange={this.handleInputChange} /><input
-                    name="password"
-                    value={password}
-                    type="password"
-                    placeholder="Password"
-                    onChange={this.handleInputChange} />
-                    <button type="submit">LOG IN</button>
-                    <a href={`https://github.com/login/oauth/authorize?client_id=${window.GITHUB_CLIENT_ID}`}><button type='button'>LOGIN WITH GITHUB</button></a>
-                    </>
-              ): this.switch(step) }
+                  onChange={this.handleInputChange} />
+                  <input
+                  name="password"
+                  value={password}
+                  type="password"
+                  placeholder="Password"
+                  onChange={this.handleInputChange} />
+                  <button className = 'buttonTest' type="submit">LOG IN</button>
+                  <button type='button'><a href={`https://github.com/login/oauth/authorize?client_id=${window.GITHUB_CLIENT_ID}`}>LOGIN WITH GITHUB</a></button>
+                  </div>
+                  ): this.switch(step) } 
             </form>
+            
             {isLoginForm && (
               <div className="check-member">
                 Not a member?{" "}
