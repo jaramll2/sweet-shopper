@@ -11,9 +11,9 @@ function OrderSummary(props) {
         <h3>Order Summary</h3>
           {lines.map((line) => {
             return (
-              <>
-                <div className="order-summary-container">
-                  <div className="order-details" key={line.id}>
+              
+                <div className="order-summary-container" key={line.id}>
+                  <div className="order-details">
                     <div className="order-details-left">
                       <div className="image-container">img</div>
                       {/* Eventually include image of candy */}
@@ -36,7 +36,7 @@ function OrderSummary(props) {
                   </div>
                   </div>
                 </div>
-              </>
+              
             );
           })}
         <span className="total">

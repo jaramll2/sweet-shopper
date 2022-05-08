@@ -23,7 +23,7 @@ class Cart extends Component {
   
   componentDidUpdate(prevProps){
     if(prevProps!==this.props){
-      console.log('CART UPDATED');
+      // console.log('CART UPDATED');
     }
   }
 

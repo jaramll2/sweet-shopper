@@ -53,7 +53,6 @@ class UserList extends Component {
     //sorts alphabetically by username
     users.sort((a, b) => a.username.localeCompare(b.username));
 
-    console.log(users);
 
     return (
       <div className="admin-items">
