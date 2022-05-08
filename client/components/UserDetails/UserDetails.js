@@ -33,7 +33,7 @@ class UserDetails extends Component {
         authorization: window.localStorage.token
       }
     })
-    this.props.done()
+    this.props.onClose()
   }
 
   render(){
@@ -61,7 +61,7 @@ class UserDetails extends Component {
             </div>
             <label>
               <input type="checkbox" 
-                class="checkbox" 
+                className="checkbox" 
                 checked={isAdmin} 
                 onChange={this.handleChange} 
                 disabled={user.id === this.props.auth.id ? true : false}
