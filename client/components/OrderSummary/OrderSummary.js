@@ -11,22 +11,32 @@ function OrderSummary(props) {
         <h3>Order Summary</h3>
           {lines.map((line) => {
             return (
-              <>
-                <div className="order-summary-container">
-                  <div className="order-details" key={line.id}>
-                    <div className="image-container">img</div>
-                    {/* Eventually include image of candy */}
-                    <div className="item-details">
+              
+                <div className="order-summary-container" key={line.id}>
+                  <div className="order-details">
+                    <div className="order-details-left">
+                      <div className="image-container">img</div>
+                      {/* Eventually include image of candy */}
+                      <div className="item-details">
+                        <span>
+                          {line.candy.name} x {line.qty}
+                        </span>
+                        <span>
+                          Price: {line.candy.price}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="order-details-right">
+                    <div className="sub-total">
+                      <br />
                       <span>
-                        {line.candy.name} x {line.qty}
-                      </span>
-                      <span>
-                        Price: ${(line.qty * line.candy.price).toFixed(2)}
+                        ${(line.qty * line.candy.price).toFixed(2)}
                       </span>
                     </div>
                   </div>
+                  </div>
                 </div>
-              </>
+              
             );
           })}
         <span className="total">

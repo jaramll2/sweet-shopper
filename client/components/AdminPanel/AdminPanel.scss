@@ -6,10 +6,10 @@
 
   .admin-nav {
     flex: 0.6;
-    background-color: rgb(153, 179, 200);
+    background-color: #48742C;
 
     h3 {
-      color: $thunder;
+      color: $white;
       padding: 20px 0 0 20px;
       font-size: x-large;
       cursor: pointer;
@@ -23,7 +23,7 @@
 
   .admin-body {
     flex: 3;
-    background-color: rgb(244, 243, 243);
+    background-color: #F3F2E5;
   }
 }
 
@@ -51,16 +51,4 @@
 
 
 
-//     .unordered-list {
-//       list-style-type: none;
-//       padding: none;
-
-//       li{
-//         padding: 1.5em;
-//       }
-//       li:hover{
-//         background-color: $soft-green;
-//       }
-//     }
-//   }
-// }
+//     

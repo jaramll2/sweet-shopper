@@ -9,20 +9,18 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
   }
 
   return (
-    <nav className="pagination-container">
-      <ul>
-        {pageNumbers.map((num) => (
-          <li key={num} style={{ display: "inline" }}>
-            <a
-              onClick={() => paginate(num)}
-              className={`num ${currentPage === num ? "active" : ""}`}
-            >
-              {num}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className="pagination-container">
+      {pageNumbers.map((num) => (
+        <li key={num} style={{ display: "inline" }}>
+          <a
+            onClick={() => paginate(num)}
+            className={`num ${currentPage === num ? "active" : ""}`}
+          >
+            {num}
+          </a>
+        </li>
+      ))}
+    </div>
   );
 };
 

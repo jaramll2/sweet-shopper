@@ -38,6 +38,9 @@
         color: $dark-gray;
         margin-bottom: 30px;
         
+        &:hover {
+          opacity: 0.7;
+        }
       }
       .selected{ 
         color: $black;

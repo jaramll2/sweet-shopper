@@ -20,7 +20,7 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate:{
       notEmpty: true
     }
@@ -69,7 +69,50 @@ User.prototype.generateToken = function() {
 /**
  * classMethods
  */
-User.authenticate = async function({ username, password }){
+
+//URLs for github oauth
+ const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token';
+ const GITHUB_USER_URL = 'https://api.github.com/user';
+ 
+
+User.authenticate = async function({ username, password, code }){
+  //if we're logging in through github ouath
+  if(code){
+    let response = await axios.post(GITHUB_TOKEN_URL, {
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      code
+    },{
+      headers:{
+        accept: 'application/json'
+      }
+    })
+
+    const { data } = response;
+    if(data.error){
+      const error = new Error(data.error_description);
+      error.status = 401;
+      throw error;
+    }
+    const { access_token } = data;
+    response = await axios.get(GITHUB_USER_URL, {
+      headers: {
+        Authorization: `token ${access_token}`
+      }
+    })
+    const gitHubInfo = response.data;
+    let user = await User.findOne({
+      where: {username: gitHubInfo.login}
+    })
+    if(!user){
+      user = await User.create({ username: gitHubInfo.login, /*password: 'GH',*/  firstName: 'First Name', lastName: 'Last Name', email: 'Email' });
+      await Cart.create({ userId: user.id });
+    }
+
+    return user.generateToken();
+  }
+  //if we're logging in without github oauth
+  else{
     const user = await this.findOne({where: { username }})
     if (!user || !(await user.correctPassword(password))) {
       const error = Error('Incorrect username/password');
@@ -77,6 +120,8 @@ User.authenticate = async function({ username, password }){
       throw error;
     }
     return user.generateToken();
+  }
+
 };
 
 User.findByToken = async function(token) {
