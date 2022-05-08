@@ -34,7 +34,7 @@ class AccountPage extends Component {
   };
 
   render() {
-    const { username, firstName, lastName, email } = this.props.auth;
+    const { username, firstName, lastName, email, address, city, usState, zipcode} = this.props.auth;
     const { accountModalOpen, shippingModalOpen } = this.state;
     
     if(!window.localStorage.token){
@@ -92,19 +92,19 @@ class AccountPage extends Component {
                   </div>
                   <div>
                     <span className="title">Address</span>
-                    <span></span>
+                    <span>{address}</span>
                   </div>
                   <div>
                     <span className="title">City</span>
-                    <span></span>
+                    <span>{city}</span>
                   </div>
                   <div>
                     <span className="title">State</span>
-                    <span></span>
+                    <span>{usState}</span>
                   </div>
                   <div>
                     <span className="title">Zip Code</span>
-                    <span></span>
+                    <span>{zipcode}</span>
                   </div>
                 </div>
               </Paper>
