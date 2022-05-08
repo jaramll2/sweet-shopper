@@ -17,7 +17,14 @@ router.get('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try{ 
     const user = await User.findByToken(req.headers.authorization);
-    
+    const requestTags = req.body.selectedTags;
+    const tagIds = []
+
+    //find all the ids of the tags that we are sent
+    for (let i = 0 ; i < requestTags.length; i++){
+      tagIds.push( (await Tag.findOne({where: {name: requestTags[i]}})).dataValues.id )
+    }
+
     //only admins can modify product info
     if(!user.admin)
       res.sendStatus(401);
@@ -26,11 +33,10 @@ router.put('/:id', async (req, res, next) => {
       candy.name = req.body.name;
       candy.price = req.body.price;
       candy.weight = req.body.weight;
+      await candy.setTags(tagIds);
       await candy.save();
       res.sendStatus(204);
     }
-
-    
   }
   catch(err){
     next(err);
@@ -39,14 +45,21 @@ router.put('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try{
-    const user = await User.findByToken(req.headers.authorization)
+    const user = await User.findByToken(req.headers.authorization);
+    const requestTags = req.body.selectedTags;
+    const tagIds = []
+
+    //find all the ids of the tags that we are sent
+    for (let i = 0 ; i < requestTags.length; i++){
+      tagIds.push( (await Tag.findOne({where: {name: requestTags[i]}})).dataValues.id )
+    }
 
     //only admins can create new product
     if(!user.admin)
       res.sendStatus(401);
 
-    await Candy.create({name: req.body.name, price: req.body.price, weight: req.body.weight})
-    
+    const candy = await Candy.create({name: req.body.name, price: req.body.price, weight: req.body.weight})
+    await candy.setTags(tagIds);
     res.sendStatus(201);
   }
   catch(err){

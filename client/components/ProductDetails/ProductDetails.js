@@ -7,6 +7,9 @@ import { getTags } from '../../store/tags';
 import { Box, Modal } from "@mui/material";
 
 import { modalStyle } from "../../utils";
+import Select from '@mui/material/Select';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
 
 import "./ProductDetails.scss";
 
@@ -15,16 +18,19 @@ class ProductDetails extends Component{
   constructor(props){
     super(props);
     const { name, price, weight, newProduct } = this.props.product;
+    const selectedTags = this.props.product.tags?.map(tag => tag.name) || [];
 
     this.state = {
       name,
       price,
       weight,
       newProduct,
-      error: null
+      error: null,
+      selectedTags
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   async componentDidMount(){
@@ -35,6 +41,11 @@ class ProductDetails extends Component{
     this.setState({
       [evt.target.name]: evt.target.value
     })
+  }
+
+  handleSelectChange(evt){
+    const value = evt.target.value;
+    this.setState({selectedTags: typeof value === 'string' ? value.split(',') : value})
   }
 
   async handleSubmit(evt){
@@ -87,7 +98,7 @@ class ProductDetails extends Component{
 
   render(){
     const { open, done, product: { id }, tags } = this.props;
-    const { name, price, weight, newProduct, error } = this.state
+    const { name, price, weight, newProduct, error, selectedTags } = this.state;
 
     return(
       <Modal open={open}>
@@ -97,7 +108,15 @@ class ProductDetails extends Component{
             <input value={name} name="name" onChange={this.handleChange}></input>
             <input value={price} name="price" onChange={this.handleChange}></input>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
-            {tags.map(tag => tag.name)}
+            <Select 
+              value={selectedTags}
+              multiple
+              input={<OutlinedInput label="Tag" 
+              onChange={this.handleSelectChange}/>}
+            >
+              {tags.map(tag => <MenuItem key={tag.id} value={tag.name}>{tag.name}</MenuItem>)}
+            </Select>
+
             {newProduct ? null : <button type='button' onClick={() => this.handleDelete(id)}>Delete Item</button>}
             <button type='button' onClick={done}>Cancel</button>
             <button>Submit</button>
