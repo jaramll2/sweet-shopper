@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import axios from "axios";
+
+import { getTags } from '../../store/tags';
 
 import { Box, Modal } from "@mui/material";
 
@@ -11,9 +14,7 @@ class ProductDetails extends Component{
 
   constructor(props){
     super(props);
-
-  const { name, price, weight, newProduct } = this.props.product
-
+    const { name, price, weight, newProduct } = this.props.product;
 
     this.state = {
       name,
@@ -22,9 +23,12 @@ class ProductDetails extends Component{
       newProduct,
       error: null
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  async componentDidMount(){
+    await this.props.getTags();
   }
 
   handleChange(evt){
@@ -82,8 +86,9 @@ class ProductDetails extends Component{
   }
 
   render(){
-    const { open, done, product: { id } } = this.props;
-    const { name, price, weight, newProduct, error} = this.state
+    const { open, done, product: { id }, tags } = this.props;
+    const { name, price, weight, newProduct, error } = this.state
+
     return(
       <Modal open={open}>
         <Box sx={modalStyle}>
@@ -92,6 +97,7 @@ class ProductDetails extends Component{
             <input value={name} name="name" onChange={this.handleChange}></input>
             <input value={price} name="price" onChange={this.handleChange}></input>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
+            {tags.map(tag => tag.name)}
             {newProduct ? null : <button type='button' onClick={() => this.handleDelete(id)}>Delete Item</button>}
             <button type='button' onClick={done}>Cancel</button>
             <button>Submit</button>
@@ -104,4 +110,18 @@ class ProductDetails extends Component{
   }
 }
 
-export default ProductDetails;
+const mapStateToProps = (state) => {
+  return {
+    tags: state.tags
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getTags: () => {
+      dispatch(getTags());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
