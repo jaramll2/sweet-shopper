@@ -19,7 +19,6 @@ class Navbar extends Component {
     this.state = {
       navbarScrolled: false,
       isHomePage: pathname === "/",
-      isCandyPage: pathname.includes("/candy/"),
     };
   }
 
@@ -28,7 +27,6 @@ class Navbar extends Component {
     this.props.history.listen(({ pathname }) => {
       this.setState({
         isHomePage: pathname === "/",
-        isCandyPage: pathname.includes("/candy/"),
       });
     });
   }
@@ -48,8 +46,8 @@ class Navbar extends Component {
 
   render() {
     const { location: { pathname } } = this.props;
-    const { navbarScrolled, isHomePage, isCandyPage } = this.state;
-    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""} ${isCandyPage ? "candy-page" : ""}`;
+    const { navbarScrolled, isHomePage } = this.state;
+    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""}`;
     return (
       <div className={navbarClass}>
         <MobileNavbar />

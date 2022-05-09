@@ -123,12 +123,13 @@ class CandyList extends React.Component {
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
     let currentCandies = sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
+    const heroText = filter?.length > 0 ? filter.join(", ") : "All Candies";
 
     return (
       <div className="shop">
         <div className="shop-header">
           <img src="/candy-image.jpeg" />
-          <div className="shop-name">All Candies</div>
+          <div className="shop-name">{heroText}</div>
         </div>
         <div className="shop-body">
           <div className="category-container">
