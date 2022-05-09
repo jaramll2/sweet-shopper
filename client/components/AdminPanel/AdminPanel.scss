@@ -2,7 +2,7 @@
 
 .admin-panel {
   display: flex;
-  height: 100%;
+  min-height: calc(100vh - 80px);
 
   .admin-nav {
     flex: 0.6;
@@ -10,7 +10,7 @@
 
     h3 {
       color: $white;
-      padding: 20px 0 0 20px;
+      padding: 50px 0 0 30px;
       font-size: x-large;
       cursor: pointer;
       opacity: 0.5;
@@ -26,29 +26,3 @@
     background-color: #F3F2E5;
   }
 }
-
-// .details-form{
-//   display: flex;
-//   flex-direction: column;
-
-//   .login-error-msg {
-//     color: red;
-//     font-size: 14px;
-//     margin-bottom: 20px;
-//   }
-
-//   *{
-//     margin: 1em;
-//   }
-// }
-// .admin-panel{
-
-
-
-
-//   flex-direction: column;
-//   .admin-items{
-
-
-
-//     

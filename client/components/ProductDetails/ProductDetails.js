@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import { Box, Modal } from "@mui/material";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 
 import { modalStyle } from "../../utils";
 
@@ -12,7 +14,7 @@ class ProductDetails extends Component{
   constructor(props){
     super(props);
 
-  const { name, price, weight, newProduct } = this.props.product
+    const { name, price, weight, newProduct } = this.props.product
 
 
     this.state = {
@@ -89,12 +91,41 @@ class ProductDetails extends Component{
         <Box sx={modalStyle}>
           <form onSubmit={this.handleSubmit} className="details-form">
             {error ? <h5 className="login-error-msg">{error}</h5> : null}
-            <input value={name} name="name" onChange={this.handleChange}></input>
-            <input value={price} name="price" onChange={this.handleChange}></input>
-            <input value={weight} name="weight" onChange={this.handleChange}></input>
-            {newProduct ? null : <button type='button' onClick={() => this.handleDelete(id)}>Delete Item</button>}
-            <button type='button' onClick={done}>Cancel</button>
-            <button>Submit</button>
+            <div className="prpduct-details">
+              <div className="container-left">
+                <div className="img-container">
+                  <img />
+                  <CloudUploadOutlinedIcon fontSize="large"/>
+                </div>
+                <div>Choose img</div>
+                <button>Choose</button>
+              </div>
+
+              <div className='container-right'> 
+                <div className="input product-name">
+                  <div className="title">Product name</div>
+                  <input value={name} name="name" onChange={this.handleChange} />
+                </div>
+                <div className="input weight">
+                  <div className="title">Weight</div>
+                  <input value={weight} name="weight" onChange={this.handleChange} />
+                </div>
+                <div className="input price">
+                  <div className="title">Price</div>
+                  <input value={price} name="price" onChange={this.handleChange} />
+                </div>
+                <div className="button-container">
+                  {newProduct ? null : (
+                    <DeleteOutlineOutlinedIcon 
+                      onClick={() => this.handleDelete(id)} 
+                      fontSize="large"
+                    />
+                  )}
+                  {/* <button type='button' onClick={done}>Cancel</button> */}
+                  <button>Submit</button>
+                </div>
+              </div>
+            </div>
           </form>
 
         </Box>
