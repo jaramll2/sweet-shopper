@@ -5,6 +5,8 @@ import axios from "axios";
 import { getTags } from '../../store/tags';
 
 import { Box, Modal } from "@mui/material";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 
 import { modalStyle } from "../../utils";
 import Select from '@mui/material/Select';
