@@ -21,8 +21,9 @@ class CandyList extends React.Component {
     this.state = {
       sortBy: "",
       loading: false,
-      currentPage: JSON.parse(window.localStorage.getItem('pageNumber')) || 1,
-      postsPerPage: 6
+      currentPage: ( JSON.parse(window.localStorage.getItem('pageNumber')) || 1),
+      postsPerPage: 6,
+      pageLimit: 5
     };
     this.paginate = this.paginate.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -31,6 +32,9 @@ class CandyList extends React.Component {
   async componentDidMount() {
     await this.props.getCandy();
     await this.props.getTags();
+    if(this.props.match.params.num){
+      this.setState({currentPage: this.props.match.params.num});
+    }
   }
 
   componentWillUnmount() {
@@ -123,7 +127,8 @@ class CandyList extends React.Component {
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
     let currentCandies = sortedCandies.slice(indexofFirstPost,indexOfLastPost);
 
-
+    console.log('ON CANDYLIST');
+    console.log(this.props);
     return (
       <div className="shop">
         <div className="shop-header">
@@ -164,11 +169,6 @@ class CandyList extends React.Component {
                 </FormControl>
               </span>
             </div>
-            {/* <div className="container-contents">
-              {this.getSortedCandies().map((candy) => (
-                <CandyItem key={candy.id} candy={candy} />
-              ))}
-            </div> */}
             <Candies candies={currentCandies}/>
           </div>
         </div>
@@ -178,6 +178,8 @@ class CandyList extends React.Component {
             totalPosts = {this.props.candies.length}
             paginate={this.paginate}
             currentPage={currentPage}
+            pageLimit = {this.state.pageLimit}
+            compName = 'candy'
           />
         </div>
         <Footer />

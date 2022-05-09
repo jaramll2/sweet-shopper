@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Pagination.scss";
 
-const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
+const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, pageLimit, compName }) => {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
@@ -12,7 +12,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     <div className="pagination-container">
       {pageNumbers.map((num) => (
         <li key={num} style={{ display: "inline" }}>
-          <a
+          <a href={`/${compName}/page/${num}`}
             onClick={() => paginate(num)}
             className={`num ${currentPage === num ? "active" : ""}`}
           >
