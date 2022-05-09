@@ -40,7 +40,7 @@ class Routes extends Component {
         <Route exact path='/admin-panel' component={AdminPanel} />
         <Route exact path='/account' component={AccountPage} />
         <Route exact path='/orderDetails' component={OrderSummary}/>
-        <Route exact path='/orderHistory' component={OrderHistory}/>
+        <Route path='/account/orderHistory/page/:num' component={AccountPage}/>
       </div>
     );
   }

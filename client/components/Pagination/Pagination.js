@@ -12,7 +12,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, pageLimit
     <div className="pagination-container">
       {pageNumbers.map((num) => (
         <li key={num} style={{ display: "inline" }}>
-          <a href={`/${compName}/page/${num}`}
+          <a href={`/${compName === 'orderHistory'? `account/${compName}` : compName }/page/${num}`}
             onClick={() => paginate(num)}
             className={`num ${currentPage === num ? "active" : ""}`}
           >

@@ -133,7 +133,6 @@ class AccountPage extends Component {
         </div>
         <div className="order-history-container">
           <OrderHistory />
-          {/* <Link to="/orderHistory">View Order History</Link> */}
         </div>
       </div>
     );
