@@ -37,7 +37,19 @@ const User = db.define('user', {
   },
   email:{
     type: STRING
-  }
+  },
+  address: {
+    type: STRING
+  },
+  city: {
+    type: STRING
+  },
+  usState: {
+    type: STRING
+  },
+  zipcode: {
+    type: STRING
+  },
 })
 
 module.exports = User

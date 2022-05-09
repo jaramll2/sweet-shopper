@@ -43,8 +43,8 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const { username, password, guestCart, firstName, lastName, email } = req.body;
-    const user = await User.create({username, password, firstName, lastName, email});
+    const { username, password, guestCart, firstName, lastName, email, address, city, usState, zipcode } = req.body;
+    const user = await User.create({username, password, firstName, lastName, email, address, city, usState, zipcode});
     await Cart.create({ userId: user.id });
     
     //This block of code finds the user's cart, and the guest cart they were using,
@@ -82,10 +82,16 @@ router.post("/signup", async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try{
     let user = await User.findByToken(req.headers.authorization);
-    user.username = req.body.username;
-    user.email = req.body.email;
-    user.firstName = req.body.firstName;
-    user.lastName = req.body.lastName;
+
+    req.body.username? user.username = req.body.username: user.username = user.username;
+    req.body.email? user.email = req.body.email : user.email = user.email;
+    req.body.firstName ? user.firstName = req.body.firstName : user.firstName = user.firstName;
+    req.body.lastName? user.lastName = req.body.lastName : user.lastName = user.lastName;
+    req.body.address ? user.address = req.body.address : user.address = user.address;
+    req.body.city ? user.city = req.body.city : user.city = user.city;
+    req.body.usState ? user.usState = req.body.usState : user.usState = user.usState;
+    req.body.zipcode ? user.zipcode = req.body.zipcode : user.zipcode = user.zipcode;
+
     await user.save()
     res.send(user);
   }

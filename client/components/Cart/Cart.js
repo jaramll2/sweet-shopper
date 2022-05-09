@@ -20,12 +20,6 @@ class Cart extends Component {
   toggleCart = () => {
     this.props.toggleCart();
   };
-  
-  componentDidUpdate(prevProps){
-    if(prevProps!==this.props){
-      console.log('CART UPDATED');
-    }
-  }
 
   render() {
     const cartOpen = this.props.displayCart;
