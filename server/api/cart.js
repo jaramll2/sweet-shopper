@@ -66,7 +66,10 @@ router.get('/:id',async(req,res,next)=>{
         }]
       }]
     });
-    
+
+    if(!cart)
+      res.sendStatus(404);
+
     res.send(cart);
   }
   catch(err){
