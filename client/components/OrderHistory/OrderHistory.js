@@ -48,7 +48,7 @@ class OrderHistory extends Component {
 
     if (this.state.orders.length <= 0) {
       return (
-        <div>
+        <div className="no-order">
           <h3>Order History</h3>
           <span>No orders.</span>
         </div>
