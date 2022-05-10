@@ -6,7 +6,6 @@ const refUrl = (filter,sort)=>{
   let ref = '';
   
   if(filter){
-    console.log(JSON.stringify(filter))
     if(sort){
       ref = `/filter/${JSON.stringify(filter)}/${sort}`;
     }
@@ -15,7 +14,7 @@ const refUrl = (filter,sort)=>{
     }
   }
   else{
-    ref = `/filter/[]/`;
+    ref = `/filter/[]${ sort ? `/${sort}` : '' }`;
   }
 
   return ref;
@@ -26,9 +25,6 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, pageLimit
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
-
-  console.log('IN PAGINATION');
-  console.log(filter);
   
   const ref = compName === 'orderHistory'? `/account/${compName}/page/`: `/${compName}/page`;
   return (

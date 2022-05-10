@@ -47,19 +47,16 @@ class CandyList extends React.Component {
   }
 
   handleSort = (event) => {
+    console.log('IN HANDLE SORT');
     // this.setState({ sortBy: event.target.value });
-    const { sort, filter, history, location } = this.props;
+    const { filter, history } = this.props;
 
     if(filter){
-      if(sort){
-        history.push(`${(location.pathname).replace(`/${sort}`, '')}/${event.target.value}`)
-      }
-      else {
-        history.push(`${location.pathname}/${event.target.value}`)
-      }
+      const url = `/candy/page/1/filter/${JSON.stringify(filter)}`
+      history.push(`${url}/${event.target.value}`);
     }
     else{
-      history.push(`${location.pathname}/filter/[]/${event.target.value}`)
+      history.push(`/candy/page/1/filter/[]/${event.target.value}`)
     }
   };
 
@@ -86,7 +83,7 @@ class CandyList extends React.Component {
   //or removes the filter if it is already there
   toggleFilter(filter){
     const { sort } = this.props;
-
+    console.log('IN TOGGLE FILTER');
     if(!this.props.filter){
       this.props.history.push(`/candy/page/1/filter/${JSON.stringify([filter])}`)
     }
