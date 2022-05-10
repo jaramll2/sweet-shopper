@@ -53,7 +53,7 @@ class Candy extends Component {
     return (
       <div className="candy-body">
         <div className="candy-img">
-          <img src="https://www.rebeccas.com/mm5/graphics/00000001/cn134.jpg" />
+          <img src={candy.imageUrl} />
         </div>
         <div className="candy-details">
           <h2>

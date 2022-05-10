@@ -27,13 +27,29 @@ const Candy = db.define('candy', {
   },
   weight: {
     type: Sequelize.STRING
+  },
+  imageUrl:{
+    type: Sequelize.STRING,
+    defaultValue: 'https://www.rebeccas.com/mm5/graphics/00000001/cn134.jpg'
   }
 })
 
 Candy.generateRandom = () => {
 
-  // This is the beginning of an idea to create random candy names. It works right now, but I need to add more 
-  // variety so that we don't get a bunch of repeats
+  //have to manually type these in for now, there's probably a better way
+  const possiblePictures = [
+    '/caramel-img.jpeg',
+    '/chocolate.jpeg',
+    '/gummy.jpeg',
+    '/hard_candy.jpeg',
+    '/heart_candy.jpeg',
+    '/pink_lollipop.jpeg',
+    '/pink_heart_candy.jpg',
+    '/red_lollipop.jpeg',
+    '/swirl.jpeg'
+  ]
+
+
   const prefixes = [
     'Coco',
     'Super',
@@ -94,7 +110,8 @@ const randomName =
   return Candy.create({
     name: randomName,
     price: Math.floor(Math.random() * 8) + Math.random(),
-    weight: '16oz'
+    weight: '16oz',
+    imageUrl: possiblePictures[Math.floor(Math.random() * possiblePictures.length)]
   })
 }
 
