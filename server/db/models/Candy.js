@@ -36,6 +36,7 @@ const Candy = db.define('candy', {
 
 Candy.generateRandom = () => {
 
+  
   //have to manually type these in for now, there's probably a better way
   const possiblePictures = [
     '/caramel-img.jpeg',

@@ -35,6 +35,7 @@ class Candy extends Component {
     }
   };
 
+  
   handleClick = (amount) => {
     const qty = this.state.qty + amount;
     if (qty > 0) {

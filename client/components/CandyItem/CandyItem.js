@@ -41,6 +41,7 @@ class CandyItem extends Component {
           <span>${price}</span>
         </div>
       </div>
+      
     );
   }
 }
