@@ -35,6 +35,7 @@ class Candy extends Component {
     }
   };
 
+  
   handleClick = (amount) => {
     const qty = this.state.qty + amount;
     if (qty > 0) {
@@ -53,7 +54,7 @@ class Candy extends Component {
     return (
       <div className="candy-body">
         <div className="candy-img">
-          <img src="https://www.rebeccas.com/mm5/graphics/00000001/cn134.jpg" />
+          <img src={candy.imageUrl} />
         </div>
         <div className="candy-details">
           <h2>
