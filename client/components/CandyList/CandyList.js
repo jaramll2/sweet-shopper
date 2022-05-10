@@ -54,14 +54,13 @@ class CandyList extends React.Component {
       if(sort){
         history.push(`${(location.pathname).replace(`/${sort}`, '')}/${event.target.value}`)
       }
-      else
+      else {
         history.push(`${location.pathname}/${event.target.value}`)
+      }
     }
     else{
       history.push(`${location.pathname}/filter/[]/${event.target.value}`)
     }
-    
-
   };
 
   getSortedCandies = (candies) => {
@@ -89,14 +88,14 @@ class CandyList extends React.Component {
     const { sort } = this.props;
 
     if(!this.props.filter){
-      this.props.history.push(`/candy/filter/${JSON.stringify([filter])}`)
+      this.props.history.push(`/candy/page/1/filter/${JSON.stringify([filter])}`)
     }
     else{
       if(this.props.filter.includes(filter)){
-        this.props.history.push(`/candy/filter/${JSON.stringify([...this.props.filter.filter(filt => filt !== filter)])}${sort ? `/${sort}` : ''}`)
+        this.props.history.push(`/candy/page/1/filter/${JSON.stringify([...this.props.filter.filter(filt => filt !== filter)])}${sort ? `/${sort}` : ''}`)
       }
       else{
-        this.props.history.push(`/candy/filter/${JSON.stringify([...this.props.filter, filter])}${sort ? `/${sort}` : ''}`)
+        this.props.history.push(`/candy/page/1/filter/${JSON.stringify([...this.props.filter, filter])}${sort ? `/${sort}` : ''}`)
       }
     }
 
@@ -105,7 +104,6 @@ class CandyList extends React.Component {
   render() {
     let { candies, tags, filter, sort } = this.props;
     const { currentPage } = this.state;
-
     //filter candies based on the array of filters that are on the url
     if(filter){
       candies = candies.filter(candy => {
@@ -126,9 +124,7 @@ class CandyList extends React.Component {
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
     let currentCandies = sortedCandies.slice(indexofFirstPost,indexOfLastPost);
-
-    console.log('ON CANDYLIST');
-    console.log(this.props);
+  
     return (
       <div className="shop">
         <div className="shop-header">
@@ -180,6 +176,8 @@ class CandyList extends React.Component {
             currentPage={currentPage}
             pageLimit = {this.state.pageLimit}
             compName = 'candy'
+            filter = {filter}
+            sort = {sort}
           />
         </div>
         <Footer />
@@ -195,7 +193,6 @@ const mapStateToProps = (state, {match}) => {
   if(match.params.filter){
     filter = JSON.parse(match.params?.filter);
   }
-
 
   return {
     filter,
