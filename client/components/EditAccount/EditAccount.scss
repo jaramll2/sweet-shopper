@@ -39,10 +39,18 @@
       box-sizing: border-box;
     }
 
-    button {
-      color: $white;
-      background-color: $green;
-      margin-top: 30px;
+    .button-container {
+      display: flex;
+      justify-items: center;
+      flex-direction: column;
+
+      button {
+        color: $white;
+        background-color: $green;
+        margin-top: 30px;
+        height: 50px;
+        border-radius: 10px;
+      }
     }
   }
 }
