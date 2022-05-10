@@ -22,8 +22,8 @@ class Routes extends Component {
   async componentDidMount() {
     this.props.loadInitialData();
     this.props.getCandy();
-
     this.props.loadGuestCart();
+
 
   }
 
