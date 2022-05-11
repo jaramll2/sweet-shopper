@@ -4,23 +4,10 @@ import "./Pagination.scss";
 
 const refUrl = (filter,sort)=>{
   let ref = `/filter/${filter ? `${JSON.stringify(filter)}` : '[]'}${ sort ? `/${sort}` : ''}`;
-  
-  // if(filter){
-  //   if(sort){
-  //     ref = `/filter/${JSON.stringify(filter)}/${sort}`;
-  //   }
-  //   else {
-  //     ref = `/filter/${JSON.stringify(filter)}`;
-  //   }
-  // }
-  // else{
-  //   ref = `/filter/[]${ sort ? `/${sort}` : '' }`;
-  // }
-
   return ref;
 }
 
-const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, pageLimit, compName, filter, sort }) => {
+const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, compName, filter, sort }) => {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);

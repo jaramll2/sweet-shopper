@@ -22,8 +22,7 @@ class CandyList extends React.Component {
       sortBy: "",
       loading: false,
       currentPage: ( JSON.parse(window.localStorage.getItem('pageNumber')) || 1),
-      postsPerPage: 6,
-      pageLimit: 5
+      postsPerPage: 6
     };
     this.paginate = this.paginate.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -95,6 +94,7 @@ class CandyList extends React.Component {
         this.props.history.push(`/candy/page/1/filter/${JSON.stringify([...this.props.filter, filter])}${sort ? `/${sort}` : ''}`)
       }
     }
+    console.log(this.props);
     this.setState({currentPage: 1});
   }
 
@@ -168,10 +168,9 @@ class CandyList extends React.Component {
         <div className="pagination"> 
           <Pagination 
             postsPerPage={this.state.postsPerPage} 
-            totalPosts = {this.props.candies.length}
+            totalPosts = {candies.length}
             paginate={this.paginate}
             currentPage={currentPage}
-            pageLimit = {this.state.pageLimit}
             compName = 'candy'
             filter = {filter}
             sort = {sort}
