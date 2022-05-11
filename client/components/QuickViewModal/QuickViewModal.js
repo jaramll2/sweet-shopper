@@ -23,7 +23,7 @@ class QuickViewModal extends Component {
   
   render () {
     const { modalOpen, toggleModal } = this.props;
-    const { name, weight, price } = this.props.candy;
+    const { name, weight, price, imageUrl } = this.props.candy;
 
     return (
       <>
@@ -31,7 +31,7 @@ class QuickViewModal extends Component {
           <Box sx={modalStyle}>
             <div className="candy-modal-container">
               <div className="modal-left">
-                <img src="https://www.rebeccas.com/mm5/graphics/00000001/cn134.jpg" />
+                <img src={imageUrl} />
               </div>
               <div className="modal-right">
                 <div className="item-name">{name} ({weight})</div>

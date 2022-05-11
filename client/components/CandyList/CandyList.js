@@ -21,7 +21,7 @@ class CandyList extends React.Component {
     this.state = {
       sortBy: "",
       loading: false,
-      currentPage: JSON.parse(window.localStorage.getItem('pageNumber')) || 1,
+      currentPage: ( JSON.parse(window.localStorage.getItem('pageNumber')) || 1),
       postsPerPage: 6
     };
     this.paginate = this.paginate.bind(this);
@@ -31,6 +31,9 @@ class CandyList extends React.Component {
   async componentDidMount() {
     await this.props.getCandy();
     await this.props.getTags();
+    if(this.props.match.params.num){
+      this.setState({currentPage: this.props.match.params.num});
+    }
   }
 
   componentWillUnmount() {
@@ -44,20 +47,17 @@ class CandyList extends React.Component {
 
   handleSort = (event) => {
     // this.setState({ sortBy: event.target.value });
-    const { sort, filter, history, location } = this.props;
+    const { filter, history } = this.props;
 
     if(filter){
-      if(sort){
-        history.push(`${(location.pathname).replace(`/${sort}`, '')}/${event.target.value}`)
-      }
-      else
-        history.push(`${location.pathname}/${event.target.value}`)
+      const url = `/candy/page/1/filter/${JSON.stringify(filter)}`
+      history.push(`${url}/${event.target.value}`);
     }
     else{
-      history.push(`${location.pathname}/filter/[]/${event.target.value}`)
+      history.push(`/candy/page/1/filter/[]/${event.target.value}`)
     }
-    
 
+    this.setState({currentPage: 1});
   };
 
   getSortedCandies = (candies) => {
@@ -83,25 +83,24 @@ class CandyList extends React.Component {
   //or removes the filter if it is already there
   toggleFilter(filter){
     const { sort } = this.props;
-
     if(!this.props.filter){
-      this.props.history.push(`/candy/filter/${JSON.stringify([filter])}`)
+      this.props.history.push(`/candy/page/1/filter/${JSON.stringify([filter])}`)
     }
     else{
       if(this.props.filter.includes(filter)){
-        this.props.history.push(`/candy/filter/${JSON.stringify([...this.props.filter.filter(filt => filt !== filter)])}${sort ? `/${sort}` : ''}`)
+        this.props.history.push(`/candy/page/1/filter/${JSON.stringify([...this.props.filter.filter(filt => filt !== filter)])}${sort ? `/${sort}` : ''}`)
       }
       else{
-        this.props.history.push(`/candy/filter/${JSON.stringify([...this.props.filter, filter])}${sort ? `/${sort}` : ''}`)
+        this.props.history.push(`/candy/page/1/filter/${JSON.stringify([...this.props.filter, filter])}${sort ? `/${sort}` : ''}`)
       }
     }
-
+    console.log(this.props);
+    this.setState({currentPage: 1});
   }
 
   render() {
     let { candies, tags, filter, sort } = this.props;
     const { currentPage } = this.state;
-
     //filter candies based on the array of filters that are on the url
     if(filter){
       candies = candies.filter(candy => {
@@ -122,7 +121,6 @@ class CandyList extends React.Component {
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexofFirstPost = indexOfLastPost - this.state.postsPerPage;
     let currentCandies = sortedCandies.slice(indexofFirstPost,indexOfLastPost);
-
     const heroText = filter?.length > 0 ? filter.join(", ") : "All Candies";
 
     return (
@@ -165,20 +163,18 @@ class CandyList extends React.Component {
                 </FormControl>
               </span>
             </div>
-            {/* <div className="container-contents">
-              {this.getSortedCandies().map((candy) => (
-                <CandyItem key={candy.id} candy={candy} />
-              ))}
-            </div> */}
             <Candies candies={currentCandies}/>
           </div>
         </div>
         <div className="pagination"> 
           <Pagination 
             postsPerPage={this.state.postsPerPage} 
-            totalPosts = {this.props.candies.length}
+            totalPosts = {candies.length}
             paginate={this.paginate}
             currentPage={currentPage}
+            compName = 'candy'
+            filter = {filter}
+            sort = {sort}
           />
         </div>
         <Footer />
@@ -194,7 +190,6 @@ const mapStateToProps = (state, {match}) => {
   if(match.params.filter){
     filter = JSON.parse(match.params?.filter);
   }
-
 
   return {
     filter,

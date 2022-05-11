@@ -64,6 +64,7 @@ class OrderHistory extends Component {
             postsPerPage={this.state.postsPerPage}
             totalPosts={this.state.orders.length}
             paginate={this.paginate}
+            compName = 'orderHistory'
         />
         </div>
       </div>

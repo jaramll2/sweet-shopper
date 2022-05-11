@@ -28,7 +28,7 @@ class Confirmation extends Component{
                 if(this.state.username ===''){
                     const stateProps = {
                         cart: this.props.auth.cart,
-                        username: `, ${this.props.auth.username}!`
+                        username: `, ${this.props.auth.firstName}!`
                     }
             
                     localStorage.setItem("state", JSON.stringify(stateProps));
@@ -108,7 +108,7 @@ class Confirmation extends Component{
                   <div className="shop-name">Sweet Shopper</div>
                   <div className="text">Thank you for your purchase{ username }</div>
                   <div className="order-number">Order#</div>
-                  <div className="order-date">date</div>
+                  <div className="order-date">{cart.date}</div>
                 </div>
                 <div className="confirmation-body">
                   <hr />
@@ -121,7 +121,8 @@ class Confirmation extends Component{
                     <div className="info-left">
                       <div className="shipping-address">
                         <div className="title">Shipping address</div>
-                        <div className="details">address</div>
+                        <div className="details">{this.props.auth.address}</div>
+                        <div className="details">{this.props.auth.city}, {this.props.auth.usState} {this.props.auth.zipcode}</div>
                       </div>
                       <div className="shipping-method">
                         <div className="title">Shipping method</div>
@@ -131,7 +132,8 @@ class Confirmation extends Component{
                     <div className="info-right">
                       <div className="billing-address">
                         <div className="title">Billing address</div>
-                        <div className="details">address</div>
+                        <div className="details">{this.props.auth.address}</div>
+                        <div className="details">{this.props.auth.city}, {this.props.auth.usState} {this.props.auth.zipcode}</div>
                       </div>
                       <div className="payment-method">
                         <div className="title">Payment method</div>

@@ -33,6 +33,7 @@ router.put('/:id', async (req, res, next) => {
       candy.name = req.body.name;
       candy.price = req.body.price;
       candy.weight = req.body.weight;
+      candy.imageUrl = req.body.imageUrl
       await candy.setTags(tagIds);
       await candy.save();
       res.sendStatus(204);
@@ -58,7 +59,7 @@ router.post('/', async (req, res, next) => {
     if(!user.admin)
       res.sendStatus(401);
 
-    const candy = await Candy.create({name: req.body.name, price: req.body.price, weight: req.body.weight})
+    const candy = await Candy.create({name: req.body.name, price: req.body.price, weight: req.body.weight, imageUrl: req.body.imageUrl})
     await candy.setTags(tagIds);
     res.sendStatus(201);
   }

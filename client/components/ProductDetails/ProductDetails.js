@@ -19,7 +19,7 @@ class ProductDetails extends Component{
 
   constructor(props){
     super(props);
-    const { name, price, weight, newProduct } = this.props.product;
+    const { name, price, weight, newProduct, imageUrl } = this.props.product;
     const selectedTags = this.props.product.tags?.map(tag => tag.name) || [];
 
     this.state = {
@@ -28,7 +28,8 @@ class ProductDetails extends Component{
       weight,
       newProduct,
       error: null,
-      selectedTags
+      selectedTags,
+      imageUrl
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -100,7 +101,7 @@ class ProductDetails extends Component{
 
   render(){
     const { open, done, product: { id }, tags } = this.props;
-    const { name, price, weight, newProduct, error, selectedTags } = this.state;
+    const { name, price, weight, newProduct, error, selectedTags, imageUrl } = this.state;
 
     return(
       <Modal open={open}>
@@ -110,6 +111,7 @@ class ProductDetails extends Component{
             <input value={name} name="name" onChange={this.handleChange}></input>
             <input value={price} name="price" onChange={this.handleChange}></input>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
+            <input value={imageUrl} name="imageUrl" onChange={this.handleChange}></input>
             <Select 
               value={selectedTags}
               multiple

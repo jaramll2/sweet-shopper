@@ -1,14 +1,21 @@
 @import "../../variables.scss";
 
 .edit-modal-body {
+  scale: 0.5;
   margin: 20px 0;
   text-align: center;
-  font-size: 22px;
+  font-size: 15px;
   color: $thunder;
+  max-height: 500px;
+
+  h2{
+    margin-top: -20px;
+    font-size: 20pt;
+  }
 
   .edit-modal-form {
     display: block;
-    margin: 10px auto 0;
+    margin: -40px auto 0;
     width: 85%;
     max-width: 600px;
     box-sizing: border-box;
@@ -32,12 +39,13 @@
     button {
       display: block;
       width: 100%;
-      font-size: 20px;
+      font-size: 15px;
       border-radius: 8px;
-      padding: 14px;
+      padding: 9px;
       outline: none;
       box-sizing: border-box;
     }
+
 
     .button-container {
       display: flex;
@@ -50,6 +58,11 @@
         margin-top: 30px;
         height: 50px;
         border-radius: 10px;
+      //   padding: 5px;
+      // margin-left:0px;
+      // color: $white;
+      // background-color: $green;
+      // margin-top: 30px;
       }
     }
   }

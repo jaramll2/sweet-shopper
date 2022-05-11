@@ -6,6 +6,8 @@ import Carousel from "nuka-carousel";
 
 import "./Featured.scss";
 
+const images = ["./caramel-img.jpeg", "./chocolate.jpeg", "./gummy.jpeg"];
+
 class Featured extends React.Component {
   render() {
     const { candies } = this.props;
@@ -14,18 +16,22 @@ class Featured extends React.Component {
     }
     const featured = [];
     while (featured.length < 3) {
-      const random = Math.floor(Math.random() * candies.length);
-      if (!(candies[random] in featured)) {
-        featured.push(candies[random]);
+      const randomNumber = Math.floor(Math.random() * candies.length);
+      const randomCandy = candies[randomNumber];
+      if (!(randomCandy in featured)) {
+        featured.push(randomCandy);
       }
     }
     return (
       <div className="featured">
         <div className="featured-items-container">
-          <Carousel adaptiveHeight={true}>
+          <Carousel>
             {featured.map((item) => (
               <div key={item.name} className="featured-item">
-                {item.name}
+                <img src={images[Math.floor(Math.random() * images.length)]} alt="random" />
+                <div className="featured-item-text">
+                  <span>{item.name}</span>
+                </div>
               </div>
             ))}
           </Carousel>
@@ -40,6 +46,9 @@ class Featured extends React.Component {
               <Link to={`candy/${featured[0]?.id}`}>{featured[2]?.name}</Link>
             </li>
           </ul> */}
+        </div>
+        <div className="featured-text-container">
+          <div>text</div>
         </div>
       </div>
     );
