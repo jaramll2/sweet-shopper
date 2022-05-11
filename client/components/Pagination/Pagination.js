@@ -13,7 +13,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, compName,
     pageNumbers.push(i);
   }
 
-  const ref = compName === 'orderHistory'? `/account/${compName}/page/`: `/${compName}/page`;
+  const ref = compName === 'orderHistory'? `/account/${compName}/page`: `/${compName}/page`;
   return (
     <div className="pagination-container">
       {pageNumbers.map((num) => (
