@@ -57,7 +57,7 @@ class CartItem extends Component {
     return (
       <div key={id} className="cart-item">
         <div className="cart-item-img">
-          <img src="https://www.rebeccas.com/mm5/graphics/00000001/cn134.jpg" />
+          <img src={candy.imageUrl} />
         </div>
         <div className="cart-item-body">
           <div className="cart-item-title">{candy.name}</div>

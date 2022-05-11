@@ -36,7 +36,14 @@ export const getGuestCart = () => {
       })
     }
     catch(err){
-      throw err;
+      //if we get a 404, that means the guest cart id doesn't exist.
+      //so, clear the id and try again. Only should happen when database is getting reseeded.
+      if(err.response.status === 404){
+        window.localStorage.removeItem('cartId');
+        dispatch(getGuestCart());
+      }
+      else
+        throw err;
     }
   }
 }

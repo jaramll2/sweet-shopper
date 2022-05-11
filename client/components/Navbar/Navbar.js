@@ -19,7 +19,6 @@ class Navbar extends Component {
     this.state = {
       navbarScrolled: false,
       isHomePage: pathname === "/",
-      isCandyPage: pathname.includes("/candy/"),
     };
   }
 
@@ -28,7 +27,6 @@ class Navbar extends Component {
     this.props.history.listen(({ pathname }) => {
       this.setState({
         isHomePage: pathname === "/",
-        isCandyPage: pathname.includes("/candy/"),
       });
     });
   }
@@ -48,8 +46,8 @@ class Navbar extends Component {
 
   render() {
     const { location: { pathname } } = this.props;
-    const { navbarScrolled, isHomePage, isCandyPage } = this.state;
-    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""} ${isCandyPage ? "candy-page" : ""}`;
+    const { navbarScrolled, isHomePage } = this.state;
+    const navbarClass = `navbar ${navbarScrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""}`;
     return (
       <div className={navbarClass}>
         <MobileNavbar />
@@ -63,9 +61,30 @@ class Navbar extends Component {
           </Link>
         </span>
         <span className="navbar-center">
-          <Link to="/" className={pathname === '/' ? 'selected' : ''}>Home</Link>
-          <Link to="/candy/page/1" className={pathname.search('/candy') != -1 ? 'selected' : ''}>Shop</Link>
-          {/* <Link to="/about" className={pathname === '/about' ? 'selected' : ''}>About</Link> */}
+          <ul className="select-container">
+            <li className="home-label">
+              <Link to="/" className={pathname === '/' ? 'selected' : ''}>Home</Link>
+            </li>
+            <li className="shop-label">
+              <Link to="/candy/page/1/" className={pathname.search('/candy') != -1 ? 'selected' : ''}>Shop</Link>
+              <ul className="sub-menu">
+                <div className="category-container">
+                  <li>
+                    <Link to='/candy/page/1/filter/["Chocolate"]'>Chocolate</Link>
+                  </li>
+                  <li>
+                    <Link to='/candy/page/1/filter/["Hard%20Candy"]'>Candy</Link>
+                  </li>
+                  <li>
+                    <Link to='/candy/page/1/filter/["Caramel"]'>Caramel</Link>
+                  </li>
+                  <li>
+                    <Link to='/candy/page/1/filter/["Gummy"]'>Gummy</Link>
+                  </li>
+                </div>
+              </ul>
+            </li>
+          </ul>
         </span>
         <span className="navbar-right">
           <NavbarSearch />

@@ -16,14 +16,14 @@ class CandyItem extends Component {
   };
 
   render() {
-    const { id, name, price } = this.props.candy;
+    const { id, name, price, imageUrl } = this.props.candy;
     const { modalOpen } = this.state;
 
     return (
       <div className="candy-item" key={id}>
         <div className="image-container">
           <Link to={`/candy/${id}`}>
-            <img src="https://www.rebeccas.com/mm5/graphics/00000001/cn134.jpg" />
+            <img src={imageUrl} />
           </Link>
           <div className="quick-add">
             <div variant="contained" onClick={this.toggleModal}>
@@ -41,6 +41,7 @@ class CandyItem extends Component {
           <span>${price}</span>
         </div>
       </div>
+      
     );
   }
 }
