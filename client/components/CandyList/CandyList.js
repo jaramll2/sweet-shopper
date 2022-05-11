@@ -47,7 +47,6 @@ class CandyList extends React.Component {
   }
 
   handleSort = (event) => {
-    console.log('IN HANDLE SORT');
     // this.setState({ sortBy: event.target.value });
     const { filter, history } = this.props;
 
@@ -58,6 +57,8 @@ class CandyList extends React.Component {
     else{
       history.push(`/candy/page/1/filter/[]/${event.target.value}`)
     }
+
+    this.setState({currentPage: 1});
   };
 
   getSortedCandies = (candies) => {
@@ -83,7 +84,6 @@ class CandyList extends React.Component {
   //or removes the filter if it is already there
   toggleFilter(filter){
     const { sort } = this.props;
-    console.log('IN TOGGLE FILTER');
     if(!this.props.filter){
       this.props.history.push(`/candy/page/1/filter/${JSON.stringify([filter])}`)
     }
@@ -95,7 +95,7 @@ class CandyList extends React.Component {
         this.props.history.push(`/candy/page/1/filter/${JSON.stringify([...this.props.filter, filter])}${sort ? `/${sort}` : ''}`)
       }
     }
-
+    this.setState({currentPage: 1});
   }
 
   render() {

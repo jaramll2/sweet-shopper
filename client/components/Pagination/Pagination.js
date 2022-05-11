@@ -3,19 +3,19 @@ import React from "react";
 import "./Pagination.scss";
 
 const refUrl = (filter,sort)=>{
-  let ref = '';
+  let ref = `/filter/${filter ? `${JSON.stringify(filter)}` : '[]'}${ sort ? `/${sort}` : ''}`;
   
-  if(filter){
-    if(sort){
-      ref = `/filter/${JSON.stringify(filter)}/${sort}`;
-    }
-    else {
-      ref = `/filter/${JSON.stringify(filter)}`;
-    }
-  }
-  else{
-    ref = `/filter/[]${ sort ? `/${sort}` : '' }`;
-  }
+  // if(filter){
+  //   if(sort){
+  //     ref = `/filter/${JSON.stringify(filter)}/${sort}`;
+  //   }
+  //   else {
+  //     ref = `/filter/${JSON.stringify(filter)}`;
+  //   }
+  // }
+  // else{
+  //   ref = `/filter/[]${ sort ? `/${sort}` : '' }`;
+  // }
 
   return ref;
 }
@@ -25,7 +25,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, pageLimit
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
-  
+
   const ref = compName === 'orderHistory'? `/account/${compName}/page/`: `/${compName}/page`;
   return (
     <div className="pagination-container">
