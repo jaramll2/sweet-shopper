@@ -48,12 +48,12 @@ export const addToCart = (candy, qty, auth, guestCart)=>{
       })
     }
     else{
-      const updatedcart = (await axios.get('/api/cart/',{headers: {authorization: window.localStorage.token}})).data ;
-      auth.cart = updatedcart;
+      const updatedAuth = (await axios.get('/auth/me',{headers: {authorization: window.localStorage.token}})).data ;
+
 
       dispatch({
         type: "SET_AUTH",
-        auth
+        auth: updatedAuth
       })
       return dispatch({
         type: "TOGGLE_CART"
