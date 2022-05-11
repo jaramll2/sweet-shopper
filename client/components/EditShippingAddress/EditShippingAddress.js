@@ -50,19 +50,19 @@ class EditShippingAddress extends Component {
 
           <form onSubmit={this.handleSubmit} className="edit-modal-form">
               <div className="user-info">
-                <div className="header-name">Username</div>
+                <div className="header-name">Address</div>
                 <input value={address} name="address" onChange={this.handleChange} />
               </div>
               <div className="user-info">
-                <div className="header-name">Email</div>
+                <div className="header-name">City</div>
                 <input value={city} name="city" onChange={this.handleChange} />
               </div>
               <div className="user-info">
-                <div className="header-name">First Name </div>
+                <div className="header-name">State</div>
                 <input value={usState} name="usState" onChange={this.handleChange} />
               </div>
               <div className="user-info">
-                <div className="header-name">Last Name</div>
+                <div className="header-name">Zipcode</div>
                 <input value={zipcode} name="zipcode" onChange={this.handleChange} />
               </div>
               <div>

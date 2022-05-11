@@ -66,26 +66,25 @@ class Navbar extends Component {
               <Link to="/" className={pathname === '/' ? 'selected' : ''}>Home</Link>
             </li>
             <li className="shop-label">
-              <Link to="/candy" className={pathname.search('/candy') != -1 ? 'selected' : ''}>Shop</Link>
+              <Link to="/candy/page/1/" className={pathname.search('/candy') != -1 ? 'selected' : ''}>Shop</Link>
               <ul className="sub-menu">
                 <div className="category-container">
                   <li>
-                    <Link to='/candy/filter/["Chocolate"]'>Chocolate</Link>
+                    <Link to='/candy/page/1/filter/["Chocolate"]'>Chocolate</Link>
                   </li>
                   <li>
-                    <Link to='/candy/filter/["Hard%20Candy"]'>Candy</Link>
+                    <Link to='/candy/page/1/filter/["Hard%20Candy"]'>Candy</Link>
                   </li>
                   <li>
-                    <Link to='/candy/filter/["Caramel"]'>Caramel</Link>
+                    <Link to='/candy/page/1/filter/["Caramel"]'>Caramel</Link>
                   </li>
                   <li>
-                    <Link to='/candy/filter/["Gummy"]'>Gummy</Link>
+                    <Link to='/candy/page/1/filter/["Gummy"]'>Gummy</Link>
                   </li>
                 </div>
               </ul>
             </li>
           </ul>
-          {/* <Link to="/about" className={pathname === '/about' ? 'selected' : ''}>About</Link> */}
         </span>
         <span className="navbar-right">
           <NavbarSearch />
