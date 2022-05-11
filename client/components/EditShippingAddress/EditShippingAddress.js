@@ -65,10 +65,8 @@ class EditShippingAddress extends Component {
                 <div className="header-name">Zipcode</div>
                 <input value={zipcode} name="zipcode" onChange={this.handleChange} />
               </div>
-              <div>
+              <div className="button-container">
                 <button type="button" onClick={this.props.toggleModal}>Back</button>
-              </div>
-              <div>
                 <button>Submit Changes</button>
               </div>
             </form>

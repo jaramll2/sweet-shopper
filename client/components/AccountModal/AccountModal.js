@@ -120,7 +120,7 @@ class AccountModal extends Component {
           <input name="firstName" value={firstName} type="text" placeholder="First Name" onChange={this.handleInputChange}/>
           <input name="lastName" value={lastName} type="text" placeholder="Last Name" onChange={this.handleInputChange}/>
           <input name="email" value={email} type="text" placeholder="Email" onChange={this.handleInputChange}/>
-          <button type='button' onClick={this.continue}>Continue</button></div>
+          <button className="continue-button" type='button' onClick={this.continue}>Continue</button></div>
         );
       case 2:
         return (
@@ -152,25 +152,28 @@ class AccountModal extends Component {
               </span>
             )}
             <form className={formClass} onSubmit={this.handleSubmit}>
-              
-              { isLoginForm? (
-                <div>
+              {isLoginForm? (
+                <div className="login-modal-form">
                   <input
-                  name="username"
-                  value={username}
-                  type="text"
-                  placeholder="Username"
-                  onChange={this.handleInputChange} />
+                    name="username"
+                    value={username}
+                    type="text"
+                    placeholder="Username"
+                    onChange={this.handleInputChange} 
+                  />
                   <input
-                  name="password"
-                  value={password}
-                  type="password"
-                  placeholder="Password"
-                  onChange={this.handleInputChange} />
-                  <button className = 'buttonTest' type="submit">LOG IN</button>
-                  <button type='button'><a href={`https://github.com/login/oauth/authorize?client_id=${window.GITHUB_CLIENT_ID}`}>LOGIN WITH GITHUB</a></button>
-                  </div>
-                  ): this.switch(step) } 
+                    name="password"
+                    value={password}
+                    type="password"
+                    placeholder="Password"
+                    onChange={this.handleInputChange} 
+                  />
+                  <button type="submit">LOG IN</button>
+                  <button type='button'>
+                    <a href={`https://github.com/login/oauth/authorize?client_id=${window.GITHUB_CLIENT_ID}`}>LOGIN WITH GITHUB</a>
+                  </button>
+                </div>
+              ): this.switch(step) } 
             </form>
             
             {isLoginForm && (

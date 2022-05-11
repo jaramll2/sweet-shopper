@@ -60,10 +60,8 @@ class EditAccount extends Component {
                 <div className="header-name">Last Name</div>
                 <input value={lastName} name="lastName" onChange={this.handleChange} />
               </div>
-              <div>
+              <div className="button-container">
                 <button type="button" onClick={this.props.toggleModal}>Back</button>
-              </div>
-              <div>
                 <button>Submit Changes</button>
               </div>
             </form>

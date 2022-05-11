@@ -1,0 +1,56 @@
+@import "../../variables.scss";
+
+.edit-modal-body {
+  margin: 20px 0;
+  text-align: center;
+  font-size: 22px;
+  color: $thunder;
+
+  .edit-modal-form {
+    display: block;
+    margin: 10px auto 0;
+    width: 85%;
+    max-width: 600px;
+    box-sizing: border-box;
+
+    div {
+      display: block;
+    }
+
+    .user-address{
+      margin: 20px;
+
+      .header-name {
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 0 10px 0;
+        font-size: 18px;
+      }
+    }
+
+    input,
+    button {
+      display: block;
+      width: 100%;
+      font-size: 20px;
+      border-radius: 8px;
+      padding: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .button-container {
+      display: flex;
+      justify-items: center;
+      flex-direction: column;
+
+      button {
+        color: $white;
+        background-color: $green;
+        margin-top: 30px;
+        height: 50px;
+        border-radius: 10px;
+      }
+    }
+  }
+}
