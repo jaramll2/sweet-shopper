@@ -15,7 +15,8 @@ function OrderSummary(props) {
                 <div className="order-summary-container" key={line.id}>
                   <div className="order-details">
                     <div className="order-details-left">
-                      <div className="image-container">img</div>
+                      {/* <div className="image-container"></div> */}
+                      <img src={line.candy.imageUrl} className="image-container"/>
                       {/* Eventually include image of candy */}
                       <div className="item-details">
                         <span>
