@@ -42,21 +42,21 @@ class UserDetails extends Component {
     return(
       <Modal open={open} onClose={onClose}>
         <Box sx={modalStyle}>
-          <form onSubmit={this.handleSubmit}>
-            <div className="username">
-              <div className="title">Username: </div>
+          <form className="user-details-form" onSubmit={this.handleSubmit}>
+            <div className="input">
+              <div className="label">Username: </div>
               <div>{user.username}</div>
             </div>
-            <div className="email">
-              <div className="title">Email: </div>
+            <div className="input">
+              <div className="label">Email: </div>
               <div>{user.email}</div>
             </div>
-            <div className="first-name">
-              <div className="title">First name: </div>
+            <div className="input">
+              <div className="label">First name: </div>
               <div>{user.firstName}</div>
             </div>
-            <div className="last-name">
-              <div className="title">Last name: </div>
+            <div className="input">
+              <div className="label">Last name: </div>
               <div>{user.lastName}</div>
             </div>
             <label>
