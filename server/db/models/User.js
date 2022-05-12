@@ -36,7 +36,8 @@ const User = db.define('user', {
     type: STRING
   },
   email:{
-    type: STRING
+    type: STRING,
+    unique: true
   },
   address: {
     type: STRING
