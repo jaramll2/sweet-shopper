@@ -1,21 +1,14 @@
 @import "../../variables.scss";
 
-.edit-modal-body {
-  scale: 0.5;
+.edit-user-info {
   margin: 20px 0;
   text-align: center;
-  font-size: 15px;
+  font-size: 22px;
   color: $thunder;
-  max-height: 500px;
-
-  h2{
-    margin-top: -20px;
-    font-size: 20pt;
-  }
 
   .edit-modal-form {
     display: block;
-    margin: -40px auto 0;
+    margin: 10px auto 0;
     width: 85%;
     max-width: 600px;
     box-sizing: border-box;
@@ -32,6 +25,7 @@
         justify-content: flex-start;
         margin: 0 0 10px 0;
         font-size: 18px;
+        text-align: left;
       }
     }
 
@@ -39,18 +33,18 @@
     button {
       display: block;
       width: 100%;
-      font-size: 15px;
+      font-size: 20px;
       border-radius: 8px;
-      padding: 9px;
+      padding: 14px;
       outline: none;
       box-sizing: border-box;
     }
-
 
     .button-container {
       display: flex;
       justify-items: center;
       flex-direction: column;
+      padding: 0 20px;
 
       button {
         color: $white;
@@ -58,11 +52,6 @@
         margin-top: 30px;
         height: 50px;
         border-radius: 10px;
-      //   padding: 5px;
-      // margin-left:0px;
-      // color: $white;
-      // background-color: $green;
-      // margin-top: 30px;
       }
     }
   }
