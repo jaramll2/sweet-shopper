@@ -45,7 +45,7 @@ class EditShippingAddress extends Component {
     return (
       <Modal open={open} onClose={toggleModal}>
         <Box sx={modalStyle}>
-        <div className="edit-modal-body">
+        <div className="edit-shipping-modal">
           <h2>Edit Shipping Address</h2>
 
           <form onSubmit={this.handleSubmit} className="edit-modal-form">
