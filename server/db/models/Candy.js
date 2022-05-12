@@ -39,15 +39,29 @@ Candy.generateRandom = () => {
   
   //have to manually type these in for now, there's probably a better way
   const possiblePictures = [
-    '/caramel-img.jpeg',
-    '/chocolate.jpeg',
-    '/gummy.jpeg',
+    // '/caramel-img.jpeg',
+    // '/chocolate.jpeg',
+    // '/gummy.jpeg',
+    // '/heart_candy.jpeg',
+    // '/pink_lollipop.jpeg',
+    // '/pink_heart_candy.jpg',
+    // '/red_lollipop.jpeg',
     '/hard_candy.jpeg',
-    '/heart_candy.jpeg',
-    '/pink_lollipop.jpeg',
-    '/pink_heart_candy.jpg',
-    '/red_lollipop.jpeg',
-    '/swirl.jpeg'
+    '/swirl.jpeg',
+    "/Image/coke-gummy.jpeg",
+    "/Image/colorful-candy.jpeg",
+    "/Image/egg-gummy.jpeg",
+    "/Image/sour-green-apple-rings.jpeg",
+    "/Image/sour-rings.jpeg",
+    "/Image/peppermint-candy.jpeg",
+    "/Image/heart-gummy.jpeg",
+    "/Image/sea-salt-caramel.jpeg",
+    "/Image/soft-caramel.jpeg",
+    "/Image/lollipop-candy.webp",
+    "/Image/banana-gummy.jpg",
+    "/Image/pineapple-gummy.jpeg",
+    "/Image/orange-lemon-gummy.jpeg",
+    "/Image/dark-chocolate.jpeg",
   ]
 
 
@@ -102,8 +116,8 @@ Candy.generateRandom = () => {
     'Exploding',
     'Hard',
     'Soft',
-    
   ]
+
 const randomName = 
   `${adjective[Math.floor(Math.random() * adjective.length)]} ${prefixes[Math.floor(Math.random() * prefixes.length)]}${candy[Math.floor(Math.random() * candy.length)]}`
 

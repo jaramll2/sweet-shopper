@@ -43,6 +43,7 @@ class EditAccount extends Component {
         <Box sx={modalStyle}>
           <div className="edit-user-info">
             <h2>Edit User Information</h2>
+            
             <form onSubmit={this.handleSubmit} className="edit-modal-form">
               <div className="user-info">
                 <div className="header-name">Username</div>

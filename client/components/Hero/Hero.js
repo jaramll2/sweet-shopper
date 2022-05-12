@@ -8,8 +8,8 @@ export default () => {
       <div className="hero-content">
         <img className="hero-img" src="./hero-img.png" />
         <div className="hero-title-container">
-          <div className="hero-title">EAT SWEETS</div>
-          <div className="hero-title">BE HAPPY</div>
+          <div className="hero-title">Welcome</div>
+          <div className="hero-title"></div>
         </div>
       </div>
     </div>
