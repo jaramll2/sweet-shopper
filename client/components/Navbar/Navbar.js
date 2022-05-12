@@ -57,7 +57,7 @@ class Navbar extends Component {
               <span>SWEET</span>
               <span>SHOPPER</span>
             </span>
-            <img src="./logo.png" />
+            <img src="/logo.png" />
           </Link>
         </span>
         <span className="navbar-center">
