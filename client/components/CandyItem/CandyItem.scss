@@ -6,7 +6,6 @@
   .image-container {
     height: 200px;
     width: 200px;
-    // border: solid black 0.5px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -16,6 +15,8 @@
     img {
       height: 200px;
       width: 200px;
+      border-radius: 10px;
+      object-fit: cover;
     }
 
     .quick-add {

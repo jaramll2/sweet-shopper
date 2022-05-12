@@ -41,8 +41,9 @@ class EditAccount extends Component {
     return (
       <Modal open={open} onClose={toggleModal}>
         <Box sx={modalStyle}>
-          <div className="edit-modal-body">
+          <div className="edit-user-info">
             <h2>Edit User Information</h2>
+            
             <form onSubmit={this.handleSubmit} className="edit-modal-form">
               <div className="user-info">
                 <div className="header-name">Username</div>

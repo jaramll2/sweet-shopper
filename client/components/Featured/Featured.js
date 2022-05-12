@@ -6,7 +6,11 @@ import Carousel from "nuka-carousel";
 
 import "./Featured.scss";
 
-const images = ["./caramel-img.jpeg", "./chocolate.jpeg", "./gummy.jpeg"];
+const images = [
+  "./Image/featured-lemon-candy.jpeg", 
+  "./Image/featured-citrus-gummy.jpeg",
+  "./Image/featured-french-candy.jpeg",
+];
 
 class Featured extends React.Component {
   render() {
@@ -30,7 +34,7 @@ class Featured extends React.Component {
               <div key={item.name} className="featured-item">
                 <img src={images[Math.floor(Math.random() * images.length)]} alt="random" />
                 <div className="featured-item-text">
-                  <span>{item.name}</span>
+                  <span className="featured-item-name">{item.name}</span>
                 </div>
               </div>
             ))}
