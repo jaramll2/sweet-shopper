@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .prpduct-details {
   display: flex;
   justify-content: space-around;
@@ -42,9 +44,51 @@
   
 }
 
-// .details-form {
-//   display: flex;
-//   flex-direction: column;
+.details-form {
+  display: flex;
+  flex-direction: column;
+
+  input, button, .select {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 14px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  button {
+    color: $white;
+    background-color: $green;
+    margin-top: 30px;
+    height: 50px;
+    border-radius: 10px;
+  }
+
+  .cancel-button{
+    background-color: $white;
+    color: $green;
+  }
+
+  .delete-button{
+    background-color: $white;
+    color: red;
+    border-color: red;
+  }
+  
+}
+
+.header-name {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+
 
 //   .login-error-msg {
 //     color: red;
