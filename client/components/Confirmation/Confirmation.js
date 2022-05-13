@@ -77,7 +77,7 @@ class Confirmation extends Component{
     }
 
     componentWillUnmount(){
-        localStorage.removeItem("state");
+        window.localStorage.removeItem("state");
     }
 
     render(){

@@ -148,7 +148,7 @@ class AccountModal extends Component {
             <h4>{isLoginForm ? "Please log in to your account." : "Please enter your details."}</h4>
             {error && (
               <span className="login-error-msg">
-                Authentication failed. Please check your username and password.
+                { !isLoginForm ? 'Email and username must be unique.' : 'Authentication failed. Please check your username and password.'}
               </span>
             )}
             <form className={formClass} onSubmit={this.handleSubmit}>
