@@ -111,12 +111,16 @@ class ProductDetails extends Component{
             {error ? <h5 className="login-error-msg">{error}</h5> : null}
             <div className="header-name">Username</div>
             <input value={name} name="name" onChange={this.handleChange}></input>
+
             <div className="header-name">Price (in dollars)</div>
             <input value={price} name="price" onChange={this.handleChange}></input>
+
             <div className="header-name">Weight</div>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
+
             <div className="header-name">Image Url</div>
             <input value={imageUrl} name="imageUrl" onChange={this.handleChange}></input>
+
             <div className="header-name">Tags</div>
             <Select 
               value={selectedTags}
