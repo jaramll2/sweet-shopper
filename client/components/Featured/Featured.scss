@@ -49,5 +49,13 @@
 
   .featured-text-container {
     margin-left: 100px;
+
+    .text {
+      color: $navy;
+      font-weight: bold;
+      font-size: 35px;
+      letter-spacing: 5px;
+      padding: 10px;
+    }
   }
 }

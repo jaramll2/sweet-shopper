@@ -57,7 +57,7 @@ class Navbar extends Component {
               <span>SWEET</span>
               <span>SHOPPER</span>
             </span>
-            <img src="./logo.png" />
+            <img src="/logo.png" />
           </Link>
         </span>
         <span className="navbar-center">
@@ -70,16 +70,28 @@ class Navbar extends Component {
               <ul className="sub-menu">
                 <div className="category-container">
                   <li>
-                    <Link to='/candy/page/1/filter/["Chocolate"]'>Chocolate</Link>
+                    <Link to='/candy/page/1/filter/["Chocolate"]'>
+                      <div className="nav-cotegory-text">Chocolate</div>
+                      <img className="nav-category-image" src="/Image/nav-chocolate.jpeg" />
+                    </Link>
                   </li>
                   <li>
-                    <Link to='/candy/page/1/filter/["Hard%20Candy"]'>Candy</Link>
+                    <Link to='/candy/page/1/filter/["Hard%20Candy"]'>
+                      <div className="nav-cotegory-text">Candy</div>
+                      <img className="nav-category-image" />
+                    </Link>
                   </li>
                   <li>
-                    <Link to='/candy/page/1/filter/["Caramel"]'>Caramel</Link>
+                    <Link to='/candy/page/1/filter/["Caramel"]'>
+                      <div className="nav-cotegory-text">Caramel</div>
+                      <img className="nav-category-image"/>
+                    </Link>
                   </li>
                   <li>
-                    <Link to='/candy/page/1/filter/["Gummy"]'>Gummy</Link>
+                    <Link to='/candy/page/1/filter/["Gummy"]'>
+                      <div className="nav-cotegory-text">Gummy</div>
+                      <img className="nav-category-image"/>
+                    </Link>
                   </li>
                 </div>
               </ul>
