@@ -21,7 +21,7 @@ class Featured extends React.Component {
       return <div>...Loading</div>;
     }
     const featured = [];
-    while (featured.length < 5) {
+    while (featured.length < 6) {
       const randomNumber = Math.floor(Math.random() * candies.length);
       const randomCandy = candies[randomNumber];
       if (!(randomCandy in featured)) {
@@ -41,17 +41,6 @@ class Featured extends React.Component {
               </div>
             ))}
           </Carousel>
-          {/* <ul className="featured-items">
-            <li>
-              <Link to={`candy/${featured[0]?.id}`}>{featured[0]?.name}</Link>
-            </li>
-            <li>
-              <Link to={`candy/${featured[1]?.id}`}>{featured[1]?.name}</Link>
-            </li>
-            <li>
-              <Link to={`candy/${featured[0]?.id}`}>{featured[2]?.name}</Link>
-            </li>
-          </ul> */}
         </div>
         <div className="featured-text-container">
           <div className="text">Eat Sweet</div>

@@ -67,7 +67,12 @@ class UserList extends Component {
               <div className="col-2">ID</div>
               <div className="col-3">Username</div>
               <div className="col-4">Email</div>
-              <div className="col-5"></div>
+              <div className="col-5">Address</div>
+              <div className="col-6">City</div>
+              <div className="col-7">State</div>
+              <div className="col-8">Zipcode</div>
+              <div className="col-9"></div>
+
             </li>
             {users.map((user) => {
               return (
@@ -86,7 +91,11 @@ class UserList extends Component {
                   <div className="col col-2">{user.id}</div>
                   <div className="col col-3">{user.username}</div>
                   <div className="col col-4">{user.email}</div>
-                  <div className="col col-5" onClick={() => this.displayUserInfo(user.id)}>
+                  <div className="col col-5">{user.address}</div>
+                  <div className="col col-6">{user.city}</div>
+                  <div className="col col-7">{user.usState}</div>
+                  <div className="col col-8">{user.zipcode}</div>
+                  <div className="col col-9" onClick={() => this.displayUserInfo(user.id)}>
                     <Button className="edit-button">Edit</Button>
                   </div>
                 </li>
