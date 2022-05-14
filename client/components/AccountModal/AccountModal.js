@@ -22,7 +22,6 @@ class AccountModal extends Component {
     city: "",
     usState:"",
     zipcode: ""
-
   };
 
   toggleFormType = () => {
