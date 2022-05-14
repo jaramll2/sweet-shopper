@@ -61,6 +61,9 @@ Candy.generateRandom = () => {
     "/Image/gummy-peach.jpeg",
     "/Image/raspberry-drops.jpeg",
     "/Image/strawberry-soft.jpeg",
+    "/Image/gummy-bare.jpeg",
+    "/Image/dark-chocolate-truffle.jpeg",
+    "/Image/dark-chocolate-caramel.jpeg",
   ]
 
 

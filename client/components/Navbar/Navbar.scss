@@ -148,7 +148,7 @@
           align-items: center;
           text-align: center;
           color: $black;
-          transition: 0.2s ease;
+          transition: 0.1s ease;
 
           &:hover {
             opacity: 0.3;
@@ -157,10 +157,6 @@
 
           a {
             color: $dark-gray;
-          }
-
-          .nav-category-text {
-
           }
 
           .nav-category-image {

@@ -78,19 +78,19 @@ class Navbar extends Component {
                   <li>
                     <Link to='/candy/page/1/filter/["Hard%20Candy"]'>
                       <div className="nav-cotegory-text">Candy</div>
-                      <img className="nav-category-image" />
+                      <img className="nav-category-image" src="/Image/nav-candy.jpeg"/>
                     </Link>
                   </li>
                   <li>
                     <Link to='/candy/page/1/filter/["Caramel"]'>
                       <div className="nav-cotegory-text">Caramel</div>
-                      <img className="nav-category-image"/>
+                      <img className="nav-category-image" src="/Image/nav-caramel.jpg" />
                     </Link>
                   </li>
                   <li>
                     <Link to='/candy/page/1/filter/["Gummy"]'>
                       <div className="nav-cotegory-text">Gummy</div>
-                      <img className="nav-category-image"/>
+                      <img className="nav-category-image" src="/Image/nav-gummy.jpeg" />
                     </Link>
                   </li>
                 </div>
