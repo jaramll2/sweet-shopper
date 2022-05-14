@@ -59,3 +59,37 @@
     }
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .featured {
+    font-size: 20px;
+
+    .featured-items-container {
+      width: 400px;
+      height: 200px;
+
+      .slider-container {
+        .featured-item {
+          img {
+            width: 400px;
+            height: 200px;
+          }
+        }
+      }
+
+      .featured-item-text {
+        .featured-item-name {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .featured-text-container {
+      margin-left: 50px;
+
+      .text {
+        font-size: 30px;
+      }
+    }
+  }
+}
