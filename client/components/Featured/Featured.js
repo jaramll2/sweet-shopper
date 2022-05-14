@@ -10,6 +10,8 @@ const images = [
   "/Image/featured-lemon-candy.jpeg", 
   "/Image/featured-citrus-gummy.jpeg",
   "/Image/featured-french-candy.jpeg",
+  "/Image/featured-mint-candy.jpeg",
+  "/Image/featured-heart-gummy.jpeg",
 ];
 
 class Featured extends React.Component {
@@ -19,7 +21,7 @@ class Featured extends React.Component {
       return <div>...Loading</div>;
     }
     const featured = [];
-    while (featured.length < 3) {
+    while (featured.length < 5) {
       const randomNumber = Math.floor(Math.random() * candies.length);
       const randomCandy = candies[randomNumber];
       if (!(randomCandy in featured)) {
