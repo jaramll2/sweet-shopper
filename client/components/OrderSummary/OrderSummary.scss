@@ -19,9 +19,9 @@
         display: flex;
 
         .image-container {
-          border: solid black 1px;
           width: 130px;
           height: 130px;
+          border-radius: 10px;
         }
   
         .item-details {

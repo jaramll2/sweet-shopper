@@ -8,11 +8,11 @@
   color: $thunder;
 
   h3{
-    margin-top: 70px;
+    margin-top: 30px;
   }
   h4 {
     font-weight: 400;
-    margin: 1px 1px 0;
+    margin: 15px 0;
   }
 
   .login-error-msg {
@@ -65,15 +65,42 @@
     }
   }
   .check-member {
-    margin-bottom: 29.26px;
-  }
+    margin: 15px 0;
 
-  .signup-link {
-    cursor: pointer;
-    transition: 0.2s ease;
-    
-    &:hover {
-      color: $gray;
+    .signup-link {
+      cursor: pointer;
+      transition: 0.2s ease;
+      
+      &:hover {
+        color: $gray;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .login-modal-body {
+    h3 {
+      font-size: 20px;
+    }
+  
+    h4 {
+      font-size: 15px;
+    }
+
+    .login-modal-form {
+      input,
+      button {
+        font-size: 15px;
+      }
+    }
+
+    .check-member {
+      font-size: 15px;
+
+      .signup-link {
+        font-size: 15px;
+      }
     }
   }
 }
