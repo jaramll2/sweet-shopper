@@ -67,44 +67,44 @@ class AccountPage extends Component {
                     <ModeEditOutlineOutlinedIcon onClick={this.toggleAccountModal} />
                   </div>
                   <div>
-                    <span className="title">Username</span>
+                    <span className="label">Username</span>
                     <span>{username}</span>
                   </div>
                   <div>
-                    <span className="title">Email</span>
+                    <span className="label">Email</span>
                     <span>{email}</span>
                   </div>
                   <div>
-                    <span className="title">First Name</span>
+                    <span className="label">First Name</span>
                     <span>{firstName}</span>
                   </div>
                   <div>
-                    <span className="title">Last Name</span>
+                    <span className="label">Last Name</span>
                     <span>{lastName}</span>
                   </div>
                 </div>
               </Paper>
               <Paper elevation={3} style={{ margin: "30px", borderRadius: "10px", width: "400px" }}>
-                <div className="shopping-address-container">
-                  <div className="shopping-address">
+                <div className="shipping-address-container">
+                  <div className="shipping-address">
                     <h2>Shipping Address</h2>
                     <ModeEditOutlineOutlinedIcon onClick={this.toggleShippingModal} />
                   </div>
-                  <div>
-                    <span className="title">Address</span>
-                    <span>{address}</span>
+                  <div className="address">
+                    <span className="label">Address</span>
+                    <span className="input-address">{address}</span>
                   </div>
-                  <div>
-                    <span className="title">City</span>
-                    <span>{city}</span>
+                  <div className="address">
+                    <span className="label">City</span>
+                    <span className="input-address">{city}</span>
                   </div>
-                  <div>
-                    <span className="title">State</span>
-                    <span>{usState}</span>
+                  <div className="address">
+                    <span className="label">State</span>
+                    <span className="input-address">{usState}</span>
                   </div>
-                  <div>
-                    <span className="title">Zip Code</span>
-                    <span>{zipcode}</span>
+                  <div className="address">
+                    <span className="label">Zip Code</span>
+                    <span className="input-address">{zipcode}</span>
                   </div>
                 </div>
               </Paper>
@@ -119,11 +119,11 @@ class AccountPage extends Component {
                     <span>**** **** **** 1234</span>
                   </div>
                   <div>
-                    <span className="title">Card Holder</span>
+                    <span className="label">Card Holder</span>
                     <span></span>
                   </div>
                   <div>
-                    <span className="title">Expire</span>
+                    <span className="label">Expire</span>
                     <span></span>
                   </div>
                 </div>

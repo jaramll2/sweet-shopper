@@ -106,14 +106,25 @@ class ProductDetails extends Component{
     return(
       <Modal open={open}>
         <Box sx={modalStyle}>
+        <h2>Edit Product Information</h2>
           <form onSubmit={this.handleSubmit} className="details-form">
             {error ? <h5 className="login-error-msg">{error}</h5> : null}
+            <div className="header-name">Username</div>
             <input value={name} name="name" onChange={this.handleChange}></input>
+
+            <div className="header-name">Price (in dollars)</div>
             <input value={price} name="price" onChange={this.handleChange}></input>
+
+            <div className="header-name">Weight</div>
             <input value={weight} name="weight" onChange={this.handleChange}></input>
+
+            <div className="header-name">Image Url</div>
             <input value={imageUrl} name="imageUrl" onChange={this.handleChange}></input>
+
+            <div className="header-name">Tags</div>
             <Select 
               value={selectedTags}
+              className='select'
               multiple
               input={<OutlinedInput label="Tag" 
               onChange={this.handleSelectChange}/>}
@@ -121,8 +132,8 @@ class ProductDetails extends Component{
               {tags.map(tag => <MenuItem key={tag.id} value={tag.name}>{tag.name}</MenuItem>)}
             </Select>
 
-            {newProduct ? null : <button type='button' onClick={() => this.handleDelete(id)}>Delete Item</button>}
-            <button type='button' onClick={done}>Cancel</button>
+            {newProduct ? null : <button className="delete-button" type='button' onClick={() => this.handleDelete(id)}>Delete Item</button>}
+            <button type='button' onClick={done} className='cancel-button'>Cancel</button>
             <button>Submit</button>
           </form>
 

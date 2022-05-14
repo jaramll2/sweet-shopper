@@ -107,7 +107,7 @@ class Confirmation extends Component{
                 <div className="confirmation-header">
                   <div className="shop-name">Sweet Shopper</div>
                   <div className="text">Thank you for your purchase{ username }</div>
-                  <div className="order-number">Order#</div>
+                  <div className="order-number"></div>
                   <div className="order-date">{cart.date}</div>
                 </div>
                 <div className="confirmation-body">
@@ -120,23 +120,23 @@ class Confirmation extends Component{
                   <div className="customer-info-body">
                     <div className="info-left">
                       <div className="shipping-address">
-                        <div className="title">Shipping address</div>
+                        <div className="label">Shipping address</div>
                         <div className="details">{this.props.auth.address}</div>
                         <div className="details">{this.props.auth.city}, {this.props.auth.usState} {this.props.auth.zipcode}</div>
                       </div>
                       <div className="shipping-method">
-                        <div className="title">Shipping method</div>
+                        <div className="label">Shipping method</div>
                         <div className="details">UPS Ground</div>
                       </div>
                     </div>
                     <div className="info-right">
                       <div className="billing-address">
-                        <div className="title">Billing address</div>
+                        <div className="label">Billing address</div>
                         <div className="details">{this.props.auth.address}</div>
                         <div className="details">{this.props.auth.city}, {this.props.auth.usState} {this.props.auth.zipcode}</div>
                       </div>
                       <div className="payment-method">
-                        <div className="title">Payment method</div>
+                        <div className="label">Payment method</div>
                         <div className="details">Credit Card</div>
                       </div>
                     </div>

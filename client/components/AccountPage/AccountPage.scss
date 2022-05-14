@@ -40,32 +40,37 @@ account-page {
       justify-content: space-between;
       align-items: center;
 
-      .title {
+      .label {
         color: $dark-gray;
       }
     }
   }
 
 
-  .shopping-address-container {
+  .shipping-address-container {
     margin: 30px 50px;
     color: $thunder;
 
-    .shopping-address {
+    .shipping-address {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    div {
+    .address {
       font-size: large;
       padding-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      .title {
+      .label {
         color: $dark-gray;
+      }
+
+      .input-address {
+        overflow: hidden;
+        text-align: right;
       }
     }
   }
@@ -87,7 +92,7 @@ account-page {
       justify-content: space-between;
       align-items: center;
 
-      .title {
+      .label {
         color: $dark-gray;
       }
     }

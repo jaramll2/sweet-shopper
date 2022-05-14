@@ -20,7 +20,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, compName,
         <li key={num} style={{ display: "inline" }}>
           <a href={compName === 'orderHistory'? `${ref}/${num}` : `${ref}/${num}${filter || sort ? `${refUrl(filter,sort)}` : ''}`}
             onClick={() => paginate(num)}
-            className={`num ${currentPage === num ? "active" : ""}`}
+            className={`num ${currentPage == num ? "active" : ""}`}
           >
             {num}
           </a>

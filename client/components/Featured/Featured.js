@@ -7,9 +7,11 @@ import Carousel from "nuka-carousel";
 import "./Featured.scss";
 
 const images = [
-  "./Image/featured-lemon-candy.jpeg", 
-  "./Image/featured-citrus-gummy.jpeg",
-  "./Image/featured-french-candy.jpeg",
+  "/Image/featured-lemon-candy.jpeg", 
+  "/Image/featured-citrus-gummy.jpeg",
+  "/Image/featured-french-candy.jpeg",
+  "/Image/featured-mint-candy.jpeg",
+  "/Image/featured-heart-gummy.jpeg",
 ];
 
 class Featured extends React.Component {
@@ -41,7 +43,8 @@ class Featured extends React.Component {
           </Carousel>
         </div>
         <div className="featured-text-container">
-          <div>text</div>
+          <div className="text">Eat Sweet</div>
+          <div className="text">Be Happy</div>
         </div>
       </div>
     );

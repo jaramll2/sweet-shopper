@@ -57,13 +57,6 @@ class UserList extends Component {
 
     return (
       <div className="admin-users">
-        <div className="add-user">
-          <AddCircleOutlinedIcon 
-            className="add-icon"
-            // onClick={() => this.setState({displayDetails: true, selectedProduct: newProduct})}
-          />
-          <span>Add New User</span>
-        </div>
         {showUserDetails ? (
           <UserDetails open={showUserDetails} onClose={this.closeUserInfo} user={selectedUser} />
         ) : (

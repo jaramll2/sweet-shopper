@@ -41,7 +41,7 @@ class ProductList extends Component{
     const { products, displayDetails, selectedProduct } = this.state
 
     //object to send to form when we're creating a new product
-    const newProduct = {name: 'New Product', price: 'price', weight: 'weight', newProduct: true, imageUrl: 'Image Url'}
+    const newProduct = {name: '', price: '', weight: '', newProduct: true, imageUrl: ''}
 
     //sorts alphabetically by username
     products.sort((a, b) => a.name.localeCompare(b.name))

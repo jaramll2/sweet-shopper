@@ -56,3 +56,24 @@
     }
   }
 }
+
+@media only screen and (max-width: 920px) {
+  .edit-shipping-modal {
+    h2 {
+      font-size: 25px;
+    }
+
+    .edit-modal-form {
+      .user-info {
+        .header-name,
+        input {
+          font-size: 15px;
+        }
+      }
+
+      button {
+        font-size: 15px;
+      }
+    }
+  }
+}

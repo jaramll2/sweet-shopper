@@ -40,14 +40,13 @@ Candy.generateRandom = () => {
   //have to manually type these in for now, there's probably a better way
   const possiblePictures = [
     // '/caramel-img.jpeg',
-    // '/chocolate.jpeg',
     // '/gummy.jpeg',
     // '/heart_candy.jpeg',
     // '/pink_lollipop.jpeg',
     // '/pink_heart_candy.jpg',
     // '/red_lollipop.jpeg',
-    '/hard_candy.jpeg',
-    '/swirl.jpeg',
+    '/Image/hard_candy.jpeg',
+    '/Image/swirl.jpeg',
     "/Image/coke-gummy.jpeg",
     "/Image/colorful-candy.jpeg",
     "/Image/egg-gummy.jpeg",
@@ -55,13 +54,16 @@ Candy.generateRandom = () => {
     "/Image/sour-rings.jpeg",
     "/Image/peppermint-candy.jpeg",
     "/Image/heart-gummy.jpeg",
-    "/Image/sea-salt-caramel.jpeg",
     "/Image/soft-caramel.jpeg",
-    "/Image/lollipop-candy.webp",
     "/Image/banana-gummy.jpg",
     "/Image/pineapple-gummy.jpeg",
     "/Image/orange-lemon-gummy.jpeg",
-    "/Image/dark-chocolate.jpeg",
+    "/Image/gummy-peach.jpeg",
+    "/Image/raspberry-drops.jpeg",
+    "/Image/strawberry-soft.jpeg",
+    "/Image/gummy-bare.jpeg",
+    "/Image/dark-chocolate-truffle.jpeg",
+    "/Image/dark-chocolate-caramel.jpeg",
   ]
 
 

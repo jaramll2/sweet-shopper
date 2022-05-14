@@ -2,11 +2,11 @@
 
 .confirmation {
 
-
   .confirmation-container {
     display: flex;
     justify-content: space-between;
     height: 100%;
+    height: calc(100vh);
     border-top: solid lightgray 0.1px;
     
 
